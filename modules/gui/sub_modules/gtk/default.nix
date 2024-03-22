@@ -1,32 +1,81 @@
 { pkgs, lib, config, ... }:
 let
-  cfg = config.system_settings.gtk;
+  cfg = config.system_settings.gui.gtk;
 in {
-  options.system_settings.gtk = {
-    enable = lib.mkEnableOption null;
+  options.system_settings.gui.gtk = {
+    font = {
+      name = lib.mkOption {
+        type = lib.types.singleLineStr;
+        default = "gnome"
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.cantarell-fonts;
+      };
+
+      size = lib.mkOption {
+        type = lib.types.nullOr lib.types.int;
+        default = null;
+      };
+    };
+
+    theme = {
+      name = lib.mkOption {
+        type = lib.types.singleLineStr;
+        default = "Adwaita-dark";
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.libadwaita;
+      };
+    };
+
+    icon_theme = {
+      name = lib.mkOption {
+        type = lib.types.singleLineStr;
+        default = "Papirus-Dark";
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.papirus-icon-theme;
+      };
+    };
 
     bookmarks = lib.mkOption { type = lib.types.listOf lib.types.singleLineStr; default = []; };
   };
 
-  config = lib.mkIf cfg.enable {
-    # dependency
+  config = {
+    # dependencies
     programs.dconf.enable = true;
 
     home_manager_modules = [
-      ({ pkgs, config, ... }: {
+      ({ home_manager_config = config, ... }: {
         gtk = {
           enable = true;
 
           # denne er skummel å leke med. Driter i size og setter en classic gnome default font her.
           font = {
-            name = "Cantarell";
-            package = pkgs.cantarell-fonts;
-            size = null;
+            name = cfg.font.name;
+            package = cfg.font.package;
+            size = cfg.font.size;
+          };
+
+          theme = {
+            name = cfg.theme.name;
+            package = cfg.theme.name;
+          };
+
+          iconTheme = {
+            name = cfg.icon_theme.name;
+            package = cfg.icon_theme.package;
           };
 
           # fuck gtk2, outdated fucker
           gtk2 = {
-            configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+            configLocation = "${home_manager_config.xdg.configHome}/gtk-2.0/gtkrc";
             extraConfig = ''
               # dark theme - hell yea
               gtk-application-prefer-dark-theme = 1
@@ -76,16 +125,6 @@ in {
               gtk-error-bell = 1;
             };
             extraCss = '''';
-          };
-
-          iconTheme = {
-            name = "Papirus-Dark";
-            package = pkgs.papirus-icon-theme; 
-          };
-
-          theme = {
-            name = "Adwaita-dark";
-            package = null;
           };
         };
       })

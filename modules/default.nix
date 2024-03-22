@@ -13,11 +13,8 @@
     };
 
     # enable together with GUI
-    #system_settings.audio.enable = lib.mkIf config.system_settings.gui.enable true;
-    #system_settings.pinentry.enable = lib.mkIf config.system_settings.gui.enable true;
-    #system_settings.virtualization.libvirt.virt_manager = lib.mkIf (config.system_settings.gui.enable && system_settings.virtualization.libvirt.enable) true;
-    #system_settings.gtk.enable = lib.mkIf config.system_settings.gui.enable true;
-    #system_settings.qt.enable = lib.mkIf config.system_settings.gui.enable true;
+    system_settings.audio.enable = lib.mkDefault true;
+    system_settings.virtualization.libvirt.virt_manager = lib.mkIf (config.system_settings.gui.enable && config.system_settings.virtualization.libvirt.enable) true;
 
     # home-manager setup
     home-manager = lib.mkIf config.system_settings.user_account.enable {
@@ -47,15 +44,13 @@
     inputs.home-manager.nixosModules.home-manager
     ./boot_loader
     ./user_account
+    ./gui
     ./audio
     ./locale
     ./network
     ./nix
     ./nixos
-    ./pinentry
     ./virtualization
     ./privilege_escalation
-    ./gtk
-    ./qt
   ];
 }

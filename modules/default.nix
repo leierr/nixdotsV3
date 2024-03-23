@@ -1,20 +1,24 @@
 { inputs, lib, config, ... }:
 {
   config = {
-    # default enabled modules
-    system_settings = lib.mkIf config.system_settings.default_modules {
-      boot_loader.enable = lib.mkDefault true;
-      user_account.enable = lib.mkDefault true;
-      locale.enable = lib.mkDefault true;
-      network.enable = lib.mkDefault true;
-      nixos.enable = lib.mkDefault true;
-      nix.enable = lib.mkDefault true;
-      privilege_escalation.enable = lib.mkDefault true;
-    };
+    
+    system_settings = lib.mkMerge [
+      # default enabled modules
+      (lib.mkIf config.system_settings.default_modules.enable {
+        boot_loader.enable = lib.mkDefault true;
+        user_account.enable = lib.mkDefault true;
+        locale.enable = lib.mkDefault true;
+        network.enable = lib.mkDefault true;
+        nixos.enable = lib.mkDefault true;
+        nix.enable = lib.mkDefault true;
+        privilege_escalation.enable = lib.mkDefault true;
+      })
 
-    # enable together with GUI
-    system_settings.audio.enable = lib.mkDefault true;
-    system_settings.virtualization.libvirt.virt_manager = lib.mkIf (config.system_settings.gui.enable && config.system_settings.virtualization.libvirt.enable) true;
+      # automatially enable virt_manager if gui & libvirt are both enabled
+      (lib.mkIf (config.system_settings.gui.enable && config.system_settings.virtualization.libvirt.enable) {
+        virtualization.libvirt.virt_manager = lib.mkDefault true;
+      })
+    ];
 
     # home-manager setup
     home-manager = lib.mkIf config.system_settings.user_account.enable {
@@ -34,7 +38,7 @@
       description = "configuring home-manager in main config. List of home manager modules";
     };
 
-    system_settings.default_modules = lib.mkOption { type = lib.types.bool; default = true; };
+    system_settings.default_modules.enable = lib.mkOption { type = lib.types.bool; default = true; };
 
     system_settings.style = import "${inputs.self}/lib/style.nix";
   };
@@ -45,12 +49,12 @@
     ./boot_loader
     ./user_account
     ./gui
-    ./audio
     ./locale
     ./network
     ./nix
     ./nixos
     ./virtualization
     ./privilege_escalation
+    ./git
   ];
 }

@@ -3,10 +3,12 @@ let
   cfg = config.system_settings.gui.gtk;
 in {
   options.system_settings.gui.gtk = {
+    enable = lib.mkOption { type = lib.types.bool; default = true; };
+
     font = {
       name = lib.mkOption {
         type = lib.types.singleLineStr;
-        default = "gnome"
+        default = "gnome";
       };
 
       package = lib.mkOption {
@@ -47,12 +49,12 @@ in {
     bookmarks = lib.mkOption { type = lib.types.listOf lib.types.singleLineStr; default = []; };
   };
 
-  config = {
+  config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     # dependencies
     programs.dconf.enable = true;
 
     home_manager_modules = [
-      ({ home_manager_config = config, ... }: {
+      ({...}@inputs: {
         gtk = {
           enable = true;
 
@@ -65,7 +67,7 @@ in {
 
           theme = {
             name = cfg.theme.name;
-            package = cfg.theme.name;
+            package = cfg.theme.package;
           };
 
           iconTheme = {
@@ -75,7 +77,7 @@ in {
 
           # fuck gtk2, outdated fucker
           gtk2 = {
-            configLocation = "${home_manager_config.xdg.configHome}/gtk-2.0/gtkrc";
+            configLocation = "${inputs.config.xdg.configHome}/gtk-2.0/gtkrc";
             extraConfig = ''
               # dark theme - hell yea
               gtk-application-prefer-dark-theme = 1

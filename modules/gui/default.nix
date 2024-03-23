@@ -4,13 +4,27 @@ let
   cfg = config.system_settings.gui;
 in
 {
-  options.system_settings.gui = import ./options.nix { inherit lib pkgs; };
+  options.system_settings.gui = {
+    enable = lib.mkEnableOption null;
+    display_manager = {
+      program = lib.mkOption {
+        type = lib.types.nullOr (lib.types.enum [ "gdm" ]);
+        default = null;
+      };
 
-  imports = lib.mkIf cfg.enable [
-    ./sub_modules/qt
-    ./sub_modules/gtk
-    #./sub_modules/pinentry
-  ];
+      default_session = lib.mkOption {
+        type = lib.types.nullOr lib.types.singleLineStr;
+        default = null;
+      };
+    };
+  };
 
-  config = {};
+  imports = import ./imports.nix;
+
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    # display managers
+    (lib.mkIf ( cfg.display_manager.program == "gdm" ) { system_settings.gui.gdm.enable = true; })
+
+    # desktops
+  ]);  
 }

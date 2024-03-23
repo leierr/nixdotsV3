@@ -1,14 +1,14 @@
 { config, lib, ... }:
 
 let
-  cfg = config.system_settings.audio;
+  cfg = config.system_settings.gui.audio;
 in
 {
-  options.system_settings.audio = {
-    enable = lib.mkEnableOption null;
+  options.system_settings.gui.audio = {
+    enable = lib.mkOption { type = lib.types.bool; default = true; };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     # Enable sound with pipewire.
     sound.enable = true;
     hardware.pulseaudio.enable = false;

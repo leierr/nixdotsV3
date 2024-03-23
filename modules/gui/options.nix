@@ -1,3 +1,0 @@
-{
-  enable = lib.mkEnableOption null;
-}

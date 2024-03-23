@@ -11,7 +11,7 @@ in
 
     unstable_packages_overlay = lib.mkOption { type = lib.types.bool; default = true; };
 
-    permitted_insecure_packages = lib.mkOption { type = lib.types.listOf(lib.types.singleLineStr); default = []; };
+    permitted_insecure_packages = lib.mkOption { type = lib.types.listOf lib.types.singleLineStr; default = []; };
   };
 
   config = lib.mkIf cfg.enable {

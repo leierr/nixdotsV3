@@ -15,7 +15,11 @@ in
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     services.dbus.packages = [ pkgs.gcr ]; # dependency
-    programs.gnupg.agent.pinentryFlavor = cfg.flavor;
+    programs.gnupg.agent = {
+      enable = true;
+      pinentryFlavor = cfg.flavor;
+      enableSSHSupport = false;
+    };
 
     home_manager_modules = [
       ({ programs.rbw.settings.pinentry = pkgs.pinentry.${cfg.flavor}; })

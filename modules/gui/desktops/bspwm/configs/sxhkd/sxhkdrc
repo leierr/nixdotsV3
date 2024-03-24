@@ -29,21 +29,24 @@ super + shift + r
 # rofi scripts #
 # ------------ #
 
-# program launcher
 super + d
-	rofi -show drun -config ~/.config/rofi/drun.rasi
+	rofi -show drun
 
-# emoji picker
-super + e
-	~/.config/rofi/emoji_rofi.sh
-
-# bitwarden
-super + b
-	~/.config/rofi/rbw_rofi.sh
-
-# bitwarden + autotyper
-super + control + b
-	~/.config/rofi/rbw_rofi_autotyper.sh
+## program launcher
+#super + d
+#	rofi -show drun -config ~/.config/rofi/drun.rasi
+#
+## emoji picker
+#super + e
+#	~/.config/rofi/emoji_rofi.sh
+#
+## bitwarden
+#super + b
+#	~/.config/rofi/rbw_rofi.sh
+#
+## bitwarden + autotyper
+#super + control + b
+#	~/.config/rofi/rbw_rofi_autotyper.sh
 
 # ----------- #
 # bspwm stuff #

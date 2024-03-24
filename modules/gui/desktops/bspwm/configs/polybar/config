@@ -1,0 +1,218 @@
+;;;;;;;;;;;;;
+;; Colors  ;;
+;;;;;;;;;;;;;
+
+[color]
+;; Active Colors
+bground = #131313
+fground = #ffffff
+accent = #1081d6
+
+;;;;;;;;;;;;;;
+;; Settings ;;
+;;;;;;;;;;;;;;
+
+[settings]
+pseudo-transparency = true
+
+;;;;;;;;;;;;;
+;;   Bars  ;;
+;;;;;;;;;;;;;
+
+[bar/main]
+monitor = ${env:MONITOR:}
+monitor-strict = false
+bottom = false
+fixed-center = true
+width = 100%
+height = 3.2%
+radius = 0
+cursor-click = pointer
+
+border-bottom-size = 2
+border-color = #000000
+
+background = ${color.bground}
+foreground = ${color.fground}
+
+wm-restack = bspwm
+
+font-0 = "Hack:size=10;2"
+font-1 = "Symbols Nerd Font:size=14;3"
+font-2 = "Symbols Nerd Font:size=18;4"
+
+modules-right = cpu memory battery ethernet wifi date
+modules-center  = 
+modules-left = arch-logo bspwm
+
+module-margin = 1
+
+tray-position = center
+tray-background = ${color.bground}
+
+;;;;;;;;;;;;;;;;
+;; Arch-logo  ;;
+;;;;;;;;;;;;;;;;
+
+[module/arch-logo]
+type = custom/text
+content = 
+content-padding = 2
+content-background = ${color.bground}
+content-foreground = ${color.accent}
+content-font = 3
+margin = 0
+click-middle = systemctl poweroff
+
+;;;;;;;;;;;;;;;;
+;; Workspaces ;;
+;;;;;;;;;;;;;;;;
+
+[module/bspwm]
+type = internal/bspwm
+
+pin-workspaces = true
+enable-click = true
+enable-scroll = true
+
+format = <label-state>
+
+format-background = ${color.bground}
+format-foreground = ${color.fground}
+
+label-focused = %name%
+label-focused-background = ${color.bground}
+label-focused-foreground = ${color.accent}
+label-focused-padding = 2
+
+label-occupied = %name%
+label-occupied-padding = 2
+
+label-urgent = %name%
+label-urgent-background = #a600a8
+label-urgent-padding = 2
+
+label-empty = %name% 
+label-empty-padding = 2
+label-empty-foreground = #787878
+
+;;;;;;;;;;;;;
+;; Battery ;;
+;;;;;;;;;;;;;
+
+[module/battery]
+type = internal/battery
+
+full-at = 95
+low-at = 15
+
+battery = BAT0
+adapter = AC0
+
+poll-interval = 5
+time-format = %H:%M
+
+format-charging = <label-charging>
+format-charging-prefix = " "
+format-charging-background = ${color.bground}
+format-charging-foreground = ${color.fground}
+format-charging-padding = 1
+
+format-discharging = <label-discharging>
+format-discharging-prefix = "  "
+format-discharging-background = ${color.bground}
+format-discharging-foreground = ${color.fground}
+format-discharging-padding = 1
+padding-left = 1
+
+format-low = <label-low>
+format-low-prefix = "  "
+format-low-background = ${color.bground}
+format-low-foreground = ${color.fground}
+format-low-padding = 1
+
+label-charging =  %percentage%%
+label-discharging = %percentage%%
+label-low = %percentage%%
+
+label-full-background = ${color.bground}
+label-full-foreground = ${color.fground}
+label-full-padding = 1
+
+format-full-prefix = " "
+
+;;;;;;;;;;;;;
+;;  Date   ;;
+;;;;;;;;;;;;;
+
+[module/date]
+type = internal/date
+interval = 2.0
+
+time =  %H:%M
+time-alt =  %a, %b %dth
+format = <label>
+format-background = ${color.bground}
+format-foreground =${color.fground}
+format-padding = 2
+label = %time%
+
+;;;;;;;;;;;;;
+;;  Wifi   ;;
+;;;;;;;;;;;;;
+
+[module/wifi]
+type = internal/network
+interface = 
+interval = 3
+label-connected =   %essid%%{A}
+label-disconnected = 睊 Disconnected%{A}
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+
+;;;;;;;;;;;;;;
+;; Ethernet ;;
+;;;;;;;;;;;;;;
+
+[module/ethernet]
+type = internal/network
+interface = enp4s0
+interval = 3
+label-connected =  %linkspeed%
+label-disconnected =  Disconnected%{A}
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+
+;;;;;;;;;
+;; CPU ;;
+;;;;;;;;;
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format = <label> <bar-load>
+label = CPU
+
+bar-load-width = 8
+bar-load-foreground-0 = ${color.accent}
+bar-load-indicator = 
+bar-load-fill = ﭳ
+bar-load-empty = ﭳ
+bar-load-empty-foreground = #444444
+
+;;;;;;;;;;;;;
+;; MEMORRY ;;
+;;;;;;;;;;;;;
+
+[module/memory]
+type = internal/memory
+interval = 2
+format = <label> <bar-used>
+label = RAM
+
+bar-used-width = 8
+bar-used-foreground-0 = ${color.accent}
+bar-used-indicator = 
+bar-used-fill = ﭳ
+bar-used-empty = ﭳ
+bar-used-empty-foreground = #444444

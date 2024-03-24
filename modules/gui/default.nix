@@ -26,5 +26,6 @@ in
     (lib.mkIf ( cfg.display_manager.program == "gdm" ) { system_settings.gui.gdm.enable = true; })
 
     # desktops
+    { system_settings.gui.bspwm.enable = true; }
   ]);  
 }

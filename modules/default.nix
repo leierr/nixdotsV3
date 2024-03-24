@@ -1,7 +1,37 @@
 { inputs, lib, config, ... }:
 {
+  options = {
+    home_manager_modules = lib.mkOption {
+      default = [];
+      description = "configuring home-manager in main config. List of home manager modules";
+    };
+
+    system_settings.default_modules.enable = lib.mkOption { type = lib.types.bool; default = true; };
+
+    system_settings.style = import "${inputs.self}/lib/style.nix";
+  };
+
+  # this file imports all modules. All of them are disabled by default.
+  imports = [
+    # home-manager
+    inputs.home-manager.nixosModules.home-manager
+
+    # default enabled
+    ./boot_loader
+    ./user_account
+    ./locale
+    ./network
+    ./nix
+    ./nixos
+    ./privilege_escalation
+
+    # the rest
+    ./gui
+    ./virtualization
+    ./git
+  ];
+
   config = {
-    
     system_settings = lib.mkMerge [
       # default enabled modules
       (lib.mkIf config.system_settings.default_modules.enable {
@@ -31,30 +61,4 @@
       };
     };
   };
-
-  options = {
-    home_manager_modules = lib.mkOption {
-      default = [];
-      description = "configuring home-manager in main config. List of home manager modules";
-    };
-
-    system_settings.default_modules.enable = lib.mkOption { type = lib.types.bool; default = true; };
-
-    system_settings.style = import "${inputs.self}/lib/style.nix";
-  };
-
-  # this file imports all modules. All of them are disabled by default.
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-    ./boot_loader
-    ./user_account
-    ./gui
-    ./locale
-    ./network
-    ./nix
-    ./nixos
-    ./virtualization
-    ./privilege_escalation
-    ./git
-  ];
 }

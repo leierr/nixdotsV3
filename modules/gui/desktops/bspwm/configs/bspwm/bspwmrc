@@ -33,7 +33,7 @@ launch_always dunst
 launch_always flameshot
 launch_always nm-applet
 launch_always sxhkd
-launch_always picom --config "${script_location}/picom.conf"
+#launch_always picom --config "${script_location}/picom.conf"
 launch_always pinentry
 
 # work time! monday-friday 07:00-15:30

@@ -6,6 +6,8 @@
       description = "Lars Smith Eier";
     };
 
+    nixos.allow_unfree = true;
+
     virtualization = {
       docker.enable = true;
       libvirt.enable = true;

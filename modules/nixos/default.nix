@@ -18,6 +18,7 @@ in
     nixpkgs.config = {
       allowUnfree = cfg.allow_unfree;
       permittedInsecurePackages = cfg.permitted_insecure_packages;
+      hostPlatform = config.nixpkgs.system;
     };
 
     # make unstable packages available as an nixpkgs overlay

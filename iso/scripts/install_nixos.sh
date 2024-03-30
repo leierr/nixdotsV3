@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "Not running as root"
+    exit
+fi
+
 installdisk=""
 
 function select_install_disk() {
@@ -40,12 +45,8 @@ EOF
     local boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[0].name' <<< "${json_disk_info}")"
     local root_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
 
-    mkfs.fat -F 32 "${boot_disk}"
-    fatlabel "${boot_disk}" NIXBOOT
-    mkfs.ext4 "${root_disk}" -L NIXROOT
-
-    NIXROOT=""
-    NIXBOOT=""
+    mkfs.fat -I -F 32 "${boot_disk}" -n NIXBOOT
+    mkfs.ext4 -F "${root_disk}" -L NIXROOT
 
     while [[ ! -e "/dev/disk/by-label/NIXROOT" || ! -e "/dev/disk/by-label/NIXBOOT" ]]; do
         echo "Waiting for NIXROOT and NIXBOOT to appear..."

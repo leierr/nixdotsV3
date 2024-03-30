@@ -1,6 +1,6 @@
 {
   description = "Minimal NixOS installation media";
-  inputs.nixos.url = "nixpkgs-unstable";
+  inputs.nixos.url = "nixpkgs/nixpkgs-unstable";
   outputs = { self, nixos }: {
     nixosConfigurations = {
       minimal_iso = nixos.lib.nixosSystem {

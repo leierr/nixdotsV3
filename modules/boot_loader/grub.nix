@@ -4,7 +4,7 @@
     grub = {
       enable = true;
       efiSupport = true;
-      device = lib.mkDefault config.fileSystems."/boot".device;
+      device = "nodev";
       useOSProber = cfg.grub.useOSProber;
       theme = pkgs.stdenv.mkDerivation {
         name = "hyperfluent_grub_theme";

@@ -5,7 +5,7 @@ let
 in
 {
   options.system_settings.gui = {
-    enable = lib.mkEnableOption null;
+    enable = lib.mkEnableOption "";
     display_manager = {
       program = lib.mkOption {
         type = lib.types.nullOr (lib.types.enum [ "gdm" ]);

@@ -6,23 +6,13 @@ in
 {
   options.system_settings.virtualization = {
     libvirt = {
-      enable = lib.mkEnableOption null;
-
-      virt_manager = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Whether to install and virt-manager";
-      };
+      enable = lib.mkEnableOption "";
+      virt_manager.enable = lib.mkOption { type = lib.types.bool; default = false; };
     };
 
     docker = {
-      enable = lib.mkEnableOption null;
-
-      docker_compose = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Whether to install and configure docker compose";
-      };
+      enable = lib.mkEnableOption "";
+      docker_compose.enable = lib.mkOption { type = lib.types.bool; default = false; };
     };
   };
 
@@ -43,7 +33,7 @@ in
     };
 
     environment.systemPackages = with pkgs;
-      lib.optionals (cfg.libvirt.enable && cfg.libvirt.virt_manager) [ virt-manager ] 
-      ++ lib.optionals (cfg.docker.enable && cfg.docker.docker_compose) [ docker-compose ];
+      lib.optionals (cfg.libvirt.enable && cfg.libvirt.virt_manager.enable) [ virt-manager ] 
+      ++ lib.optionals (cfg.docker.enable && cfg.docker.docker_compose.enable) [ docker-compose ];
   };
 }

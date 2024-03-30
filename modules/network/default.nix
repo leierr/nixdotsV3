@@ -4,10 +4,7 @@ let
   cfg = config.system_settings.network;
 in
 {
-  options.system_settings.network = {
-    enable = lib.mkEnableOption null;
-    ipv6.enable = lib.mkEnableOption null;
-  };
+  options.system_settings.network.enable = lib.mkEnableOption "";
 
   config = lib.mkIf cfg.enable {
     networking = {
@@ -28,7 +25,7 @@ in
         '';
       };
       useNetworkd = false; # om jeg ikke hadde hatt vpn setup hadde jeg brukt den
-      enableIPv6 = cfg.ipv6.enable; # all my homies use ipv4
+      enableIPv6 = false; # all my homies use ipv4
       dhcpcd.enable = false; # vet ikke hvorfor NixOS enda har dhcpd som default enabled...
       useDHCP = false;
       firewall = {

@@ -4,9 +4,7 @@ let
   cfg = config.system_settings.locale;
 in
 {
-  options.system_settings.locale = {
-    enable = lib.mkEnableOption null;
-  };
+  options.system_settings.locale.enable = lib.mkEnableOption "";
 
   config = lib.mkIf cfg.enable {
     # Configure console keymap & font

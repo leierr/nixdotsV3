@@ -1,0 +1,63 @@
+env:
+  TERM: xterm-256color
+
+window:
+  title: Alacritty
+  padding:
+    x: 0
+    y: 0
+
+scrolling:
+  history: 5000
+
+selection:
+  save_to_clipboard: true
+
+font:
+  normal:
+    family: Hack
+    style: Regular
+  bold:
+    family: Hack
+    style: Bold
+  italic:
+    family: Hack
+    style: Italic
+  bold_italic:
+    family: Hack
+    style: Bold Italic
+
+  # Point size
+  size: 13 
+
+  offset:
+    x: 0
+    y: 4
+
+  glyph_offset:
+    x: 0
+    y: 4
+
+# Blacks = Gray
+colors:
+  primary:
+    background: '#121212'
+    foreground: '#f1f1f1'
+  normal:
+    black:    '#1e1e1e'
+    red:      '#f13a31'
+    green:    '#2bbf3e'
+    yellow:   '#f1c50f'
+    blue:     '#0e66d0'
+    magenta:  '#9c48cc'
+    cyan:     '#4bb0e3'
+    white:    '#f1f1f1'
+  bright:
+    black:    '#323232'
+    red:      '#fe3c33'
+    green:    '#2dd042'
+    yellow:   '#fecf0f'
+    blue:     '#0875f6'
+    magenta:  '#b24fea'
+    cyan:     '#4fc0f7'
+    white:    '#fefefe'

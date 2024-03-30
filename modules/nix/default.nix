@@ -5,7 +5,7 @@ let
 in
 {
   options.system_settings.nix = {
-    enable = lib.mkEnableOption null;
+    enable = lib.mkEnableOption "";
 
     garbage_collection = {
       automatic = lib.mkOption { type = lib.types.bool; default = true; };

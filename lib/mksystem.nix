@@ -1,4 +1,4 @@
-{
+({
   system ? "x86_64-linux", # default to linux 64bit
   hostName,
   nixpkgs,
@@ -16,4 +16,4 @@ nixpkgs.lib.nixosSystem {
     hardware_configuration
     { system.stateVersion = system_state_version; }
   ];
-}
+})

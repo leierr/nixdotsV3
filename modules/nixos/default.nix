@@ -5,9 +5,9 @@ let
 in
 {
   options.system_settings.nixos = {
-    enable = lib.mkEnableOption null;
+    enable = lib.mkEnableOption "";
 
-    allow_unfree = lib.mkEnableOption null;
+    allow_unfree = lib.mkEnableOption "";
 
     unstable_packages_overlay = lib.mkOption { type = lib.types.bool; default = true; };
 

@@ -7,10 +7,14 @@ let
 in
 {
   options.system_settings.user_account = {
-    enable = lib.mkEnableOption null;
+    # required
+    enable = lib.mkEnableOption "";
     username = lib.mkOption { type = lib.types.singleLineStr; };
     description = lib.mkOption { type = lib.types.nullOr(lib.types.singleLineStr); };
+    
+    # not required
     initialPassword = lib.mkOption { type = lib.types.nullOr(lib.types.singleLineStr); default = "123"; };
+    shell = lib.mkOption { type = lib.types.shellPackage; default = pkgs.bash; };
     home_directory = lib.mkOption { type = lib.types.singleLineStr; default = "/home/${cfg.username}"; };
 
     secondary_groups = lib.mkOption {
@@ -38,7 +42,7 @@ in
 
     users.users.${cfg.username} = {
       isNormalUser = true;
-      shell = pkgs.bash;
+      shell = cfg.shell;
       home = "/home/${cfg.username}";
       homeMode = "0770";
       createHome = true;

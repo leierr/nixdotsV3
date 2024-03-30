@@ -5,7 +5,7 @@ let
 in
 {
   options.system_settings.git = {
-    enable = lib.mkEnableOption null;
+    enable = lib.mkEnableOption "";
 
     extraConfig = lib.mkOption {
       default = {
@@ -30,9 +30,7 @@ in
       ({
         programs.git = {
           enable = true;
-
           extraConfig = cfg.extraConfig;
-
           includes = cfg.includes;
         };
       })

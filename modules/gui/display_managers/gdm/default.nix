@@ -5,7 +5,7 @@ let
 in
 {
   options.system_settings.gui.gdm = {
-    enable = lib.mkEnableOption null;
+    enable = lib.mkEnableOption "";
   };
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {

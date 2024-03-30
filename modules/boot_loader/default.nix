@@ -1,29 +1,37 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   cfg = config.system_settings.boot_loader;
   bootLoader_configs = import ./bootloaders.nix {
     useOSProber = config.system_settings.boot_loader.useOSProber;
-    configurationLimit = config.system_settings.boot_loader.configurationLimit;
   };
 in
 {
   options.system_settings.boot_loader = {
-    enable = lib.mkEnableOption null;
+    enable = lib.mkEnableOption "";
 
-    type = lib.mkOption { type = lib.types.enum [ "grub" "systemd_boot" ]; };
+    program = lib.mkOption { type = lib.types.enum [ "grub" "systemd_boot" ]; default = [ "grub" ]; };
 
-    useOSProber = lib.mkEnableOption null;
-
-    configurationLimit = lib.mkOption {
-      type = lib.types.int;
-      default = 20;
-    };
+    grub.useOSProber = lib.mkEnableOption "";
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
     { boot.tmp.cleanOnBoot = true; }
-    (lib.mkIf (cfg.type == "grub") bootLoader_configs.grub)
-    (lib.mkIf (cfg.type == "systemd_boot") bootLoader_configs.systemd_boot)
+
+    (lib.mkIf (cfg.program == "grub") (import ./grub.nix));
+
+    (lib.mkIf (cfg.program == "systemd_boot") {
+      boot.loader = {
+        grub.enable = false;
+
+        systemd-boot = {
+          enable = true;
+          editor = true;
+        };
+
+        efi.canTouchEfiVariables = true;
+        timeout = 3;
+      };
+    });
   ]);
 }

@@ -1,0 +1,106 @@
+[global]
+    monitor = 0
+    follow = keyboard
+    geometry = "400x200-15+50"
+    progress_bar = false
+    indicate_hidden = yes
+    shrink = yes
+    transparency = 0
+    notification_height = 75
+    notification_limit = 100
+    separator_height = 2
+    padding = 15
+    horizontal_padding = 15
+    text_icon_padding = 15
+    separator_color = frame
+    frame_width = 0
+    sort = yes
+    idle_threshold = 0
+
+    ### Text ###
+
+    font = Hack 13
+    line_height = 1
+    markup = full
+    format = "<b>%a</b>\n%s\n%b"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = 30
+    word_wrap = no
+    ellipsize = end
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+
+    ### Icons ###
+
+    icon_position = left
+    min_icon_size = 64
+    max_icon_size = 64
+    icon_path = /usr/share/icons/Papirus-Dark/128x128/apps:/usr/share/icons/Papirus-Dark/128x128/devices
+
+    ### History ###
+
+    sticky_history = yes
+    history_length = 20
+
+    ### Misc/Advanced ###
+
+    browser = /usr/bin/firefox -new-tab
+    always_run_script = false
+    title = Dunst
+    class = Dunst
+    startup_notification = false
+    verbosity = mesg
+    corner_radius = 8
+    ignore_dbusclose = false
+    force_xwayland = false
+    force_xinerama = false
+
+    ### mouse
+
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[experimental]
+    per_monitor_dpi = false
+
+[shortcuts]
+
+#[urgency_low]
+#    background = "#0c0c0c"
+#    foreground = "#888888"
+#    timeout = 10
+#
+#[urgency_normal]
+#    background = "#0c0c0c"
+#    foreground = "#ffffff"
+#    timeout = 10
+#
+#[urgency_critical]
+#    background = "#0c0c0c"
+#    foreground = "#ffffff"
+#    frame_color = "#ff0700"
+#    timeout = 0
+
+# --- Colors --- #
+
+[urgency_low]
+    background = "#1e2137fa"
+    foreground = "#ffffffff"
+    timeout = 8
+
+[urgency_normal]
+    background = "#1e2137fa"
+    foreground = "#ffffffff"
+    timeout = 8
+
+[urgency_critical]
+    background = "#dd130ddd"
+    foreground = "#ffffff"
+    timeout = 0
+    icon = abrt
+
+# vim: ft=cfg

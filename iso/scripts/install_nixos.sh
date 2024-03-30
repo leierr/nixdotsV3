@@ -43,6 +43,15 @@ EOF
     mkfs.fat -F 32 "${boot_disk}"
     fatlabel "${boot_disk}" NIXBOOT
     mkfs.ext4 "${root_disk}" -L NIXROOT
+
+    NIXROOT=""
+    NIXBOOT=""
+
+    while [[ ! -e "/dev/disk/by-label/NIXROOT" || ! -e "/dev/disk/by-label/NIXBOOT" ]]; do
+        echo "Waiting for NIXROOT and NIXBOOT to appear..."
+        sleep 2
+    done
+
     mount /dev/disk/by-label/NIXROOT /mnt
     mkdir -p /mnt/boot
     mount /dev/disk/by-label/NIXBOOT /mnt/boot

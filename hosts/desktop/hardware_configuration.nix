@@ -1,11 +1,11 @@
 {
   fileSystems."/" = {
-    label = "NIXROOT";
+    device = "/dev/disk/by-label/NIXROOT";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    label = "NIXBOOT";
+    device = "/dev/disk/by-label/NIXBOOT";
     fsType = "vfat";
   };
 

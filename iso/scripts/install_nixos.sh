@@ -58,17 +58,13 @@ EOF
 
     echo '''
 last remaining steps of installation:
-
--> sudo nixos-generate-config --root /mnt --show-hardware-config > /tmp/hardware_configuration.nix
-
-move configuration file into /tmp/nixdots (https://github.com/leierr/nixdotsV3)
-
--> sudo nixos-install --root /mnt --flake /tmp/nixdots#host 
+-> sudo nixos-install --root /mnt --flake ./nixdots#${}
 
     '''
 }
 
-git clone https://github.com/leierr/nixdotsV3 /tmp/nixdots
-
 select_install_disk
+
+git clone https://github.com/leierr/nixdotsV3 ./nixdots
+
 partition_disk

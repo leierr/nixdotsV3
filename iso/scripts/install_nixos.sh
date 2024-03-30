@@ -33,13 +33,12 @@ function partition_disk() {
     sfdisk "${installdisk}" <<EOF
 label: gpt
 ;512Mib;U;*
-;512Mib;BC13C2FF-59E6-4262-A352-B275FD6F7172
 ;+;L
 EOF
 
     local json_disk_info="$(lsblk -pJ ${installdisk})"
     local boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[0].name' <<< "${json_disk_info}")"
-    local boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
+    local root_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
 
     mkfs.fat -F 32 "${boot_disk}"
     fatlabel "${boot_disk}" NIXBOOT

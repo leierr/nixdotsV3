@@ -72,7 +72,7 @@
   environment.systemPackages = with pkgs; [
     firefox jq git
   ] ++ [
-    (pkgs.writeShellScriptBin "nix_installer" ( builtins.readFile ./scripts/install_nixos.sh ))
+    (pkgs.writeShellScriptBin "leier-nix-install" ( builtins.readFile ./scripts/install_nixos.sh ))
   ];
 
   # saving myself some time

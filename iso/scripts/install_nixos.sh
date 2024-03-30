@@ -31,14 +31,15 @@ function partition_disk() {
     wipefs -af "${installdisk}"
 
     sfdisk "${installdisk}" <<EOF
-    label: gpt
-    ;512Mib;U;*
-    ;512Mib;BC13C2FF-59E6-4262-A352-B275FD6F7172
-    ;+;L
-    EOF
+label: gpt
+;512Mib;U;*
+;512Mib;BC13C2FF-59E6-4262-A352-B275FD6F7172
+;+;L
+EOF
 
-    local boot_disk="$(lsblk -pJ ${installdisk} | jq -r --argjson disk ${installdisk}'.blockdevices.[] | select(.name == $disk).children[0].name')"
-    local root_disk="$(lsblk -pJ ${installdisk} | jq -r --argjson disk ${installdisk}'.blockdevices.[] | select(.name == $disk).children[1].name')"
+    local json_disk_info="$(lsblk -pJ ${installdisk})"
+    local boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[0].name' <<< "${json_disk_info}")"
+    local boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
 
     mkfs.fat -F 32 "${boot_disk}"
     fatlabel "${boot_disk}" NIXBOOT
@@ -46,7 +47,20 @@ function partition_disk() {
     mount /dev/disk/by-label/NIXROOT /mnt
     mkdir -p /mnt/boot
     mount /dev/disk/by-label/NIXBOOT /mnt/boot
+
+    echo '''
+last remaining steps of installation:
+
+-> sudo nixos-generate-config --root /mnt --show-hardware-config > /tmp/hardware_configuration.nix
+
+move configuration file into /tmp/nixdots (https://github.com/leierr/nixdotsV3)
+
+-> sudo nixos-install --root /mnt --flake /tmp/nixdots#host 
+
+    '''
 }
+
+git clone https://github.com/leierr/nixdotsV3 /tmp/nixdots
 
 select_install_disk
 partition_disk

@@ -70,8 +70,7 @@
 
   # extra packages
   environment.systemPackages = with pkgs; [
-    firefox
-    jq
+    firefox jq git
   ] ++ [
     (pkgs.writeShellScriptBin "nix_installer" ( builtins.readFile ./scripts/install_nixos.sh ))
   ];

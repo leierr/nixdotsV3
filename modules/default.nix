@@ -53,5 +53,6 @@
     ./gui
     ./virtualization
     ./terminal_utils
+    ./bluetooth
   ];
 }

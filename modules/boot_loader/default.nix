@@ -20,18 +20,6 @@ in
 
     (lib.mkIf (cfg.program == "grub") (import ./grub.nix { inherit cfg pkgs config lib; }) )
 
-    (lib.mkIf (cfg.program == "systemd_boot") {
-      boot.loader = {
-        grub.enable = false;
-
-        systemd-boot = {
-          enable = true;
-          editor = true;
-        };
-
-        efi.canTouchEfiVariables = true;
-        timeout = 3;
-      };
-    })
+    (lib.mkIf (cfg.program == "systemd_boot") (import ./systemd_boot.nix))
   ]);
 }

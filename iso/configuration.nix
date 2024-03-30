@@ -1,7 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [ <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix> ];
-
   console = {
     earlySetup = true;
     keyMap = "no";

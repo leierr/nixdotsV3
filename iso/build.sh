@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-nix build .#nixosConfigurations.minimal_iso.config.system.build.isoImage
+
+script_location="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
+nix build ${script_location}#nixosConfigurations.minimal_iso.config.system.build.isoImage

@@ -1,9 +1,11 @@
 { pkgs, lib, config, ... }:
+
 let
   cfg = config.system_settings.gui.qt;
-in {
+in
+{
   options.system_settings.gui.qt = {
-    enable = lib.mkOption { type = lib.types.bool; default = true; };
+    enable = lib.mkEnableOption "";
 
     platformTheme = {
       name = lib.mkOption {

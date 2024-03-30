@@ -1,4 +1,4 @@
-{}:
+{cfg}:
 {
   security.sudo = {
     enable = true;

@@ -24,6 +24,7 @@
     # default enabled
     system_settings = lib.mkIf config.system_settings.default_modules.enable {
       user_account.enable = lib.mkDefault true;
+      privilege_escalation.enable = lib.mkDefault true;
       nix.enable = lib.mkDefault true;
       nixos.enable = lib.mkDefault true;
       network.enable = lib.mkDefault true;
@@ -46,10 +47,11 @@
     ./nix
     ./nixos
     ./privilege_escalation
+    ./git
 
     # the rest
     ./gui
     ./virtualization
-    ./git
+    ./terminal_utils
   ];
 }

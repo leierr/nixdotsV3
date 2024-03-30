@@ -1,4 +1,4 @@
-{}:
+{cfg}:
 {
   security.doas = {
     enable = true;

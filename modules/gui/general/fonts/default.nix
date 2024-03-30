@@ -5,7 +5,7 @@ let
 in
 {
   options.system_settings.gui.fonts = {
-    enable = lib.mkOption { type = lib.types.bool; default = true; };
+    enable = lib.mkEnableOption "";
 
     default_fonts = lib.mkOption {
       type = lib.types.listOf lib.types.package;

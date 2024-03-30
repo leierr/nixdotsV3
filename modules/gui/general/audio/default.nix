@@ -5,7 +5,7 @@ let
 in
 {
   options.system_settings.gui.audio = {
-    enable = lib.mkOption { type = lib.types.bool; default = true; };
+    enable = lib.mkEnableOption "";
   };
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {

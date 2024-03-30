@@ -1,0 +1,3 @@
+{
+  programs.vim.defaultEditor = true;
+}

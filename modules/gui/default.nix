@@ -4,28 +4,29 @@ let
   cfg = config.system_settings.gui;
 in
 {
-  options.system_settings.gui = {
-    enable = lib.mkEnableOption "";
-    display_manager = {
-      program = lib.mkOption {
-        type = lib.types.nullOr (lib.types.enum [ "gdm" ]);
-        default = null;
-      };
+  options.system_settings.gui.enable = lib.mkEnableOption "";
 
-      default_session = lib.mkOption {
-        type = lib.types.nullOr lib.types.singleLineStr;
-        default = null;
-      };
-    };
+  imports = [
+    ./display_manager
+
+    ./desktops/bspwm
+
+    ./general/qt
+    ./general/gtk
+    ./general/pinentry
+    ./general/audio
+    ./general/fonts
+    ./general/theme
+    ./general/gaming
+  ];
+
+  config = {
+    # default enabled
+    system_settings.gui.display_manager.enable = lib.mkDefault true;
+    system_settings.gui.qt.enable = lib.mkDefault true;
+    system_settings.gui.gtk.enable = lib.mkDefault true;
+    system_settings.gui.audio.enable = lib.mkDefault true;
+    system_settings.gui.fonts.enable = lib.mkDefault true;
+    system_settings.gui.pinentry.enable = lib.mkDefault true;
   };
-
-  imports = import ./imports.nix;
-
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    # display managers
-    (lib.mkIf ( cfg.display_manager.program == "gdm" ) { system_settings.gui.gdm.enable = true; })
-
-    # desktops
-    { system_settings.gui.bspwm.enable = true; }
-  ]);  
 }

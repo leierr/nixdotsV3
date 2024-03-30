@@ -10,7 +10,7 @@ in
   options.system_settings.boot_loader = {
     enable = lib.mkEnableOption "";
 
-    program = lib.mkOption { type = lib.types.enum [ "grub" "systemd_boot" ]; default = [ "grub" ]; };
+    program = lib.mkOption { type = lib.types.enum [ "grub" "systemd_boot" ]; default = "grub"; };
 
     grub.useOSProber = lib.mkEnableOption "";
   };
@@ -18,7 +18,7 @@ in
   config = lib.mkIf cfg.enable (lib.mkMerge [
     { boot.tmp.cleanOnBoot = true; }
 
-    (lib.mkIf (cfg.program == "grub") (import ./grub.nix))
+    (lib.mkIf (cfg.program == "grub") (import ./grub.nix { inherit cfg pkgs; }) )
 
     (lib.mkIf (cfg.program == "systemd_boot") {
       boot.loader = {

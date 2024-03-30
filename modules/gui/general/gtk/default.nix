@@ -1,9 +1,11 @@
 { pkgs, lib, config, ... }:
+
 let
   cfg = config.system_settings.gui.gtk;
-in {
+in
+{
   options.system_settings.gui.gtk = {
-    enable = lib.mkOption { type = lib.types.bool; default = true; };
+    enable = lib.mkEnableOption "";
 
     font = {
       name = lib.mkOption {

@@ -10,9 +10,9 @@ in
     # required
     enable = lib.mkEnableOption "";
     username = lib.mkOption { type = lib.types.singleLineStr; };
-    description = lib.mkOption { type = lib.types.nullOr(lib.types.singleLineStr); };
     
     # not required
+    description = lib.mkOption { type = lib.types.nullOr(lib.types.singleLineStr); default = cfg.username; };
     initialPassword = lib.mkOption { type = lib.types.nullOr(lib.types.singleLineStr); default = "123"; };
     shell = lib.mkOption { type = lib.types.shellPackage; default = pkgs.bash; };
     home_directory = lib.mkOption { type = lib.types.singleLineStr; default = "/home/${cfg.username}"; };
@@ -32,6 +32,7 @@ in
         "wireshark"
         "libvirtd"
         "kvm"
+        "mlocate"
       ];
     };
   };

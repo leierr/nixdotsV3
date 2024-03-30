@@ -5,7 +5,7 @@ let
   style = config.system_settings.style;
 in
 {
-  options.system_settings.gui.bspwm = {
+  options.system_settings.gui.desktops.bspwm = {
     enable = lib.mkEnableOption "";
     bspwm_config_dir = lib.mkOption { type = lib.types.path; default = ./configs/bspwm; };
     sxhkd_config_dir = lib.mkOption { type = lib.types.path; default = ./configs/sxhkd; };
@@ -15,7 +15,7 @@ in
   };
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
-    # install BSPWM on system level
+    # install BSPWM on the system level
     services.xserver.windowManager.bspwm.enable = true;
 
     home_manager_modules = [

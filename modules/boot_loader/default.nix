@@ -18,7 +18,7 @@ in
   config = lib.mkIf cfg.enable (lib.mkMerge [
     { boot.tmp.cleanOnBoot = true; }
 
-    (lib.mkIf (cfg.program == "grub") (import ./grub.nix));
+    (lib.mkIf (cfg.program == "grub") (import ./grub.nix))
 
     (lib.mkIf (cfg.program == "systemd_boot") {
       boot.loader = {
@@ -32,6 +32,6 @@ in
         efi.canTouchEfiVariables = true;
         timeout = 3;
       };
-    });
+    })
   ]);
 }

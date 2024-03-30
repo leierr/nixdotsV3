@@ -14,25 +14,7 @@ in
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
-    (lib.mkIf (cfg.program == "doas") {
-      security.doas = {
-        enable = true;
-        wheelNeedsPassword = cfg.wheel_needs_password;
-      };
-
-      # sudo -> doas alias
-      environment.interactiveShellInit = ''alias sudo="doas"'';
-
-      security.sudo.enable = false;
-    });
-
-    (lib.mkIf (cfg.program == "sudo") {
-      security.sudo = {
-        enable = true;
-        wheelNeedsPassword = cfg.wheel_needs_password;
-      };
-
-      security.doas.enable = false;
-    });
+    (lib.mkIf (cfg.program == "doas") (import ./doas.nix) )
+    (lib.mkIf (cfg.program == "sudo") (import ./sudo.nix) )
   ]);
 }

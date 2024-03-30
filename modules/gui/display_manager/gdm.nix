@@ -1,4 +1,4 @@
-{cfg}:
+{ cfg }:
 {
   services.xserver.enable = true;
   services.xserver.displayManager = {

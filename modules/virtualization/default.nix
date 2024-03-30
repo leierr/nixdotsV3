@@ -27,6 +27,8 @@ in
       allowedBridges = [ "virbr0" ];
     };
 
+    networking.firewall.trustedInterfaces = lib.mkIf cfg.libvirt.enable [ "virbr0" ];
+
     virtualisation.docker.rootless = lib.mkIf cfg.docker.enable {
       enable = true;
       setSocketVariable = true;

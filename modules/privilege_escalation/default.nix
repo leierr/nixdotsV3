@@ -10,7 +10,7 @@ in
 
     # not required
     program = lib.mkOption { type = lib.types.enum [ "sudo" "doas" ]; default = "doas"; };
-    wheel_needs_password = lib.mkOption { type = lib.types.bool; };
+    wheel_needs_password = lib.mkOption { type = lib.types.bool; default = true; };
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [

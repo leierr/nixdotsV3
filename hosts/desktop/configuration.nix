@@ -15,6 +15,10 @@
   system_settings.gui.enable = true;
   system_settings.gui.desktops.bspwm.enable = true;
 
+  system_settings.nixos.allow_unfree = true;
+
+  system_settings.privilege_escalation.wheel_needs_password = false;
+
   system_settings.terminal_utils.locate.enable = true;
   system_settings.terminal_utils.gnupg.enable = true;
   system_settings.terminal_utils.editor.program = "neovim";

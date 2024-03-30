@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.system_settings.gui.bspwm;
+  cfg = config.system_settings.gui.desktops.bspwm;
   style = config.system_settings.style;
 in
 {

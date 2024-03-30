@@ -1,4 +1,4 @@
-{ lib }:
+{ lib, config, ... }:
 
 let
   cfg = config.system_settings.gui.theme;

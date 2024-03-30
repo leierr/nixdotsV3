@@ -1,9 +1,10 @@
-{ cfg, pkgs }:
+{ cfg, pkgs, lib, config }:
 {
   boot.loader = {
     grub = {
       enable = true;
       efiSupport = true;
+      device = lib.mkDefault config.fileSystems."/boot".device;
       useOSProber = cfg.grub.useOSProber;
       theme = pkgs.stdenv.mkDerivation {
         name = "hyperfluent_grub_theme";

@@ -16,12 +16,9 @@ in
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
-    {
-      boot.tmp.cleanOnBoot = true;
-      boot.loader.grub.device = lib.mkDefault config.fileSystems."/boot".device;
-    }
+    { boot.tmp.cleanOnBoot = true; }
 
-    (lib.mkIf (cfg.program == "grub") (import ./grub.nix { inherit cfg pkgs; }) )
+    (lib.mkIf (cfg.program == "grub") (import ./grub.nix { inherit cfg pkgs config lib; }) )
 
     (lib.mkIf (cfg.program == "systemd_boot") {
       boot.loader = {

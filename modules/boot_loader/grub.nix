@@ -18,7 +18,6 @@
       };
     };
 
-    efi.efiSysMountPoint = "/boot";
     efi.canTouchEfiVariables = true;
     timeout = 5;
   };

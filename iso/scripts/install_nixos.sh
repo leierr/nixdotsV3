@@ -48,11 +48,11 @@ echo "Partitioning disk..."
     wipefs -af "${installdisk}" &>/dev/null
 )
 
-sfdisk "${installdisk}" <<EOF
+sfdisk "${installdisk}" &>/dev/null <<EOF
 label: gpt
 ;512Mib;U;*
 ;+;L
-EOF &>/dev/null
+EOF
 
 json_disk_info="$(lsblk -pJ ${installdisk})"
 boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[0].name' <<< "${json_disk_info}")"

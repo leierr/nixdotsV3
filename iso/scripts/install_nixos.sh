@@ -4,7 +4,7 @@ set -euo pipefail
 
 if [[ $EUID -ne 0 ]]; then
     # Attempt to rerun the script with sudo
-    exec sudo /bin/bash "$0" "$@"
+    exec sudo bash "$0" "$@"
 fi
 
 # test internet connectivity

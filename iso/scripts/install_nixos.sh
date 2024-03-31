@@ -59,7 +59,6 @@ boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name 
 root_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
 
 # sanity check
-[[ -n "${json_disk_info}" ]]
 for disk in "${boot_disk}" "${root_disk}"
 do
     [[ -n "${disk}" && -b "${disk}" ]]
@@ -77,4 +76,4 @@ mount /dev/disk/by-label/NIXROOT /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/NIXBOOT /mnt/boot
 
-nixos-install --cores 0 --root /mnt --flake "git+${flake_git_url}#${system_to_install}"
+nixos-install --cores 0 --no-root-passwd --root /mnt --flake "git+${flake_git_url}#${system_to_install}"

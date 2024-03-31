@@ -19,9 +19,14 @@
 
   system_settings.privilege_escalation.wheel_needs_password = false;
 
-  system_settings.terminal_utils.locate.enable = true;
-  system_settings.terminal_utils.gnupg.enable = true;
-  system_settings.terminal_utils.editor.program = "neovim";
+  system_settings.editor.program = "neovim";
+
+  system_settings.bluetooth.enable = true;
+  system_settings.mlocate.enable = true;
+  system_settings.gnupg.enable = true;
+
+  # disable root password
+  users.users.root.hashedPassword = "!";
 
   virtualisation.vmVariant = {
     virtualisation = {

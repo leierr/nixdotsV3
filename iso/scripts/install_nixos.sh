@@ -58,10 +58,9 @@ json_disk_info="$(lsblk -pJ ${installdisk})"
 boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[0].name' <<< "${json_disk_info}")"
 root_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
 
-echo "${json_disk_info}" "${boot_disk}" "${root_disk}"
-
 # sanity check
-for disk in "${json_disk_info}" "${boot_disk}" "${root_disk}"
+[[ -n "${json_disk_info}" ]]
+for disk in "${boot_disk}" "${root_disk}"
 do
     [[ -n "${disk}" && -b "${disk}" ]]
 done

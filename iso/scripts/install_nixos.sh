@@ -38,8 +38,7 @@ Disk: ${installdisk}""" --prompt.border "rounded" \
 
 clear
 
-function partitioning() {
-
+gum spin --spinner line --show-output --title "Partitioning Disk" -- bash -c '''
 umount -AR /mnt
 swapoff -a
 wipefs -af "${installdisk}"
@@ -50,9 +49,9 @@ label: gpt
 ;+;L
 EOF
 
-local json_disk_info="$(lsblk -pJ ${installdisk})"
-local boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[0].name' <<< "${json_disk_info}")"
-local root_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
+json_disk_info="$(lsblk -pJ ${installdisk})"
+boot_disk="$(jq -r --arg disk "${installdisk}" ".blockdevices[] | select (.name == $disk).children[0].name" <<< "${json_disk_info}")"
+root_disk="$(jq -r --arg disk "${installdisk}" ".blockdevices[] | select (.name == $disk).children[1].name" <<< "${json_disk_info}")"
 
 # sanity check
 for disk in "${json_disk_info}" "${boot_disk}" "${root_disk}"
@@ -63,7 +62,7 @@ done
 mkfs.fat -I -F 32 "${boot_disk}" -n NIXBOOT
 mkfs.ext4 -F "${root_disk}" -L NIXROOT
 
-local start_time=$SECONDS
+start_time=$SECONDS
 while [[ ! -e "/dev/disk/by-label/NIXROOT" || ! -e "/dev/disk/by-label/NIXBOOT" ]] && [[ $((SECONDS - start_time)) -lt 30 ]]; do
     sleep 2
 done
@@ -71,8 +70,6 @@ done
 mount /dev/disk/by-label/NIXROOT /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/NIXBOOT /mnt/boot
+'''
 
-}
-
-gum spin --spinner dot --title "Partitioning Disk" -- partitioning
-gum spin --spinner dot --title "Installing OS to /mnt" -- nixos-install --root /mnt --flake "${flake_git_url}"
+gum spin --spinner line --show-output --title "Installing OS to /mnt" -- nixos-install --root /mnt --flake "${flake_git_url}"

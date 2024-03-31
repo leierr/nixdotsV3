@@ -76,4 +76,4 @@ mount /dev/disk/by-label/NIXROOT /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/NIXBOOT /mnt/boot
 
-gum spin --spinner line --show-output --title "Installing OS to /mnt" -- nixos-install --cores 0 --root /mnt --flake "${flake_git_url}"
+gum spin --spinner line --show-output --title "Installing OS to /mnt" -- nixos-install --cores 0 --root /mnt --flake "git+${flake_git_url}#${system_to_install}"

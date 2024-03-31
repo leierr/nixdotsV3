@@ -43,20 +43,20 @@ echo "Partitioning disk..."
 # Use a subshell to temporarily disable exit on error
 (
     set +e
-    umount -AR /mnt
-    swapoff -a
-    wipefs -af "${installdisk}"
+    umount -AR /mnt &>/dev/null
+    swapoff -a &>/dev/null
+    wipefs -af "${installdisk}" &>/dev/null
 )
 
 sfdisk "${installdisk}" <<EOF
 label: gpt
 ;512Mib;U;*
 ;+;L
-EOF
+EOF &>/dev/null
 
 json_disk_info="$(lsblk -pJ ${installdisk})"
-boot_disk="$(jq -r --arg disk "${installdisk}" ".blockdevices[] | select (.name == $disk).children[0].name" <<< "${json_disk_info}")"
-root_disk="$(jq -r --arg disk "${installdisk}" ".blockdevices[] | select (.name == $disk).children[1].name" <<< "${json_disk_info}")"
+boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[0].name' <<< "${json_disk_info}")"
+root_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
 
 # sanity check
 for disk in "${json_disk_info}" "${boot_disk}" "${root_disk}"

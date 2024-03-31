@@ -11,13 +11,13 @@
 
   swapDevices = [ ];
 
-  hardware.enableRedistributableFirmware = true;
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ]; # basicly kernel modules needed to mount/boot
+  boot.kernelModules = [ "amdgpu" "kvm-amd" ]; # AMD GPU + kvm stuff
+
   powerManagement.cpuFreqGovernor = "performance";
+
   hardware.cpu.amd.updateMicrocode = true; # AMD CPU
-
-  boot.initrd.kernelModules = [ "amdgpu" "kvm-amd" ]; # AMD GPU
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-
+  hardware.enableRedistributableFirmware = true;
   hardware.opengl = {
     enable = true; # Mesa
     driSupport = true; # Vulkan

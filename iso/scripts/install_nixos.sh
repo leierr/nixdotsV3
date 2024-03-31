@@ -59,13 +59,12 @@ EOF
 
     echo '''
 last remaining steps of installation:
--> sudo nixos-install --root /mnt --flake ./nixdots#${}
+-> sudo nixos-install --root /mnt --flake ./nixdots#system
 
     '''
 }
 
+clear
 select_install_disk
-
 git clone https://github.com/leierr/nixdotsV3 ./nixdots
-
 partition_disk

@@ -21,7 +21,6 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.11";
-
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
 
     home-manager = {
@@ -29,9 +28,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ags = {
-      url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs"; # BEWARE: ags uses unstable branch by default
-    };
+    ags.url = "github:Aylur/ags";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprpaper.url = "github:hyprwm/hyprpaper";
+    hypridle.url = "github:hyprwm/hypridle";
+    hyprlock.url = "github:hyprwm/Hyprlock";
   };
 }

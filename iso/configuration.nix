@@ -41,6 +41,9 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
+  # temporarily make it faster
+  isoImage.squashfsCompression = "gzip -Xcompression-level 1";
+
   # prefered editor
   programs.neovim = { enable = true; viAlias = true; vimAlias = true; defaultEditor = true; withPython3 = false; withNodeJs = false; withRuby = false; };
 }

@@ -38,10 +38,13 @@ Disk: ${installdisk}""" --prompt.border "double" \
 
 clear
 
-gum spin --spinner line --show-output --title "Partitioning Disk" -- bash -c '''
-umount -AR /mnt
-swapoff -a
-wipefs -af "${installdisk}"
+# Use a subshell to temporarily disable exit on error
+(
+    set +e
+    umount -AR /mnt
+    swapoff -a
+    wipefs -af "${installdisk}"
+)
 
 sfdisk "${installdisk}" <<EOF
 label: gpt
@@ -70,6 +73,5 @@ done
 mount /dev/disk/by-label/NIXROOT /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/NIXBOOT /mnt/boot
-'''
 
 gum spin --spinner line --show-output --title "Installing OS to /mnt" -- nixos-install --root /mnt --flake "${flake_git_url}"

@@ -2,6 +2,14 @@
 
 set -euo pipefail
 
+if [[ $EUID -ne 0 ]]; then
+    # Attempt to rerun the script with sudo
+    exec sudo /bin/bash "$0" "$@"
+fi
+
+# test internet connectivity
+timeout 3 bash -c "</dev/tcp/archlinux.org/443" &> /dev/null
+
 flake_git_url="https://github.com/leierr/nixdotsV3.git"
 
 # print nixos logo 4 fun

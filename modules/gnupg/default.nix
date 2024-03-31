@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.system_settings.terminal_utils;
+  cfg = config.system_settings.gnupg;
 in
 {
-  options.system_settings.terminal_utils = {
+  options.system_settings.gnupg = {
     enable = lib.mkEnableOption "";
   };
 

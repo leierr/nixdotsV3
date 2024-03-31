@@ -16,12 +16,12 @@ flake_git_url="https://github.com/leierr/nixdotsV3.git"
 clear ; neofetch -L
 
 # get flake info & choose system to install
-gum style --border rounded --margin "0 1" --padding "1 2" --border-foreground "006" "Please select NixOS system to install from ${flake_git_url}"
+gum style --border double --margin "0 1" --padding "1 2" --border-foreground "006" "Please select NixOS system to install from ${flake_git_url}"
 flake_systems="$(nix eval --json --impure --expr "( builtins.attrNames (builtins.getFlake \"git+${flake_git_url}\").nixosConfigurations )" | jq -r '.[]')"
 system_to_install="$(gum choose --cursor.foreground=002 ${flake_systems[@]})"
 
 # pretty print disks, then pick one
-gum style --border rounded --margin "0 1" --padding "1 2" --border-foreground "006" """Please Select disk
+gum style --border double --margin "0 1" --padding "1 2" --border-foreground "006" """Please Select disk
 
 $(lsblk -o NAME,SIZE,MOUNTPOINT,TYPE)"""
 installdisk="$(gum choose --cursor.foreground=002 "$(lsblk -dnpo NAME -I 8,259,253,254,179 | grep -Pv "mmcblk\dboot\d")")"
@@ -32,7 +32,7 @@ installdisk="$(gum choose --cursor.foreground=002 "$(lsblk -dnpo NAME -I 8,259,2
 gum confirm """Proceed with these settings?
 
 System: ${system_to_install}
-Disk: ${installdisk}""" --prompt.border "rounded" \
+Disk: ${installdisk}""" --prompt.border "double" \
 --prompt.padding "1 2" --selected.background "001" \
 --prompt.margin "0 1" --prompt.border-foreground "006"
 

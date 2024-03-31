@@ -10,7 +10,7 @@ in
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
-    (lib.mkIf (cfg.editor == "neovim") (import ./editors/neovim.nix))
-    (lib.mkIf (cfg.editor == "vim") (import ./editors/vim.nix))
+    (lib.mkIf (cfg.program == "neovim") (import ./editors/neovim.nix))
+    (lib.mkIf (cfg.program == "vim") (import ./editors/vim.nix))
   ]);
 }

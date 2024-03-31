@@ -55,8 +55,8 @@ done
 mkfs.fat -I -F 32 "${boot_disk}" -n NIXBOOT
 mkfs.ext4 -F "${root_disk}" -L NIXROOT
 
-while [[ ! -e "/dev/disk/by-label/NIXROOT" || ! -e "/dev/disk/by-label/NIXBOOT" ]]; do
-    echo "Waiting for NIXROOT and NIXBOOT to appear..."
+local start_time=$SECONDS
+while [[ ! -e "/dev/disk/by-label/NIXROOT" || ! -e "/dev/disk/by-label/NIXBOOT" ]] && [[ $((SECONDS - start_time)) -lt 30 ]]; do
     sleep 2
 done
 

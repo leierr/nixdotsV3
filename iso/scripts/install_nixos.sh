@@ -1,70 +1,70 @@
 #!/usr/bin/env bash
 
-if [[ $(id -u) -ne 0 ]]; then
-    echo "Not running as root"
-    exit
-fi
+set -euo pipefail
 
-installdisk=""
+flake_git_url="https://github.com/leierr/nixdotsV3.git"
 
-function select_install_disk() {
-	local disk_list=($(lsblk -dnpo NAME -I 8,259,253,254,179 | grep -Pv "mmcblk\dboot\d"))
+# print nixos logo 4 fun
+clear ; neofetch -L
 
-	# pretty print disks
-	lsblk -o NAME,SIZE,MOUNTPOINT,TYPE
-    echo # create some space
+# get flake info & choose system to install
+gum style --border rounded --margin "0 1" --padding "1 2" --border-foreground "006" "Please select NixOS system to install from ${flake_git_url}"
+flake_systems="$(nix eval --json --impure --expr "( builtins.attrNames (builtins.getFlake \"git+${flake_git_url}\").nixosConfigurations )" | jq -r '.[]')"
+system_to_install="$(gum choose --cursor.foreground=002 ${flake_systems[@]})"
 
-	local PS3="Select disk: "
-	select disk in ${disk_list[@]} ; do
-		[[ -n "$disk" && -e "$disk" && -b "$disk" ]] && break
-	done
+# pretty print disks, then pick one
+gum style --border rounded --margin "0 1" --padding "1 2" --border-foreground "006" """Please Select disk
 
-    installdisk="${disk}"
+$(lsblk -o NAME,SIZE,MOUNTPOINT,TYPE)"""
+installdisk="$(gum choose --cursor.foreground=002 "$(lsblk -dnpo NAME -I 8,259,253,254,179 | grep -Pv "mmcblk\dboot\d")")"
 
-    if [[ -n "$installdisk" && -b "$installdisk" ]]
-    then
-        return 0
-    else
-        echo "Installdisk: $installdisk is either empty or not a block device."
-        exit 1
-    fi
-}
+# sanity check
+[[ -n "${installdisk}" && -b "${installdisk}" ]]
 
-function partition_disk() {
-    umount -AR /mnt
-    swapoff -a
-    wipefs -af "${installdisk}"
+gum confirm """Proceed with these settings?
 
-    sfdisk "${installdisk}" <<EOF
+System: ${system_to_install}
+Disk: ${installdisk}""" --prompt.border "rounded" \
+--prompt.padding "1 2" --selected.background "001" \
+--prompt.margin "0 1" --prompt.border-foreground "006"
+
+clear
+
+function partitioning() {
+
+umount -AR /mnt
+swapoff -a
+wipefs -af "${installdisk}"
+
+sfdisk "${installdisk}" <<EOF
 label: gpt
 ;512Mib;U;*
 ;+;L
 EOF
 
-    local json_disk_info="$(lsblk -pJ ${installdisk})"
-    local boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[0].name' <<< "${json_disk_info}")"
-    local root_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
+local json_disk_info="$(lsblk -pJ ${installdisk})"
+local boot_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[0].name' <<< "${json_disk_info}")"
+local root_disk="$(jq -r --arg disk "${installdisk}" '.blockdevices[] | select (.name == $disk).children[1].name' <<< "${json_disk_info}")"
 
-    mkfs.fat -I -F 32 "${boot_disk}" -n NIXBOOT
-    mkfs.ext4 -F "${root_disk}" -L NIXROOT
+# sanity check
+for disk in "${json_disk_info}" "${boot_disk}" "${root_disk}"
+do
+    [[ -n "${disk}" && -b "${disk}" ]]
+done
 
-    while [[ ! -e "/dev/disk/by-label/NIXROOT" || ! -e "/dev/disk/by-label/NIXBOOT" ]]; do
-        echo "Waiting for NIXROOT and NIXBOOT to appear..."
-        sleep 2
-    done
+mkfs.fat -I -F 32 "${boot_disk}" -n NIXBOOT
+mkfs.ext4 -F "${root_disk}" -L NIXROOT
 
-    mount /dev/disk/by-label/NIXROOT /mnt
-    mkdir -p /mnt/boot
-    mount /dev/disk/by-label/NIXBOOT /mnt/boot
+while [[ ! -e "/dev/disk/by-label/NIXROOT" || ! -e "/dev/disk/by-label/NIXBOOT" ]]; do
+    echo "Waiting for NIXROOT and NIXBOOT to appear..."
+    sleep 2
+done
 
-    echo '''
-last remaining steps of installation:
--> sudo nixos-install --root /mnt --flake ./nixdots#system
+mount /dev/disk/by-label/NIXROOT /mnt
+mkdir -p /mnt/boot
+mount /dev/disk/by-label/NIXBOOT /mnt/boot
 
-    '''
 }
 
-clear
-select_install_disk
-git clone https://github.com/leierr/nixdotsV3 ./nixdots
-partition_disk
+gum spin --spinner dot --title "Partitioning Disk" -- partitioning
+gum spin --spinner dot --title "Installing OS to /mnt" -- nixos-install --root /mnt --flake "${flake_git_url}"

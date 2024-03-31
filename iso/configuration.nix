@@ -32,7 +32,7 @@
 
   # extra packages
   environment.systemPackages = with pkgs; [
-   jq git
+   jq git gum
   ] ++ [
     (pkgs.writeShellScriptBin "leier-nix-install" ( builtins.readFile ./scripts/install_nixos.sh ))
   ];

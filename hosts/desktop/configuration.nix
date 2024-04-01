@@ -19,7 +19,7 @@
 
   system_settings.privilege_escalation.wheel_needs_password = false;
 
-  system_settings.editor.program = "neovim";
+  system_settings.shell.editor.program = "neovim";
 
   system_settings.bluetooth.enable = true;
   system_settings.mlocate.enable = true;

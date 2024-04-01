@@ -6,8 +6,8 @@ in
 {
   options.system_settings.shell = {
     enable = lib.mkEnableOption "";
-    starship.enable = lib.mkEnableOption "";
-    editor.enable = lib.mkEnableOption "";
+    starship.enable = lib.mkOption { type = lib.types.bool; default = true; };
+    editor.enable = lib.mkOption { type = lib.types.bool; default = true; };
     editor.program = lib.mkOption { type = lib.types.enum [ "neovim" "vim" ]; default = "vim"; };
   };
 

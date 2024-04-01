@@ -28,11 +28,12 @@
   # disable root password
   users.users.root.hashedPassword = "!";
 
+  virtualisation.qemu.guestAgent.enable = true;
   virtualisation.vmVariant = {
     virtualisation = {
       memorySize =  8192;
       cores = 8;
-      qemu.options = ["-vga cirrus"];
+      qemu.options = ["-vga qxl"];
     };
   };
 }

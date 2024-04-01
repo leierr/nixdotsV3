@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   cfg = config.system_settings.gui.desktops.hyprland;
@@ -14,23 +14,25 @@ in
 
   # https://github.com/hyprwm/xdg-desktop-portal-hyprland/issues/99#issuecomment-1731390092
 
-  config = lib.mkif cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.hyprland = {
-      package = pkgs.hyprland;
       enable = true;
+      package = pkgs.unstable.hyprland;
       xwayland.enable = true;
       enableNvidiaPatches = false;
     };
 
+    environment.systemPackages = [ pkgs.alacritty ];
+
     home_manager_modules = [
       inputs.hyprland.homeManagerModules.default
+      inputs.hyprpaper.homeManagerModules.default
 
-      #(lib.mkIf cfg.hyprpaper.enable inputs.hyprpaper.homeManagerModules.default)
       #(lib.mkIf cfg.ags.enable inputs.ags.homeManagerModules.default)
       #(lib.mkIf cfg.hypridle.enable inputs.hypridle.homeManagerModules.default)
       #(lib.mkIf cfg.hyprlock.enable inputs.hyprlock.homeManagerModules.default)
 
-      (import ./modules/hyprpaper.nix)
+      (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper))
     ];
   };
 }

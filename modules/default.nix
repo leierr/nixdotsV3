@@ -31,7 +31,7 @@
       locale.enable = lib.mkDefault true;
       git.enable = lib.mkDefault true;
       boot_loader.enable = lib.mkDefault true;
-      editor.enable = lib.mkDefault true;
+      shell.enable = lib.mkDefault true;
     };
   };
 
@@ -49,7 +49,7 @@
     ./nixos
     ./privilege_escalation
     ./git
-    ./editor
+    ./shell
 
     # the rest
     ./gui

@@ -13,7 +13,7 @@ in
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
     # addons
-    (lib.mkIf cfg.starship.enable (import ./addons/starship.nix))
+    (lib.mkIf cfg.starship.enable (import ./addons/starship.nix { inherit cfg; }))
     # editors
     (lib.mkIf (cfg.editor.program == "neovim") (import ./editors/neovim.nix))
     (lib.mkIf (cfg.editor.program == "vim") (import ./editors/vim.nix))

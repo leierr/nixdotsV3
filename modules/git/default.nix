@@ -26,6 +26,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    programs.git.enable = true;
     home_manager_modules = [
       ({
         programs.git = {

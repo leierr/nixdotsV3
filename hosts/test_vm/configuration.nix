@@ -27,12 +27,4 @@
 
   # disable root password
   users.users.root.hashedPassword = "!";
-
-  virtualisation.vmVariant = {
-    virtualisation = {
-      memorySize =  8192;
-      cores = 8;
-      qemu.options = ["-device virtio-vga-gl" "-display gtk,gl=on" "-accel kvm"];
-    };
-  };
 }

@@ -6,15 +6,10 @@
       efiSupport = true;
       device = "nodev";
       useOSProber = cfg.grub.useOSProber;
-      theme = pkgs.stdenv.mkDerivation {
-        name = "hyperfluent_grub_theme";
-        src = pkgs.fetchFromGitHub {
-          owner = "Coopydood";
-          repo = "HyperFluent-GRUB-Theme";
-          rev = "b21a28079ab7fce57ee9080e2d09533262ef73fd";
-          hash = "sha256-MWM6LQKtU5IWHx+s5MStPqeBd0jJRYYwB4zxGCBj1mA=";
-        };
-        installPhase = "cp -r nixos $out";
+      theme = pkgs.fetchurl {
+        url = "https://github.com/AdisonCavani/distro-grub-themes/releases/download/v3.2/nixos.tar";
+        sha512="3ndh8yzyap3s8z0l3732cv5k66b40rfid1dy8dda72m78sdmbva5jq5ril76vgmy7pzdwhn8gyvbjgnzmfflfws5b0yj3fg72vfxcna";
+        postFetch = ''tar -xf "$out"'';
       };
     };
 

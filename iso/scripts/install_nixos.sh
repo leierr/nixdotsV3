@@ -21,7 +21,7 @@ flake_systems="$(nix flake show --json git+"${flake_git_url}" | jq -r '.nixosCon
 system_to_install="$(gum choose --cursor.foreground=002 ${flake_systems[@]})"
 
 # pretty print disks, then pick one
-gum style --border double --margin "0 1" --padding "1 2" --border-foreground "006" """Please Select disk
+clear ; gum style --border double --margin "0 1" --padding "1 2" --border-foreground "006" """Please Select disk
 
 $(lsblk -o NAME,SIZE,MOUNTPOINT,TYPE)"""
 installdisk="$(gum choose --cursor.foreground=002 "$(lsblk -dnpo NAME -I 8,259,253,254,179 | grep -Pv "mmcblk\dboot\d")")"
@@ -29,7 +29,7 @@ installdisk="$(gum choose --cursor.foreground=002 "$(lsblk -dnpo NAME -I 8,259,2
 # sanity check
 [[ -n "${installdisk}" && -b "${installdisk}" ]]
 
-gum confirm """Proceed with these settings?
+clear ; gum confirm """Proceed with these settings?
 
 System: ${system_to_install}
 Disk: ${installdisk}""" --prompt.border "double" \

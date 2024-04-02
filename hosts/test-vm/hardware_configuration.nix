@@ -16,4 +16,7 @@
   boot.kernelModules = ["kvm-amd"];
 
   services.qemuGuest.enable = true;
+
+  hardware.enableRedistributableFirmware = true;
+  hardware.opengl.enable = true; # Mesa
 }

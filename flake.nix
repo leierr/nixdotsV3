@@ -16,6 +16,11 @@
         hostName = "workmachine";
         system_state_version = "23.11";
       };
+      test-vm = mkSystem {
+        inherit nixpkgs inputs;
+        hostName = "test-vm";
+        system_state_version = "23.11";
+      };
     };
   };
 

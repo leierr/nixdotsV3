@@ -17,7 +17,7 @@ clear ; neofetch -L
 
 # get flake info & choose system to install
 gum style --border double --margin "0 1" --padding "1 2" --border-foreground "006" "Please select NixOS system to install from ${flake_git_url}"
-flake_systems="$(nix eval --json --impure --expr "( builtins.attrNames (builtins.getFlake \"git+${flake_git_url}\").nixosConfigurations )" | jq -r '.[]')"
+flake_systems="$(nix flake show --json git+"${flake_git_url}" | jq -r '.nixosConfigurations | keys[]')"
 system_to_install="$(gum choose --cursor.foreground=002 ${flake_systems[@]})"
 
 # pretty print disks, then pick one

@@ -28,7 +28,6 @@
   # disable root password
   users.users.root.hashedPassword = "!";
 
-  virtualisation.qemu.guestAgent.enable = true;
   virtualisation.vmVariant = {
     virtualisation = {
       memorySize =  8192;

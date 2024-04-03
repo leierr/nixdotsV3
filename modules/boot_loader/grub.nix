@@ -14,7 +14,7 @@
           rev = "c96f868e75707ea2b2eb2869a3d67bd9c151cee6";
           hash = "sha256-QHqsQUEYxa04je9r4FbOJn2FqRlTdBLyvwZXw9JxWlQ=";
         };
-        installPhase = "tar -xf themes/nixos.tar -C $out";
+        installPhase = "mkdir -p $out ; tar -xf themes/nixos.tar -C $out";
       };
     };
 

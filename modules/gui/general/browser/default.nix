@@ -1,10 +1,10 @@
 { pkgs, lib, config, ... }:
 
 let
-  cfg = config.home_manager_modules.gui.browser;
+  cfg = config.system_settings.gui.browser;
 in
 {
-  options.home_manager_modules.gui.browser = {
+  options.system_settings.gui.browser = {
     enable = lib.mkEnableOption "";
     firefox.enable = lib.mkOption { type = lib.types.bool; default = true; };
   };

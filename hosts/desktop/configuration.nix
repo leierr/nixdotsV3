@@ -13,7 +13,7 @@
     }
   ];
   system_settings.gui.enable = true;
-  system_settings.gui.desktops.hyprland.enable = true;
+  system_settings.gui.desktops.bspwm.enable = true;
 
   system_settings.nixos.allow_unfree = true;
 
@@ -32,7 +32,7 @@
     virtualisation = {
       memorySize =  8192;
       cores = 8;
-      qemu.options = ["-device virtio-vga-gl" "-display gtk,gl=on" "-accel kvm"];
+      #qemu.options = ["-device virtio-vga-gl" "-display gtk,gl=on" "-accel kvm"];
     };
   };
 }

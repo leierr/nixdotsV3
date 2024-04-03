@@ -1,4 +1,4 @@
-{ cfg, pkgs }:
+{ cfg, pkgs, inputs }:
 
 let
   install_firefox_extension = extension_name: builtins.fetchurl { url="https://addons.mozilla.org/firefox/downloads/latest/${extension_name}/latest.xpi"; };
@@ -14,7 +14,7 @@ in
         isDefault = true;
         bookmarks = [];
         extensions = [
-          (install_firefox_extension "ublock-origin")
+          inputs.firefox_extensions.ublock-origin
         ];
         settings = {};
         search = {

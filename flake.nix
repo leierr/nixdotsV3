@@ -41,5 +41,6 @@
     hyprpaper = { url = "github:hyprwm/hyprpaper"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
     hypridle = { url = "github:hyprwm/hypridle"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
     hyprlock = { url = "github:hyprwm/Hyprlock"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
+    firefox_extensions = (import ./firefox_extensions.nix);
   };
 }

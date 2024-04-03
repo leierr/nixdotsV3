@@ -15,7 +15,7 @@ in
 
     home_manager_modules = [
       ({
-        pointerCursor = {
+        home.pointerCursor = {
           name = "Adwaita";
           size = 32;
           package = pkgs.gnome.adwaita-icon-theme;

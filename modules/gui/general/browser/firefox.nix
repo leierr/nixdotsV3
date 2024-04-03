@@ -1,4 +1,8 @@
 { cfg, pkgs }:
+
+let
+  install_firefox_extension = extension_name: builtins.fetchurl { url="https://addons.mozilla.org/firefox/downloads/latest/${extension_name}/latest.xpi"; };
+in
 {
   home_manager_modules = [
     ({
@@ -9,7 +13,9 @@
         name = "main";
         isDefault = true;
         bookmarks = [];
-        extensions = [];
+        extensions = [
+          (install_firefox_extension "ublock-origin")
+        ];
         settings = {};
         search = {
           default = "DuckDuckGo";

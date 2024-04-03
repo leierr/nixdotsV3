@@ -19,6 +19,7 @@ in
     ./general/fonts
     ./general/theme
     ./general/gaming
+    ./general/cursor
     ./general/browser
   ];
 

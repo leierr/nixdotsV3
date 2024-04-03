@@ -1,10 +1,10 @@
 { pkgs, lib, config, ... }:
 
 let
-  cfg = config.home_manager_modules.gui.cursor;
+  cfg = config.system_settings.gui.cursor;
 in
 {
-  options.home_manager_modules.gui.cursor.enable = lib.mkEnableOption "";
+  options.system_settings.gui.cursor.enable = lib.mkEnableOption "";
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     services.xserver.displayManager.lightdm.greeters.gtk.cursorTheme = {

@@ -20,6 +20,18 @@
         "type": "github"
       }
     },
+    "fe_ublock_origin": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-MfqTlVO/wTHF210xzGM0GA8zGmm/Akd+iCxtJE+99LA=",
+        "type": "file",
+        "url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -343,6 +355,7 @@
     "root": {
       "inputs": {
         "ags": "ags",
+        "fe_ublock_origin": "fe_ublock_origin",
         "home-manager": "home-manager",
         "hypridle": "hypridle",
         "hyprland": "hyprland",

@@ -2,6 +2,7 @@
 
 let
   cfg = config.system_settings.gui.desktops.hyprland;
+  theme = config.system_settings.gui.theme;
 in
 {
   options.system_settings.gui.desktops.hyprland = {
@@ -9,6 +10,7 @@ in
     hyprpaper.enable = lib.mkOption { type = lib.types.bool; default = true; };
     hypridle.enable = lib.mkOption { type = lib.types.bool; default = true; };
     hyprlock.enable = lib.mkOption { type = lib.types.bool; default = true; };
+    hyprlock.profile_pic = lib.mkOption { type = lib.types.nullOr lib.types.path; default = null; };
     ags.enable = lib.mkOption { type = lib.types.bool; default = true; };
   };
 
@@ -22,17 +24,17 @@ in
       enableNvidiaPatches = false;
     };
 
-    environment.systemPackages = [ pkgs.alacritty ];
+    security.pam.services.hyprlock = lib.mkIf cfg.hyprlock.enable {};
 
     home_manager_modules = [
       inputs.hyprland.homeManagerModules.default
       inputs.hyprpaper.homeManagerModules.default
-
-      #(lib.mkIf cfg.ags.enable inputs.ags.homeManagerModules.default)
-      #(lib.mkIf cfg.hypridle.enable inputs.hypridle.homeManagerModules.default)
-      #(lib.mkIf cfg.hyprlock.enable inputs.hyprlock.homeManagerModules.default)
+      inputs.ags.homeManagerModules.default
+      inputs.hypridle.homeManagerModules.default
+      inputs.hyprlock.homeManagerModules.default
 
       (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper))
+      (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit cfg theme; }))
     ];
   };
 }

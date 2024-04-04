@@ -1,7 +1,4 @@
-{ cfg, theme, inputs }:
-let
-  hexToRGBA = (import (inputs.self + "/helper_functions/hex_to_rgba.nix") { inherit lib; });
-in
+{ cfg, theme, hexToRGBA }:
 {
   programs.hyprlock.enable = true;
   programs.hyprlock = {

@@ -3,6 +3,7 @@
 let
   cfg = config.system_settings.gui.desktops.hyprland;
   theme = config.system_settings.gui.theme;
+  hexToRGBA = (import (inputs.self + "/helper_functions/hex_to_rgba.nix") { inherit lib; });
 in
 {
   options.system_settings.gui.desktops.hyprland = {
@@ -34,7 +35,7 @@ in
       inputs.hyprlock.homeManagerModules.default
 
       (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper))
-      (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit cfg theme inputs; }))
+      (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit cfg theme hexToRGBA; }))
     ];
   };
 }

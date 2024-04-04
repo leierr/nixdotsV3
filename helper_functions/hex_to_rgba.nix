@@ -18,5 +18,5 @@ let
 
   rgbToRGBAString = rgb: "rgba(${toString rgb.r}, ${toString rgb.g}, ${toString rgb.b}, 1)";
 in
-  hexToRGBA: rgbToRGBAString (hexToRGB hex)
+  hexToRGBA: rgbToRGBAString (hexToRGB hexToRGBA)
 )

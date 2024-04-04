@@ -1,5 +1,9 @@
-{ cfg, theme }:
+{ cfg, theme, inputs }:
+let
+  hexToRGBA = (import (inputs.self + "/helper_functions/hex_to_rgba.nix"));
+in
 {
+  programs.hyprlock.enable = true;
   programs.hyprlock = {
     general = {
       no_fade_in = true;
@@ -19,11 +23,11 @@
     images = [
       {
         monitor = "";
-        path = cfg.hyprlock.profile_pic ? "${./nix_logo.png}";
+        path = "${./nix_logo.png}";
         size = 150;
         rounding = -1; # circle
         border_size = 4;
-        border_color = "${theme.primary_color.rgba}";
+        border_color = "${hexToRGBA theme.primary_color}";
         position.x = 0;
         position.y = 250;
         halign = "center";
@@ -38,14 +42,14 @@
         outline_thickness = 4;
         dots_size = 0.2;
         dots_spacing = 0.2;
-        outer_color = "${theme.primary_color.rgba}";
-        inner_color = "${theme.bg.rgba}";
-        font_color = "${theme.bg.rgba}";
+        outer_color = "${hexToRGBA theme.primary_color}";
+        inner_color = "${hexToRGBA theme.bg}";
+        font_color = "${hexToRGBA theme.bg}";
         fade_on_empty = false;
-        placeholder_text = ''<span foreground="##$textAlpha"><i>󱅞 Logged in as </i><span foreground="##$accentAlpha">$USER</span></span>'';
+        placeholder_text = ''<span foreground="${hexToRGBA theme.bg2}"><i>󱅞 Logged in as $USER</span>'';
         hide_input = false;
         #rounding
-        check_color = "${theme.primary_color.rgba}";
+        check_color = "${hexToRGBA theme.primary_color}";
         fail_color = "rgba(255, 46, 46, 1)";
         fail_text = ''<i>$FAIL <b>($ATTEMPTS)</b></i>'';
         #fail_transition

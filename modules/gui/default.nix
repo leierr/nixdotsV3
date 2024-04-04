@@ -31,6 +31,5 @@ in
     system_settings.gui.fonts.enable = lib.mkDefault true;
     system_settings.gui.pinentry.enable = lib.mkDefault true;
     system_settings.gui.cursor.enable = lib.mkDefault true;
-    system_settings.gui.browser.enable = lib.mkDefault true;
   };
 }

@@ -34,7 +34,7 @@ in
       inputs.hyprlock.homeManagerModules.default
 
       (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper))
-      (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit cfg theme; }))
+      (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit cfg theme inputs; }))
     ];
   };
 }

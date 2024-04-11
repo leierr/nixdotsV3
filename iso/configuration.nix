@@ -34,10 +34,6 @@
    (writeShellScriptBin "leier-nix-install" ( builtins.readFile ./install.sh ))
   ];
 
-  users.users.nixos.shell = pkgs.bash;
-
-  programs.bash.loginShellInit = "leier-nix-install";
-
   # saving myself some time
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;

@@ -36,7 +36,7 @@
 
   users.users.nixos.shell = pkgs.bash;
 
-  programs.bash.${initOption} = "leier-nix-install";
+  programs.bash.interactiveShellInit = "leier-nix-install";
 
   # saving myself some time
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

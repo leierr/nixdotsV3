@@ -1,12 +1,12 @@
 {
   description = "Minimal NixOS installation media";
-  inputs.nixos.url = "nixpkgs/nixpkgs-unstable";
-  outputs = { self, nixos }: {
+  inputs.nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+  outputs = { self, nixpkgs }: {
     nixosConfigurations = {
-      minimal_iso = nixos.lib.nixosSystem {
+      minimal_iso = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ./configuration.nix
         ];
       };

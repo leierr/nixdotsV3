@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 set -euo pipefail
 
 if [[ $EUID -ne 0 ]]; then
@@ -76,4 +74,5 @@ mount /dev/disk/by-label/NIXROOT /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/NIXBOOT /mnt/boot
 
-nixos-install --cores 0 --no-root-passwd --root /mnt --flake "git+${flake_git_url}#${system_to_install}"
+git clone "${flake_git_url}" "/mnt/etc/nixos/"
+nixos-install --cores 0 --no-root-passwd --root /mnt --flake "/mnt/etc/nixos/flake.nix#${system_to_install}"

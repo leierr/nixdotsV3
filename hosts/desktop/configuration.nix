@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   system_settings.default_modules.enable = true;
   system_settings.user_account.username = "leier";
@@ -28,12 +29,12 @@
 
   # disable root password
   users.users.root.hashedPassword = "!";
-
+  
   virtualisation.vmVariant = {
     virtualisation = {
       memorySize =  8192;
       cores = 8;
-      #qemu.options = ["-device virtio-vga-gl" "-display gtk,gl=on" "-accel kvm"];
+      qemu.options = ["-device virtio-vga-gl" "-display gtk,gl=on"];
     };
   };
 }

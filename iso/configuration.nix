@@ -26,16 +26,17 @@
     LC_TIME = "nb_NO.UTF-8";
   };
 
-  networking = {
-    hostName = "iso";
-  };
+  networking.hostName = "iso";
 
-  # extra packages
+  # packages
   environment.systemPackages = with pkgs; [
-   jq git gum neofetch
-  ] ++ [
-    (pkgs.writeShellScriptBin "leier-nix-install" ( builtins.readFile ./scripts/install_nixos.sh ))
+   jq git gum neofetch bash coreutils
+   writeShellScriptBin "leier-nix-install" ( builtins.readFile ./install.sh )
   ];
+
+  users.users.nixos.shell = pkgs.bash;
+
+  programs.bash.${initOption} = "leier-nix-install";
 
   # saving myself some time
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

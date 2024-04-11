@@ -74,5 +74,5 @@ mount /dev/disk/by-label/NIXROOT /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/NIXBOOT /mnt/boot
 
-git clone "${flake_git_url}" "/mnt/etc/nixos/"
+git clone ${flake_git_url} /mnt/etc/nixos/ &>/dev/null
 nixos-install --cores 0 --no-root-passwd --root /mnt --flake "/mnt/etc/nixos/flake.nix#${system_to_install}"

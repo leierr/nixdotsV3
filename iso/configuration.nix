@@ -31,12 +31,12 @@
   # packages
   environment.systemPackages = with pkgs; [
    jq git gum neofetch bash coreutils
-   writeShellScriptBin "leier-nix-install" ( builtins.readFile ./install.sh )
+   (writeShellScriptBin "leier-nix-install" ( builtins.readFile ./install.sh ))
   ];
 
   users.users.nixos.shell = pkgs.bash;
 
-  programs.bash.interactiveShellInit = "leier-nix-install";
+  programs.bash.loginShellInit = "leier-nix-install";
 
   # saving myself some time
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

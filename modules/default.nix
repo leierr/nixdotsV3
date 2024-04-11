@@ -37,9 +37,6 @@
 
   # this file imports all modules. All of them are disabled by default.
   imports = [
-    # home-manager
-    inputs.home-manager.nixosModules.home-manager
-
     # default enabled
     ./boot_loader
     ./user_account

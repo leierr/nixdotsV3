@@ -36,11 +36,5 @@
     #
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    #
-    # ags = { url = "github:Aylur/ags"; inputs.nixpkgs.follows = "nixpkgs"; };
-    # hyprland = { url = "github:hyprwm/Hyprland"; inputs.nixpkgs.follows = "nixpkgs"; };
-    # hyprpaper = { url = "github:hyprwm/hyprpaper"; inputs.nixpkgs.follows = "nixpkgs"; };
-    # hypridle = { url = "github:hyprwm/hypridle"; inputs.nixpkgs.follows = "nixpkgs"; };
-    # hyprlock = { url = "github:hyprwm/Hyprlock"; inputs.nixpkgs.follows = "nixpkgs"; };
   };
 }

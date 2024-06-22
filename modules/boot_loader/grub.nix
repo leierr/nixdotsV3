@@ -1,4 +1,4 @@
-{ cfg, pkgs, lib, config }:
+{ cfg, pkgs }:
 {
   boot.loader = {
     grub = {

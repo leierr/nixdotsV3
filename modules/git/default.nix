@@ -1,29 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.system_settings.git;
+  cfg = config.system_settings.cli.git;
 in
 {
-  options.system_settings.git = {
-    enable = lib.mkEnableOption "";
-
-    extraConfig = lib.mkOption {
-      default = {
-        url = {
-          "git@github.com:" = { insteadOf = "https://github.com/"; };
-        };
-
-        credential = {
-          helper = "cache --timeout=36000";
-        };
-      };
-    };
-
-    includes = lib.mkOption {
-      type = lib.types.listOf lib.types.anything;
-      default = [];
-    };
-  };
+  options.system_settings.cli.git.enable = lib.mkEnableOption "";
 
   config = lib.mkIf cfg.enable {
     programs.git.enable = true;
@@ -31,8 +12,11 @@ in
       ({
         programs.git = {
           enable = true;
-          extraConfig = cfg.extraConfig;
-          includes = cfg.includes;
+          extraConfig = {
+            url."git@github.com:".insteadOf = "https://github.com/";
+            extraConfig.credential.helper = "cache --timeout=36000";
+          };
+          includes = [];
         };
       })
     ];

@@ -10,7 +10,7 @@ in
     ./display_manager
 
     ./desktops/bspwm
-    ./desktops/hyprland
+    #./desktops/hyprland
 
     ./general/qt
     ./general/gtk
@@ -24,12 +24,12 @@ in
 
   config = {
     # default enabled
-    system_settings.gui.display_manager.enable = lib.mkDefault true;
-    system_settings.gui.qt.enable = lib.mkDefault true;
-    system_settings.gui.gtk.enable = lib.mkDefault true;
-    system_settings.gui.audio.enable = lib.mkDefault true;
-    system_settings.gui.fonts.enable = lib.mkDefault true;
-    system_settings.gui.pinentry.enable = lib.mkDefault true;
-    system_settings.gui.cursor.enable = lib.mkDefault true;
+    system_settings.gui.display_manager.enable = true;
+    system_settings.gui.qt.enable = true;
+    system_settings.gui.gtk.enable = true;
+    system_settings.gui.audio.enable = true;
+    system_settings.gui.fonts.enable = true;
+    system_settings.gui.pinentry.enable = true;
+    system_settings.gui.cursor.enable = true;
   };
 }

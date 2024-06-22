@@ -2,9 +2,6 @@
 
 let
   cfg = config.system_settings.boot_loader;
-  bootLoader_configs = import ./bootloaders.nix {
-    useOSProber = config.system_settings.boot_loader.useOSProber;
-  };
 in
 {
   options.system_settings.boot_loader = {
@@ -16,10 +13,13 @@ in
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
+    # Extra generic config
     { boot.tmp.cleanOnBoot = true; }
 
-    (lib.mkIf (cfg.program == "grub") (import ./grub.nix { inherit cfg pkgs config lib; }) )
+    # GRUB UEFI + THEME
+    (lib.mkIf (cfg.program == "grub") (import ./grub.nix { inherit cfg pkgs; }) )
 
+    # SYSTEMDBOOT UEFI
     (lib.mkIf (cfg.program == "systemd_boot") (import ./systemd_boot.nix))
   ]);
 }

@@ -6,29 +6,28 @@ in
 {
   options.system_settings.nixos = {
     enable = lib.mkEnableOption "";
-
-    allow_unfree = lib.mkEnableOption "";
-
-    unstable_packages_overlay = lib.mkOption { type = lib.types.bool; default = true; };
-
-    permitted_insecure_packages = lib.mkOption { type = lib.types.listOf lib.types.singleLineStr; default = []; };
+    nixpkgs = null;
+    nix.garbage_collection.automatic = lib.mkOption { type = lib.types.bool; default = true; };
   };
 
   config = lib.mkIf cfg.enable {
-    nixpkgs.config = {
-      allowUnfree = cfg.allow_unfree;
-      permittedInsecurePackages = cfg.permitted_insecure_packages;
-      hostPlatform = config.nixpkgs.system;
-    };
+    nixpkgs.config.hostPlatform = config.nixpkgs.system;
 
-    # make unstable packages available as an nixpkgs overlay
-    nixpkgs.overlays = lib.mkIf cfg.unstable_packages_overlay [
-      (final: prev: {
-        unstable = import inputs.nixpkgs-unstable {
-          system = config.nixpkgs.system;
-          config = config.nixpkgs.config;
-        };
-      })
-    ];
+    nix = {
+      gc = lib.mkIf cfg.nix.garbage_collection.automatic {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+
+      settings = {
+        auto-optimise-store = true;
+        experimental-features = [ "nix-command" "flakes" ];
+      };
+
+      # Thanks to: https://nixos-and-flakes.thiscute.world/best-practices/nix-path-and-flake-registry#custom-nix-path-and-flake-registry
+      registry.nixpkgs.flake = nixpkgs; # make `nix run nixpkgs#nixpkgs` use the same nixpkgs as the one used by this flake.
+      channel.enable = false; # remove nix-channel related tools & configs, we use flakes instead.
+    };
   };
 }

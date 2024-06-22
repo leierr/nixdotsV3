@@ -23,15 +23,15 @@
 
     # default enabled
     system_settings = lib.mkIf config.system_settings.default_modules.enable {
-      user_account.enable = lib.mkDefault true;
-      privilege_escalation.enable = lib.mkDefault true;
-      nix.enable = lib.mkDefault true;
-      nixos.enable = lib.mkDefault true;
-      network.enable = lib.mkDefault true;
-      locale.enable = lib.mkDefault true;
-      git.enable = lib.mkDefault true;
-      boot_loader.enable = lib.mkDefault true;
-      shell.enable = lib.mkDefault true;
+      user_account.enable = true;
+      privilege_escalation.enable = true;
+      nix.enable = true;
+      nixos.enable = true;
+      network.enable = true;
+      locale.enable = true;
+      git.enable = true;
+      boot_loader.enable = true;
+      shell.enable = true;
     };
   };
 

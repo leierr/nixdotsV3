@@ -6,16 +6,49 @@ in
 {
   options.system_settings.shell = {
     enable = lib.mkEnableOption "";
-    starship.enable = lib.mkOption { type = lib.types.bool; default = true; };
-    editor.enable = lib.mkOption { type = lib.types.bool; default = true; };
-    editor.program = lib.mkOption { type = lib.types.enum [ "neovim" "vim" ]; default = "vim"; };
+    zsh.enable = lib.mkEnableOption "";
+    zsh.ohMyZsh.enable = lib.mkOption { type = lib.types.bool; default = true; };
+    starship.enable = lib.mkEnableOption "";
+    editor = lib.mkOption { type = lib.types.enum [ "vim" "neovim" ]; default = "neovim"};
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    # addons
-    (lib.mkIf cfg.starship.enable (import ./tweaks/starship.nix { inherit cfg; }))
-    # editors
-    (lib.mkIf (cfg.editor.program == "neovim") (import ./editors/neovim.nix))
-    (lib.mkIf (cfg.editor.program == "vim") (import ./editors/vim.nix))
+  config = lib.mkIf cfg.enable (lib.mkMerge[
+    # ZSH
+    (lib.mkIf cfg.zsh.enable {
+      programs.zsh = lib.mkIf cfg.zsh.enable {
+        enable = true;
+        histSize = 69000;
+        syntaxHighlighting.enable = true;
+        autosuggestions.enable = true;
+        ohMyZsh.enable = lib.mkIf cfg.zsh.ohMyZsh.enable  true;
+      };
+
+      programs.zsh.interactiveShellInit = ''
+        # ctrl + space
+        bindkey '^ ' autosuggest-accept
+      '';
+    })
+
+    # Starship
+    (lib.mkIf cfg.starship.enable { programs.starship.enable = true; })
+
+    # VIM
+    (lib.mkIf cfg.starship.enable { programs.vim.defaultEditor = true; })
+
+    # NEOVIM
+    (lib.mkIf cfg.starship.enable {
+      programs.neovim = {
+        enable = true; viAlias = true; vimAlias = true; defaultEditor = true;
+        withPython3 = false; withNodeJs = false; withRuby = false;
+      };
+    })
+    
+    # Increase Bash default history size
+    {
+      programs.bash.interactiveShellInit = ''
+        HISTFILESIZE=69000
+        HISTSIZE=69000
+      '';
+    }
   ]);
 }

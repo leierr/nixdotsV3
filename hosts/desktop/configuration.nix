@@ -14,8 +14,8 @@
     }
   ];
 
-  system_settings.gui.enable = true;
-  system_settings.gui.desktops.bspwm.enable = true;
+  # system_settings.gui.enable = true;
+  # system_settings.gui.desktops.bspwm.enable = true;
 
   system_settings.nixos.allow_unfree = true;
 
@@ -31,5 +31,4 @@
   users.users.root.hashedPassword = "!";
 
   programs.hyprland.enable = true;
-  programs.hyprlock.enable = true;
 }

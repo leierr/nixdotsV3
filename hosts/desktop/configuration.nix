@@ -14,8 +14,8 @@
     }
   ];
 
-  # system_settings.gui.enable = true;
-  # system_settings.gui.desktops.bspwm.enable = true;
+  system_settings.gui.enable = true;
+  system_settings.gui.desktops.bspwm.enable = true;
 
   system_settings.nixos.allow_unfree = true;
 

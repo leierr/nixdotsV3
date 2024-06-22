@@ -2,7 +2,6 @@
 
 let
   cfg = config.system_settings.gui.desktops.bspwm;
-  style = config.system_settings.style;
 in
 {
   options.system_settings.gui.desktops.bspwm = {
@@ -15,7 +14,6 @@ in
   };
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
-    # install BSPWM on the system level
     services.xserver.windowManager.bspwm.enable = true;
 
     home_manager_modules = [

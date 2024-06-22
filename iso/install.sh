@@ -15,9 +15,7 @@ clear ; neofetch -L
 
 # get flake info & choose system to install
 gum style --border double --margin "0 1" --padding "1 2" --border-foreground "006" "Please select NixOS system to install from ${flake_git_url}"
-# make sure we have the latest version of the flake.
-nix flake prefetch "git+${flake_git_url}" &>/dev/null
-flake_systems="$(nix flake show --json git+"${flake_git_url}" | jq -r '.nixosConfigurations | keys[]')"
+flake_systems="$(nix flake show --no-write-lock-file --json "git+${flake_git_url}" 2>/dev/null | jq -r '.nixosConfigurations | keys[]')"
 system_to_install="$(gum choose --cursor.foreground=002 ${flake_systems[@]})"
 
 # pretty print disks, then pick one
@@ -77,4 +75,4 @@ mkdir -p /mnt/boot
 mount /dev/disk/by-label/NIXBOOT /mnt/boot
 
 git clone ${flake_git_url} /mnt/etc/nixos/ &>/dev/null
-nixos-install --cores 0 --no-root-passwd --root /mnt --flake "/mnt/etc/nixos#${system_to_install}"
+nixos-install --cores 0 --no-root-passwd --root /mnt --flake "/mnt/etc/nixos#${system_to_install}" 2>/dev/null

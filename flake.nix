@@ -8,7 +8,7 @@
         pkgs ? inputs.nixpkgs,
         home_manager ? inputs.home-manager,
         host_name,
-        system_state_version,
+        system_state_version ? (inputs.nixpkgs.lib.versions.majorMinor inputs.nixpkgs.lib.version),
         configuration ? ( ./. + "/hosts/${host_name}/configuration.nix"),
         hardware_configuration ? ( ./. + "/hosts/${host_name}/hardware_configuration.nix")
       }: 
@@ -26,8 +26,8 @@
       };
     in {
     nixosConfigurations = {
-      desktop = mkSystem { host_name = "desktop"; system_state_version = "24.05"; };
-      work_laptop = mkSystem { host_name = "work_laptop"; system_state_version = "24.05"; };
+      desktop = mkSystem { host_name = "desktop"; };
+      work_laptop = mkSystem { host_name = "work_laptop"; };
     };
   };
 

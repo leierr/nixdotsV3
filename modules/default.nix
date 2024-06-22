@@ -25,7 +25,6 @@
     system_settings = lib.mkIf config.system_settings.default_modules.enable {
       user_account.enable = true;
       privilege_escalation.enable = true;
-      nix.enable = true;
       nixos.enable = true;
       network.enable = true;
       locale.enable = true;
@@ -42,7 +41,6 @@
     ./user_account
     ./locale
     ./network
-    ./nix
     ./nixos
     ./privilege_escalation
     ./git

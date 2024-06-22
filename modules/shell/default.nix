@@ -9,7 +9,7 @@ in
     zsh.enable = lib.mkEnableOption "";
     zsh.ohMyZsh.enable = lib.mkOption { type = lib.types.bool; default = true; };
     starship.enable = lib.mkEnableOption "";
-    editor = lib.mkOption { type = lib.types.enum [ "vim" "neovim" ]; default = "neovim"};
+    editor = lib.mkOption { type = lib.types.enum [ "vim" "neovim" ]; default = "neovim"; };
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge[

@@ -20,13 +20,12 @@ in
         histSize = 69000;
         syntaxHighlighting.enable = true;
         autosuggestions.enable = true;
-        ohMyZsh.enable = lib.mkIf cfg.zsh.ohMyZsh.enable  true;
+        ohMyZsh.enable = lib.mkIf cfg.zsh.ohMyZsh.enable true;
+        interactiveShellInit = ''
+          # ctrl + space
+          bindkey '^ ' autosuggest-accept
+        '';
       };
-
-      programs.zsh.interactiveShellInit = ''
-        # ctrl + space
-        bindkey '^ ' autosuggest-accept
-      '';
     })
 
     # Starship

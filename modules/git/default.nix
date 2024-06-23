@@ -4,7 +4,7 @@ let
   cfg = config.system_settings.cli.git;
 in
 {
-  options.system_settings.cli.git.enable = lib.mkEnableOption "";
+  options.system_settings.git.enable = lib.mkEnableOption "";
 
   config = lib.mkIf cfg.enable {
     programs.git.enable = true;

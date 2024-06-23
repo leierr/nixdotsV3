@@ -1,18 +1,7 @@
 { pkgs, ... }:
 {
   system_settings.default_modules.enable = true;
-  system_settings.user_account.username = "leier";
-  system_settings.git.includes = [
-    {
-      condition = "hasconfig:remote.*.url:git@github.com:**/**";
-      contents = {
-        user = {
-          name = "Lars Smith Eier";
-          email = "hBm5BEqULhwPKUY@protonmail.com";
-        };
-      };
-    }
-  ];
+  system_settings.user_account.username = "leier"; 
 
   system_settings.gui.enable = true;
   system_settings.gui.desktops.bspwm.enable = true;
@@ -31,4 +20,21 @@
   users.users.root.hashedPassword = "!";
 
   programs.hyprland.enable = true;
+
+  # overwriting home-manager values
+  home_manager_modules = [
+    ({
+      programs.git.includes = [
+        {
+          condition = "hasconfig:remote.*.url:git@github.com:**/**";
+          contents = {
+            user = {
+              name = "Lars Smith Eier";
+              email = "hBm5BEqULhwPKUY@protonmail.com";
+            };
+          };
+        }
+      ];
+    })
+  ];
 }

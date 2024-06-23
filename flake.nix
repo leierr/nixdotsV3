@@ -26,8 +26,8 @@
       };
     in {
     nixosConfigurations = {
-      desktop = mkSystem { host_name = "desktop"; system_state_version = "24.05"; };
-      work_laptop = mkSystem { host_name = "work_laptop"; system_state_version = "24.05"; };
+      desktop = mkSystem { host_name = "desktop"; system_state_version = "24.11"; };
+      work_laptop = mkSystem { host_name = "work_laptop"; system_state_version = "24.11"; };
     };
   };
 

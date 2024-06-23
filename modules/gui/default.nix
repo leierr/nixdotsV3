@@ -9,7 +9,7 @@ in
   imports = [
     ./display_manager
 
-    #./desktops/bspwm
+    ./desktops/bspwm
     #./desktops/hyprland
 
     ./general/qt

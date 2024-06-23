@@ -10,7 +10,7 @@ in
     platformTheme = {
       name = lib.mkOption {
         type = lib.types.singleLineStr;
-        default = "gnome";
+        default = "adwaita";
       };
 
       packages = lib.mkOption {
@@ -41,7 +41,6 @@ in
 
     qt = {
       enable = true;
-      platformTheme = cfg.platformTheme.name;
       style = cfg.style.name;
     };
 
@@ -49,7 +48,7 @@ in
       ({
         qt = {
           enable = true;
-          platformTheme = cfg.platformTheme.name;
+          platformTheme.name = cfg.platformTheme.name;
           style.name = cfg.style.name;
         };
       })

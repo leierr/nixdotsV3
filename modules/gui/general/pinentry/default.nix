@@ -8,8 +8,8 @@ in
     enable = lib.mkEnableOption "";
 
     package = lib.mkOption {
-      type = lib.types.enum [ "gnome3" "curses" "tty" "gtk2" "emacs" "qt" ];
-      default = "gnome3";
+      type = lib.types.package;
+      default = pkgs.pinentry-gnome3;
     };
   };
 

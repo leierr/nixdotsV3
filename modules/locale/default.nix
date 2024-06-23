@@ -35,7 +35,7 @@ in
     };
 
     # xserver defaults
-    services.xserver.layout = "no";
-    services.xserver.xkbVariant = "nodeadkeys";
+    services.xserver.xkb.variant = "nodeadkeys";
+    services.xserver.xkb.layout = "no";
   };
 }

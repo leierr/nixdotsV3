@@ -19,10 +19,11 @@ in
         dns = "default";
         ethernet.macAddress = "stable";
         logLevel = "WARN";
-        settings = ''
-          [main]
-          no-auto-default=*
-        '';
+        settings = {
+          main = {
+            no-auto-default = "*";
+          };
+        };
       };
       useNetworkd = false; # om jeg ikke hadde hatt vpn setup hadde jeg brukt den
       enableIPv6 = false; # all my homies use ipv4

@@ -11,6 +11,7 @@ in
   };
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
-    (lib.mkIf (cfg.program == "gdm") (import ./gdm.nix { inherit cfg; }) )
+    ( lib.mkIf (cfg.program == "gdm") (import ./gdm.nix { inherit cfg; }) )
+    ({ services.displayManager.defaultSession = cfg.default_session; })
   ]);
 }

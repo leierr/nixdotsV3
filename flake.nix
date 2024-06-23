@@ -6,7 +6,7 @@
       mkSystem = {
         system ? "x86_64-linux",
         pkgs ? inputs.nixpkgs,
-        home_manager ? inputs.home-manager,
+        home_manager ? inputs.home-manager.nixosModules.home-manager,
         host_name,
         system_state_version,
         configuration ? ( ./. + "/hosts/${host_name}/configuration.nix"),

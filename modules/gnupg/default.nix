@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  cfg = config.system_settings.cli.gnupg;
+  cfg = config.system_settings.gnupg;
 in
 {
   options.system_settings.gnupg.enable = lib.mkEnableOption "";

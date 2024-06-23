@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  cfg = config.system_settings.cli.git;
+  cfg = config.system_settings.git;
 in
 {
   options.system_settings.git.enable = lib.mkEnableOption "";

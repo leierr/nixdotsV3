@@ -7,7 +7,7 @@ in
   options.system_settings.gui.pinentry = {
     enable = lib.mkEnableOption "";
 
-    flavor = lib.mkOption {
+    package = lib.mkOption {
       type = lib.types.enum [ "gnome3" "curses" "tty" "gtk2" "emacs" "qt" ];
       default = "gnome3";
     };
@@ -18,10 +18,10 @@ in
     services.dbus.packages = [ pkgs.gcr ];
     services.pcscd.enable = true;
 
-    programs.gnupg.agent = { pinentryFlavor = cfg.flavor; };
+    programs.gnupg.agent = { pinentryPackage = cfg.package; };
 
     home_manager_modules = [
-      ({ programs.rbw.settings.pinentry = pkgs.pinentry.${cfg.flavor}; })
+      ({ programs.rbw.settings.pinentry = pkgs.pinentry.${cfg.package}; })
     ];
   };
 }

@@ -19,7 +19,7 @@ in
         dns = "default";
         ethernet.macAddress = "stable";
         logLevel = "WARN";
-        extraConfig = ''
+        settings = ''
           [main]
           no-auto-default=*
         '';

@@ -23,7 +23,7 @@
   hardware.enableRedistributableFirmware = true;
   hardware.graphics = {
     enable = true; # Mesa / OpenGL
-    driSupport32Bit = true; # Vulkan 32 bit support
+    enable32Bit = true; # Vulkan 32 bit support
     extraPackages = with pkgs; [
       rocmPackages.clr.icd # AMD OpenCL
       amdvlk # AMDGPU vulkan

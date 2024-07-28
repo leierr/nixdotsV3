@@ -31,6 +31,7 @@
       git.enable = true;
       boot_loader.enable = true;
       shell.enable = true;
+      gnupg.enable = true;
     };
   };
 
@@ -45,12 +46,12 @@
     ./privilege_escalation
     ./git
     ./shell
+    ./gnupg
+    ./mlocate
 
     # the rest
     ./gui
     ./virtualization
     ./bluetooth
-    ./mlocate
-    ./gnupg
   ];
 }

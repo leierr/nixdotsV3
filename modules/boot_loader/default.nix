@@ -6,9 +6,7 @@ in
 {
   options.system_settings.boot_loader = {
     enable = lib.mkEnableOption "";
-
     program = lib.mkOption { type = lib.types.enum [ "grub" "systemd_boot" ]; default = "grub"; };
-
     grub.useOSProber = lib.mkEnableOption "";
   };
 

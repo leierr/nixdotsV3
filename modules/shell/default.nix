@@ -32,10 +32,10 @@ in
     (lib.mkIf cfg.starship.enable { programs.starship.enable = true; })
 
     # VIM
-    (lib.mkIf cfg.starship.enable { programs.vim.defaultEditor = true; })
+    (lib.mkIf cfg.editor == "vim" { programs.vim.defaultEditor = true; })
 
     # NEOVIM
-    (lib.mkIf cfg.starship.enable {
+    (lib.mkIf cfg.editor == "neovim" {
       programs.neovim = {
         enable = true; viAlias = true; vimAlias = true; defaultEditor = true;
         withPython3 = false; withNodeJs = false; withRuby = false;

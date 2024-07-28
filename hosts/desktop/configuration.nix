@@ -1,18 +1,18 @@
 { pkgs, ... }:
 {
   system_settings.default_modules.enable = true;
-  system_settings.user_account.username = "leier"; 
+  system_settings.user_account.username = "leier";
+  system_settings.user_account.shell = pkgs.zsh;
+
+  system_settings.shell.editor.program = "neovim";
+  system_settings.shell.starship.enable = true;
 
   system_settings.gui.enable = true;
   system_settings.gui.desktops.bspwm.enable = true;
 
   system_settings.privilege_escalation.wheel_needs_password = false;
 
-  system_settings.shell.editor.program = "neovim";
-
   system_settings.bluetooth.enable = true;
-  system_settings.mlocate.enable = true;
-  system_settings.gnupg.enable = true;
 
   # disable root password
   users.users.root.hashedPassword = "!";

@@ -26,10 +26,11 @@
   };
 
   networking.hostName = "iso";
+  networking.networkmanager.enable = true;
 
   # packages
   environment.systemPackages = with pkgs; [
-   jq git gum neofetch bash coreutils
+   jq git gum fastfetch bash coreutils
    (writeShellScriptBin "leier-nix-install" ( builtins.readFile ./install.sh ))
   ];
 

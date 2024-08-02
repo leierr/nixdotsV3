@@ -11,7 +11,7 @@ timeout 3 bash -c "</dev/tcp/archlinux.org/443" &> /dev/null
 flake_git_url="https://github.com/leierr/nixdotsV3.git"
 
 # print nixos logo 4 fun
-clear ; neofetch -L
+clear ; fastfetch -s ":" -l nixos
 
 # get flake info & choose system to install
 gum style --border double --margin "0 1" --padding "1 2" --border-foreground "006" "Please select NixOS system to install from ${flake_git_url}"
@@ -22,7 +22,7 @@ system_to_install="$(gum choose --cursor.foreground=002 ${flake_systems[@]})"
 clear ; gum style --border double --margin "0 1" --padding "1 2" --border-foreground "006" """Please Select disk
 
 $(lsblk -o NAME,SIZE,MOUNTPOINT,TYPE)"""
-installdisk="$(gum choose --cursor.foreground=002 "$(lsblk -dnpo NAME -I 8,259,253,254,179 | grep -Pv "mmcblk\dboot\d")")"
+installdisk="$(gum choose --cursor.foreground=002 $(lsblk -dnpo NAME -I 8,259,253,254,179 | grep -Pv "mmcblk\dboot\d"))"
 
 # sanity check
 [[ -n "${installdisk}" && -b "${installdisk}" ]]
@@ -30,9 +30,7 @@ installdisk="$(gum choose --cursor.foreground=002 "$(lsblk -dnpo NAME -I 8,259,2
 clear ; gum confirm """Proceed with these settings?
 
 System: ${system_to_install}
-Disk: ${installdisk}""" --prompt.border "double" \
---prompt.padding "1 2" --selected.background "001" \
---prompt.margin "0 1" --prompt.border-foreground "006"
+Disk: ${installdisk}""" --selected.background "001" --prompt.foreground="006"
 
 clear
 

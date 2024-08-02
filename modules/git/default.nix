@@ -14,9 +14,11 @@ in
           enable = true;
           extraConfig = {
             url."git@github.com:".insteadOf = "https://github.com/";
-            extraConfig.credential.helper = "cache --timeout=36000";
+            credential.helper = "cache --timeout=36000";
+            safe.directory = "*";
           };
           includes = [];
+          ignores = [];
         };
       })
     ];

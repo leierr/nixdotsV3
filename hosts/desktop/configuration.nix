@@ -23,7 +23,7 @@
     ({
       programs.git.includes = [
         {
-          condition = "hasconfig:remote.*.url:git@github.com:**/**";
+          condition = "gitdir:remote.*.url=git@github.com:";
           contents = {
             user = {
               name = "Lars Smith Eier";
@@ -33,5 +33,10 @@
         }
       ];
     })
+  ];
+
+  # extra packages
+  environment.systemPackages = [
+    pkgs.vscodium
   ];
 }

@@ -3,6 +3,7 @@
   system_settings.default_modules.enable = true;
   system_settings.user_account.username = "leier";
   system_settings.user_account.shell = pkgs.zsh;
+  system_settings.shell.zsh.enable = true;
   system_settings.shell.starship.enable = true;
 
   system_settings.gui.enable = true;

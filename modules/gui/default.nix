@@ -10,6 +10,7 @@ in
     ./display_manager
 
     ./desktops/bspwm
+    ./desktops/gnome
     #./desktops/hyprland
 
     ./general/qt

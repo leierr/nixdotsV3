@@ -15,17 +15,23 @@ in
   config = lib.mkIf cfg.enable (lib.mkMerge[
     # ZSH
     (lib.mkIf cfg.zsh.enable {
-      programs.zsh = lib.mkIf cfg.zsh.enable {
-        enable = true;
-        histSize = 69000;
-        syntaxHighlighting.enable = true;
-        autosuggestions.enable = true;
-        ohMyZsh.enable = lib.mkIf cfg.zsh.ohMyZsh.enable true;
-        interactiveShellInit = ''
-          # ctrl + space
-          bindkey '^ ' autosuggest-accept
-        '';
-      };
+      programs.zsh.enable = true;
+      home_manager_modules = [
+        ({
+          programs.zsh = {
+            enable = true;
+            oh-my-zsh.enable = lib.mkIf cfg.zsh.ohMyZsh.enable true;
+            oh-my-zsh.plugins = [];
+            syntaxHighlighting.enable = true;
+            autosuggestion.enable = true;
+            envExtra = ''
+              ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=246"
+            '';
+            history.save = 690000;
+            history.size = 690000;
+          };
+        })
+      ];
     })
 
     # Starship

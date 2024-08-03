@@ -19,13 +19,16 @@ in
 
     # locale
     i18n.defaultLocale = "en_US.UTF-8"; # this sets LANG
+    i18n.supportedLocales = [
+      "C.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
+      "nb_NO.UTF-8/UTF-8"
+    ];
     i18n.extraLocaleSettings = {
+      LANGUAGE = "en_US.UTF-8";
       LC_ADDRESS = "nb_NO.UTF-8";
-      LC_COLLATE = "nb_NO.UTF-8";
-      LC_CTYPE = "en_US.UTF-8"; # LANG and LC_CTYPE should be the same
       LC_IDENTIFICATION = "nb_NO.UTF-8";
       LC_MEASUREMENT = "nb_NO.UTF-8";
-      LC_MESSAGES = "en_US.UTF-8"; # this has to do with display language
       LC_MONETARY = "nb_NO.UTF-8";
       LC_NAME = "nb_NO.UTF-8";
       LC_NUMERIC = "nb_NO.UTF-8";

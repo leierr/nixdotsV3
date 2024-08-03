@@ -8,6 +8,8 @@
 
   system_settings.gui.enable = true;
   system_settings.gui.desktops.bspwm.enable = true;
+  system_settings.gui.desktops.gnome.enable = true;
+  system_settings.gui.gaming.enable = true;
 
   system_settings.privilege_escalation.wheel_needs_password = false;
 

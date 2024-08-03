@@ -32,5 +32,8 @@ in
     system_settings.gui.fonts.enable = true;
     system_settings.gui.pinentry.enable = true;
     system_settings.gui.cursor.enable = true;
+
+    # to get some chromium based programs to work on wayland
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
   };
 }

@@ -18,18 +18,17 @@ in
     services.gnome.sushi.enable = true;
 
     environment.gnome.excludePackages = (with pkgs; [
-      gnome-photos
-      gnome-tour
-      ]) ++ (with pkgs.gnome; [
-      cheese # webcam tool
-      gnome-music
-      gnome-terminal
+      gnome-photos # gnome photo viewer
+      gnome-tour # gnome tutorial
       gedit # text editor
-      epiphany # web browser
       geary # email reader
-      evince # document viewer
-      gnome-characters
       totem # video player
+      epiphany # web browser
+      gnome-terminal # default gnome terminal
+      cheese # webcam tool
+      ]) ++ (with pkgs.gnome; [
+      gnome-music
+      gnome-characters
       tali # poker game
       iagno # go game
       hitori # sudoku game
@@ -40,6 +39,7 @@ in
       ({
         dconf = {
           settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+          settings."org/gnome/Weather".locations = ''[<(uint32 2, <('Oslo', 'ENGM', true, [(1, 0)], [(1, 0)])>)>]'';
         };
       })
     ];

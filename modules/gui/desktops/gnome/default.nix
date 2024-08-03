@@ -17,29 +17,34 @@ in
     # cool nautilus picture/video previewer
     services.gnome.sushi.enable = true;
 
-    environment.gnome.excludePackages = (with pkgs; [
-      gnome-photos # gnome photo viewer
-      gnome-tour # gnome tutorial
-      gedit # text editor
-      geary # email reader
-      totem # video player
-      epiphany # web browser
-      gnome-terminal # default gnome terminal
-      cheese # webcam tool
-      ]) ++ (with pkgs.gnome; [
-      gnome-music
-      gnome-characters
-      tali # poker game
-      iagno # go game
-      hitori # sudoku game
-      atomix # puzzle game
-    ]);
+    # disable most default gnome crap
+    services.gnome.core-utilities.enable = false;
+    environment.gnome.excludePackages = (with pkgs; [ gnome-tour ]);
 
     home_manager_modules = [
       ({
         dconf = {
           settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-          settings."org/gnome/Weather".locations = ''[<(uint32 2, <('Oslo', 'ENGM', true, [(1, 0)], [(1, 0)])>)>]'';
+          settings."org/gnome/mutter".edge-tiling = true;
+          settings."org/gnome/desktop/interface".enable-hot-corners = false;
+          settings."org/gnome/desktop/peripherals/touchpad".two-finger-scrolling-enabled = true;
+          settings."org/gnome/system/location".enabled = false;
+          settings."org/gnome/desktop/wm/preferences".resize-with-right-button = true;
+          settings."org/gnome/desktop/wm/preferences".mouse-button-modifier = "<Super>";
+          settings."org/gnome/mutter".center-new-windows = true;
+          settings."org/gnome/desktop/wm/preferences".button-layout = "appmenu:minimize,maximize,close";
+          settings."org/gnome/mutter".dynamic-workspaces = true;
+          settings."org/gnome/shell/app-switcher".current-workspace-only = true;
+          settings."org/gnome/desktop/interface".enable-animations = false;
+
+          # bindings
+          settings."org/gnome/desktop/wm/keybindings".close = [ "<Super>w" ];
+          settings."org/gnome/desktop/wm/keybindings".switch-windows = [ "<Alt>Tab" ];
+          settings."org/gnome/desktop/wm/keybindings".switch-windows-backward = [ "<Shift><Alt>Tab" ];
+
+          # unbind
+          settings."org/gnome/desktop/wm/keybindings".switch-applications = [];
+          settings."org/gnome/desktop/wm/keybindings".switch-applications-backward = [];
         };
       })
     ];

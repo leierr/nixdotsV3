@@ -34,11 +34,17 @@
           };
         }
       ];
+
+      programs.vscode = {
+        enable = true;
+        package = pkgs.vscodium;
+        extensions = with pkgs.vscode-extensions; [
+          bbenoist.nix
+        ];
+      };
     })
   ];
 
   # extra packages
-  environment.systemPackages = [
-    pkgs.vscodium
-  ];
+  environment.systemPackages = [];
 }

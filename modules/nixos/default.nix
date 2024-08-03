@@ -6,17 +6,17 @@ in
 {
   options.system_settings.nixos = {
     enable = lib.mkEnableOption "";
-    garbage_collection.automatic = lib.mkOption { type = lib.types.bool; default = true; };
-    allow_unfree = lib.mkOption { type = lib.types.bool; default = true; };
   };
 
   config = lib.mkIf cfg.enable {
     nixpkgs.config.hostPlatform = config.nixpkgs.system;
 
-    nixpkgs.config.allowUnfree = lib.mkIf cfg.allow_unfree true;
+    nixpkgs.config.allowUnfree = true;
+
+    documentation.nixos.enable = false;
 
     nix = {
-      gc = lib.mkIf cfg.garbage_collection.automatic {
+      gc = {
         automatic = true;
         dates = "weekly";
         options = "--delete-older-than 7d";

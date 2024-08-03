@@ -35,5 +35,8 @@ in
 
     # to get some chromium based programs to work on wayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+    # remove that stupid default terminal
+    services.xserver.excludePackages = [ pkgs.xterm ];
   };
 }

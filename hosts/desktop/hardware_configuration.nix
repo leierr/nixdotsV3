@@ -33,5 +33,33 @@
     ];
   };
 
-  systemd.tmpfiles.rules = ["L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"];
+  systemd.tmpfiles.rules = let
+  
+  in [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    #"f+ /run/gdm/.config/monitors.xml - gdm gdm - ${}"
+  ];
+
+  # DEFAULT screen setup
+  services.xserver.xrandrHeads = [
+    {
+      output = "DisplayPort-1";
+      primary = true;
+      monitorConfig = ''
+        Option "Position" "2560 0"
+        Option "Enable" "true"
+        Option "Rotate" "normal"
+        Option "PreferredMode" "2560x1440_144"
+      '';
+    }
+    {
+      output = "DisplayPort-0";
+      monitorConfig = ''
+        Option "Position" "0 0"
+        Option "Enable" "true"
+        Option "Rotate" "normal"
+        Option "PreferredMode" "2560x1440_144"
+      '';
+    }
+  ];
 }

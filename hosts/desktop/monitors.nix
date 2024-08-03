@@ -1,7 +1,6 @@
-{}:
 {
   systemd.tmpfiles.rules = let
-    gdm_monitor_config = ''
+    gdm_monitor_config_multiline = ''
       <monitors version="2">
         <configuration>
           <logicalmonitor>
@@ -45,9 +44,10 @@
       </monitors>
     '';
 
-    gdm_monitor_config_singleline = builtins.replaceStrings ["\n"] [""] gdm_monitor_config_multiline;
+    # Trimming
+    gdm_monitor_config_trimmed = builtins.replaceStrings ["\n" "  "] [" " ""] gdm_monitor_config_multiline;
   in [
-    "f+ /run/gdm/.config/monitors.xml - gdm gdm - ${gdm_monitor_config_singleline}"
+    "f+ /run/gdm/.config/monitors.xml - gdm gdm - ${gdm_monitor_config_trimmed}"
   ];
 
   services.xserver.xrandrHeads = [

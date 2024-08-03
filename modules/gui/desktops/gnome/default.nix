@@ -16,6 +16,7 @@ in
 
     # cool nautilus picture/video previewer
     services.gnome.sushi.enable = true;
+    environment.systemPackages = [ pkgs.gnome.nautilus ];
 
     # disable most default gnome crap
     services.gnome.core-utilities.enable = false;

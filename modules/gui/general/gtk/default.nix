@@ -27,7 +27,7 @@ in
     theme = {
       name = lib.mkOption {
         type = lib.types.singleLineStr;
-        default = "Adwaita-dark";
+        default = "Adwaita";
       };
 
       package = lib.mkOption {

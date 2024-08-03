@@ -42,9 +42,12 @@
           bbenoist.nix
         ];
       };
+
+      # increase the gnome text size a bit
+      dconf.settings."org/gnome/desktop/interface".text-scaling-factor = "1.1";
     })
   ];
 
   # extra packages
-  environment.systemPackages = [];
+  environment.systemPackages = [ pkgs.gnome-tweaks ];
 }

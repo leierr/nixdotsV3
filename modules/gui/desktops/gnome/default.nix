@@ -16,12 +16,22 @@ in
 
     # cool nautilus picture/video previewer
     services.gnome.sushi.enable = true;
-    environment.systemPackages = [ pkgs.gnome.nautilus ];
+    environment.systemPackages = [ pkgs.nautilus pkgs.libappindicator pkgs.gnomeExtensions.appindicator pkgs.gnomeExtensions.dash-to-panel ];
 
     # disable most default gnome crap
     services.gnome.core-utilities.enable = false;
     environment.gnome.excludePackages = (with pkgs; [ gnome-tour ]);
 
+    # tror dette er vanlig lmao
+    programs.dconf.enable = true;
+    services.dbus.enable = true;
+    services.gnome.gnome-keyring.enable = true;
+    services.gnome.core-shell.enable = true;
+    services.gnome.gnome-settings-daemon.enable = true;
+    services.gvfs.enable = true;
+    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+
+    # home manager stuff
     home_manager_modules = [
       ({
         dconf = {
@@ -38,14 +48,35 @@ in
           settings."org/gnome/shell/app-switcher".current-workspace-only = true;
           settings."org/gnome/desktop/interface".enable-animations = false;
 
+          # extensions
+          settings."org/gnome/shell".disable-user-extensions = false;
+          settings."org/gnome/shell".enabled-extensions = [
+            pkgs.gnomeExtensions.appindicator.extensionUuid
+            pkgs.gnomeExtensions.dash-to-panel.extensionUuid
+          ];
+          settings."org/gnome/shell/extensions/dash-to-panel".dot-style-unfocused = "DASHES";
+          settings."org/gnome/shell/extensions/dash-to-panel".show-apps-icon-file = "${./assets/nixos.svg}";
+
           # bindings
           settings."org/gnome/desktop/wm/keybindings".close = [ "<Super>w" ];
           settings."org/gnome/desktop/wm/keybindings".switch-windows = [ "<Alt>Tab" ];
           settings."org/gnome/desktop/wm/keybindings".switch-windows-backward = [ "<Shift><Alt>Tab" ];
+          settings."org/gnome/shell/keybindings".show-screenshot-ui = [ "<Super>q" ];
+
+          # custom bindings
+          settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings".custom0 = {
+            binding = "<Super>Return";
+            command = "alacritty";
+            name = "Terminal Emulator";
+          };
+          settings."org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+          ];
 
           # unbind
           settings."org/gnome/desktop/wm/keybindings".switch-applications = [];
           settings."org/gnome/desktop/wm/keybindings".switch-applications-backward = [];
+          settings."org/gnome/shell/keybindings".screenshot = [];
         };
       })
     ];

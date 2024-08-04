@@ -11,7 +11,7 @@ in
 
     ./desktops/bspwm
     ./desktops/gnome
-    #./desktops/hyprland
+    ./desktops/hyprland
 
     ./general/qt
     ./general/gtk

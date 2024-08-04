@@ -9,6 +9,7 @@
   system_settings.gui.enable = true;
   system_settings.gui.desktops.bspwm.enable = true;
   system_settings.gui.desktops.gnome.enable = true;
+  system_settings.gui.desktops.hyprland.enable = true;
   system_settings.gui.gaming.enable = true;
 
   system_settings.privilege_escalation.wheel_needs_password = false;
@@ -17,8 +18,6 @@
 
   # disable root password
   users.users.root.hashedPassword = "!";
-
-  programs.hyprland.enable = true;
 
   # overwriting home-manager values
   home_manager_modules = [
@@ -39,15 +38,38 @@
         enable = true;
         package = pkgs.vscodium;
         extensions = with pkgs.vscode-extensions; [
-          bbenoist.nix
+          bbenoist.nix # nix syntax highlighting
         ];
       };
 
       # increase the gnome text size a bit
       dconf.settings."org/gnome/desktop/interface".text-scaling-factor = 1.1;
+
+      # hyprland automagical screen config
+      services.kanshi = {
+        enable = true;
+        systemdTarget = "hyprland-session.target";
+        settings = [
+          {
+            profile.name = "main";
+            profile.outputs = [
+              {
+                criteria = "AOC Q27G2G4 0x000023BD"; # hyprctl monitors, description
+                position = "2560,0";
+                mode = "2560x1440@143.91Hz";
+              }
+              {
+                criteria = "AOC Q27G2G4 0x000021BD"; # hyprctl monitors, description
+                position = "0,0";
+                mode = "2560x1440@143.91Hz";
+              }
+            ];
+          }
+        ];
+      };
     })
   ];
 
   # extra packages
-  environment.systemPackages = [ pkgs.gnome-tweaks ];
+  environment.systemPackages = [];
 }

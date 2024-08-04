@@ -26,9 +26,6 @@ in
     programs.dconf.enable = true;
     programs.xwayland.enable = true;
     services.dbus.enable = true;
-    services.gnome.gnome-keyring.enable = true;
-    services.gnome.core-shell.enable = true;
-    services.gnome.gnome-settings-daemon.enable = true;
     services.gvfs.enable = true;
 
     # home manager stuff

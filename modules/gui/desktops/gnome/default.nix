@@ -24,12 +24,12 @@ in
 
     # tror dette er vanlig lmao
     programs.dconf.enable = true;
+    programs.xwayland.enable = true;
     services.dbus.enable = true;
     services.gnome.gnome-keyring.enable = true;
     services.gnome.core-shell.enable = true;
     services.gnome.gnome-settings-daemon.enable = true;
     services.gvfs.enable = true;
-    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
     # home manager stuff
     home_manager_modules = [
@@ -64,7 +64,7 @@ in
           settings."org/gnome/shell/keybindings".show-screenshot-ui = [ "<Super>q" ];
 
           # custom bindings
-          settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings".custom0 = {
+          settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
             binding = "<Super>Return";
             command = "alacritty";
             name = "Terminal Emulator";

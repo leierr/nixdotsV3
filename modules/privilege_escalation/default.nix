@@ -12,7 +12,7 @@ in
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
-    (lib.mkIf (cfg.program == "doas") (import ./doas.nix { inherit cfg; }) )
+    (lib.mkIf (cfg.program == "doas") (import ./doas.nix { inherit cfg lib; }) )
     (lib.mkIf (cfg.program == "sudo") (import ./sudo.nix { inherit cfg; }) )
   ]);
 }

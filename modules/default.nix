@@ -32,6 +32,7 @@
       boot_loader.enable = true;
       shell.enable = true;
       gnupg.enable = true;
+      mlocate.enable = true;
     };
   };
 

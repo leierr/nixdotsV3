@@ -40,5 +40,14 @@ in
     # xserver defaults
     services.xserver.xkb.variant = "nodeadkeys";
     services.xserver.xkb.layout = "no";
+
+    # home manager stuff
+    home_manager_modules = [
+      ({
+        # hyprland defaults
+        wayland.windowManager.hyprland.settings.input.kb_layout = "no";
+        wayland.windowManager.hyprland.settings.input.kb_variant = "nodeadkeys";
+      })
+    ];
   };
 }

@@ -55,7 +55,7 @@
       output = "DisplayPort-1";
       primary = true;
       monitorConfig = ''
-        Option "Position" "2560 0"
+        Option "Position" "0 0"
         Option "Enable" "true"
         Option "Rotate" "normal"
         Option "PreferredMode" "2560x1440_144"
@@ -64,7 +64,7 @@
     {
       output = "DisplayPort-0";
       monitorConfig = ''
-        Option "Position" "0 0"
+        Option "Position" "2560 0"
         Option "Enable" "true"
         Option "Rotate" "normal"
         Option "PreferredMode" "2560x1440_144"

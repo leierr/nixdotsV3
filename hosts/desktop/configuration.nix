@@ -71,5 +71,5 @@
   ];
 
   # extra packages
-  environment.systemPackages = [];
+  environment.systemPackages = with pkgs; [ obsidian ];
 }

@@ -15,9 +15,34 @@ in
       ({
         wayland.windowManager.hyprland = {
           enable = true;
-					settings = {};
+					settings = {
+            # variables
+						"$mod" = "SUPER";
+						"$terminal" = "alacritty";
+            "$browser" = "firefox --new-window";
+						"$application_launcher" = "wofi --show drun";
+
+            # autostart
+						exec-once = [
+              "$browser"
+              "discord"
+            ];
+
+            # keyboard binds
+						bind = [
+							"$mod, Return, exec, $terminal"
+							"$mod, W, killactive"
+							"$mod, escape, exit"
+							"$mod, D, exec, $application_launcher"
+						];
+
+            # mouse binds
+            bindm = [
+              "$mod, mouse:272, movewindow"
+              "$mod, mouse:273, resizewindow"
+            ];
+					};
 					plugins = [];
-					extraConfig = "";
         };
       })
     ];

@@ -26,9 +26,10 @@
 
     hardware.cpu.amd.updateMicrocode = true; # AMD CPU
     hardware.enableRedistributableFirmware = true;
-    hardware.graphics = {
-      enable = true; # Mesa / OpenGL
-      enable32Bit = true; # Vulkan 32 bit support
+    hardware.opengl = {
+      enable = true; # Mesa
+      driSupport = true; # Vulkan
+      driSupport32Bit = true; # Vulkan 32 bit support
       extraPackages = with pkgs; [
         rocmPackages.clr.icd # AMD OpenCL
         amdvlk # AMDGPU vulkan

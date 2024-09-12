@@ -9,7 +9,7 @@ in
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     services.xserver.displayManager.lightdm.greeters.gtk.cursorTheme = {
       name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+      package = pkgs.gnome.adwaita-icon-theme;
       size = 32;
     };
 
@@ -18,7 +18,7 @@ in
         home.pointerCursor = {
           name = "Adwaita";
           size = 32;
-          package = pkgs.adwaita-icon-theme;
+          package = pkgs.gnome.adwaita-icon-theme;
           x11 = {
             enable = true;
             defaultCursor = "left_ptr";

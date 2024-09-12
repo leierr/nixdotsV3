@@ -26,12 +26,13 @@
       };
     in {
     nixosConfigurations = {
-      desktop = mkSystem { host_name = "desktop"; system_state_version = "24.11"; };
+      desktop = mkSystem { host_name = "desktop"; system_state_version = "24.05"; };
     };
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     #
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

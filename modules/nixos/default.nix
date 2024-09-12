@@ -11,6 +11,16 @@ in
   config = lib.mkIf cfg.enable {
     nixpkgs.config.hostPlatform = config.nixpkgs.system;
 
+    # make unstable packages available as an nixpkgs overlay
+    nixpkgs.overlays = lib.mkIf cfg.unstable_packages_overlay [
+      (final: prev: {
+        unstable = import inputs.nixpkgs-unstable {
+          system = config.nixpkgs.system;
+          config = config.nixpkgs.config;
+        };
+      })
+    ];
+
     nixpkgs.config.allowUnfree = true;
 
     documentation.nixos.enable = false;

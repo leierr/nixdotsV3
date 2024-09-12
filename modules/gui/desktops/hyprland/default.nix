@@ -48,8 +48,6 @@ in
     ];
 
     # dependencies
-    environment.systemPackages = with pkgs; [
-			wofi
-    ];
+    environment.systemPackages = with pkgs; [];
   };
 }

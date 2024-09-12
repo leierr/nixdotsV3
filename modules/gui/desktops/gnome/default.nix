@@ -16,7 +16,7 @@ in
 
     # cool nautilus picture/video previewer
     services.gnome.sushi.enable = true;
-    environment.systemPackages = [ pkgs.nautilus pkgs.libappindicator pkgs.gnomeExtensions.appindicator pkgs.gnomeExtensions.dash-to-panel ];
+    environment.systemPackages = [ pkgs.gnome.nautilus pkgs.libappindicator pkgs.gnomeExtensions.appindicator pkgs.gnomeExtensions.dash-to-panel ];
 
     # disable most default gnome crap
     services.gnome.core-utilities.enable = false;

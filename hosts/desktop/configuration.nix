@@ -44,33 +44,9 @@
 
       # increase the gnome text size a bit
       dconf.settings."org/gnome/desktop/interface".text-scaling-factor = 1.1;
-
-      # hyprland automagical screen config
-      # services.kanshi = {
-      #   enable = true;
-      #   systemdTarget = "hyprland-session.target";
-      #   settings = [
-      #     {
-      #       profile.name = "main";
-      #       profile.outputs = [
-      #         {
-      #           criteria = "AOC Q27G2G4 0x000023BD"; # hyprctl monitors, description
-      #           position = "2560,0";
-      #           mode = "2560x1440@143.91Hz";
-      #         }
-      #         {
-      #           criteria = "AOC Q27G2G4 0x000021BD"; # hyprctl monitors, description
-      #           position = "0,0";
-      #           mode = "2560x1440@143.91Hz";
-      #         }
-      #       ];
-      #     }
-      #   ];
-      # };
     })
   ];
 
   # extra packages
-  environment.systemPackages = with pkgs; [ obsidian spotify remmina brave xfce.mousepad totem ];
-  # trenger xdg-desktop-portal-gnome xdg-desktop-portal
+  environment.systemPackages = with pkgs; [ obsidian spotify remmina brave xfce.mousepad gnome.totem ];
 }

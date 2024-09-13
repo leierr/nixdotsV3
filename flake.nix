@@ -36,5 +36,9 @@
     #
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    #
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    split-monitor-workspaces.url = "github:Duckonaut/split-monitor-workspaces";
+    split-monitor-workspaces.inputs.hyprland.follows = "hyprland";
   };
 }

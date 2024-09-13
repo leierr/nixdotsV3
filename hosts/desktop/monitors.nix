@@ -71,4 +71,15 @@
       '';
     }
   ];
+
+  home_manager_modules = [
+    ({
+      home.file.".config/kanshi/config".text = ''
+        profile main {
+          output "AOC Q27G2G4 0x000023BD" mode 2560x1440@143.91Hz position 2560,0
+          output "AOC Q27G2G4 0x000021BD" mode 2560x1440@143.91Hz position 0,0
+        }
+      '';
+    })
+  ];
 }

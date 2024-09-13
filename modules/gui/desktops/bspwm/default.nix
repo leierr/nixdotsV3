@@ -60,7 +60,7 @@ in
       slack
       discord
       feh
-      rofi
+      rofi-wayland
       xorg.xsetroot
       procps
       killall

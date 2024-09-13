@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   cfg = config.system_settings.gui.desktops.hyprland;
@@ -10,6 +10,7 @@ in
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     programs.hyprland.enable = true;
+    programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
     home_manager_modules = [
       ({
@@ -20,12 +21,16 @@ in
 						"$mod" = "SUPER";
 						"$terminal" = "alacritty";
             "$browser" = "firefox --new-window";
-						"$application_launcher" = "wofi --show drun";
+						"$application_launcher" = "rofi -show drun";
 
             # autostart
 						exec-once = [
               "$browser"
               "discord"
+            ];
+
+            exec = [
+              "pgrep kanshi || kanshi &" "pgrep kanshi && kanshictl reload"
             ];
 
             # keyboard binds
@@ -42,12 +47,17 @@ in
               "$mod, mouse:273, resizewindow"
             ];
 					};
-					plugins = [];
+					plugins = [
+            #inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+          ];
         };
       })
     ];
 
     # dependencies
-    environment.systemPackages = with pkgs; [];
+    environment.systemPackages = with pkgs; [
+      rofi-wayland
+      kanshi
+    ];
   };
 }

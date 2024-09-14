@@ -38,7 +38,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     #
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    split-monitor-workspaces.url = "github:Duckonaut/split-monitor-workspaces";
-    split-monitor-workspaces.inputs.hyprland.follows = "hyprland";
+    hyprsplit.url = "github:shezdy/hyprsplit";
+    hyprsplit.inputs.hyprland.follows = "hyprland";
   };
 }

@@ -25,6 +25,15 @@ in
           };
           gtk.enable = true;
         };
+
+        wayland.windowManager.hyprland.settings.env = [
+          "HYPRCURSOR_THEME,Adwaita"
+          "HYPRCURSOR_SIZE,32"
+        ];
+
+        wayland.windowManager.hyprland.settings.exec-once = [
+          "hyprctl setcursor Adwaita 32"
+        ];
       })
     ];
   };

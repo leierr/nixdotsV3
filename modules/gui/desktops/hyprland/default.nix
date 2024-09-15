@@ -45,10 +45,10 @@ in
 
               general = {
                 # borders
-                border_size = 1;
+                border_size = 2;
                 no_border_on_floating = false;
-                #col.inactive_border
-                #col.active_border
+                "col.inactive_border" = "rgb(${builtins.replaceStrings ["#"] [""] config.system_settings.gui.theme.unfocused_border_color})";
+                "col.active_border" = "rgb(${builtins.replaceStrings ["#"] [""] config.system_settings.gui.theme.focused_border_color})";
 
                 # gaps
                 gaps_in = 10;
@@ -61,6 +61,14 @@ in
               decoration = {
                 rounding = 10;
                 blur.enabled = false;
+
+                # shadows
+                drop_shadow = true;
+                shadow_ignore_window = true;
+                shadow_offset = "1 3";
+                shadow_range = 25;
+                shadow_render_power = 3;
+                "col.shadow" = "rgba(000000BF)";
               };
 
               animations = {
@@ -107,8 +115,8 @@ in
                 "$mod SHIFT, M, moveoutofgroup"
 
                 # WM control center
-                "$mod Control_L, R, exec, hyprctl reload config-only"
-                "$mod Control_L&SHIFT, R, exec, hyprctl reload"
+                "$mod, R, exec, hyprctl reload config-only"
+                "$mod Control_L, R, exec, hyprctl reload"
 
                 "$mod, ESCAPE, exit"
                 "$mod Control_L, ESCAPE, exec, systemctl poweroff"

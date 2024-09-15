@@ -36,6 +36,10 @@ in
         auto-optimise-store = true;
         flake-registry = ""; # Disable global registry
         experimental-features = [ "nix-command" "flakes" ];
+
+        # extra cache sources
+        substituters = ["https://hyprland.cachix.org"];
+        trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
       };
 
       # Thanks to: https://nixos-and-flakes.thiscute.world/best-practices/nix-path-and-flake-registry#custom-nix-path-and-flake-registry

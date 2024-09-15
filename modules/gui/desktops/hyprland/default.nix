@@ -10,23 +10,24 @@ in
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     programs.hyprland.enable = true;
-    programs.hyprland.package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    programs.hyprland.portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    programs.hyprland.portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
 
     home_manager_modules = [
       ({
         wayland.windowManager.hyprland = {
           enable = true;
-          package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+          package = inputs.hyprland.packages.${pkgs.system}.hyprland;
           plugins = [
-            inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
+            inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
           ];
           settings = {
             # variables
             "$mod" = "SUPER";
             "$terminal" = "alacritty";
-            "$browser" = "firefox --new-window";
+            "$browser" = "firefox";
             "$application_launcher" = "rofi -show drun";
+            "$screenshot_exec" = "grimblast --freeze copy area";
 
             # autostart
             exec-once = [
@@ -53,8 +54,17 @@ in
               layout = "dwindle";
             };
 
+            decoration = {
+              rounding = 10;
+              blur.enabled = false;
+            };
+
+            animations = {
+              enabled = false;
+            };
+
             misc = {
-              # disable default graphics
+              # disable default shit
               disable_hyprland_logo = true;
               disable_splash_rendering = true;
 
@@ -65,20 +75,33 @@ in
               force_split = 2;
             };
 
+            # window rules
+            windowrulev2 = [
+              "float, class:^(nm-connection-editor)$"
+            ];
+
+            # workspace rules
+            workspace = [];
+
             # keyboard binds
             bind = [
               "$mod, Return, exec, $terminal"
               "$mod, D, exec, $application_launcher"
+              "$mod, Q, exec, $screenshot_exec"
 
               # Window managment
               "$mod, W, killactive"
+              "$mod, S, togglefloating"
+              "$mod, F, fullscreen"
+              "$mod, M, togglegroup"
+              "$mod SHIFT, M, moveoutofgroup"
 
               # WM control center
               "$mod Control_L, R, exec, hyprctl reload config-only"
               "$mod Control_L&SHIFT, R, exec, hyprctl reload"
 
-              "$mod Control_L, ESCAPE, exit"
-              "$mod Control_L&SHIFT, ESCAPE, exec, systemctl poweroff"
+              "$mod, ESCAPE, exit"
+              "$mod Control_L, ESCAPE, exec, systemctl poweroff"
 
               # moving about the WM
               "$mod, 1, split-workspace, 1"
@@ -95,11 +118,24 @@ in
               "$mod SHIFT, 5, split-movetoworkspacesilent, 5"
               "$mod SHIFT, 6, split-movetoworkspacesilent, 6"
 
+              "$mod, mouse_up, split-cycleworkspaces, -1"
+              "$mod, mouse_down, split-cycleworkspaces, +1"
+
               "$mod, o, focusmonitor, +1"
               "$mod SHIFT, o, split-changemonitor, +1"
 
               "$mod, c, cyclenext"
               "$mod SHIFT, c, swapnext"
+
+              "$mod, h, movefocus, l"
+              "$mod, l, movefocus, r"
+              "$mod, k, movefocus, u"
+              "$mod, j, movefocus, d"
+
+              "$mod, h, movewindow, l"
+              "$mod, l, movewindow, r"
+              "$mod, k, movewindow, u"
+              "$mod, j, movewindow, d"
             ];
 
             # mouse binds
@@ -124,6 +160,8 @@ in
     environment.systemPackages = with pkgs; [
       rofi-wayland
       kanshi
+      grimblast
+      wl-clipboard
     ];
   };
 }

@@ -53,7 +53,7 @@ in
       pavucontrol
       arandr
       polybar
-      flameshot
+      #flameshot
       picom-next
       dunst
       firefox

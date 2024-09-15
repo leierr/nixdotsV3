@@ -10,7 +10,7 @@ in
   };
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
-    (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper))
+    (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit lib pkgs; }))
     {
       programs.hyprland.enable = true;
       programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;

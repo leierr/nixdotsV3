@@ -6,48 +6,6 @@ in
 {
   options.system_settings.gui.gtk = {
     enable = lib.mkEnableOption "";
-
-    font = {
-      name = lib.mkOption {
-        type = lib.types.singleLineStr;
-        default = "gnome";
-      };
-
-      package = lib.mkOption {
-        type = lib.types.package;
-        default = pkgs.cantarell-fonts;
-      };
-
-      size = lib.mkOption {
-        type = lib.types.nullOr lib.types.int;
-        default = null;
-      };
-    };
-
-    theme = {
-      name = lib.mkOption {
-        type = lib.types.singleLineStr;
-        default = "Adwaita";
-      };
-
-      package = lib.mkOption {
-        type = lib.types.package;
-        default = pkgs.libadwaita;
-      };
-    };
-
-    icon_theme = {
-      name = lib.mkOption {
-        type = lib.types.singleLineStr;
-        default = "Papirus-Dark";
-      };
-
-      package = lib.mkOption {
-        type = lib.types.package;
-        default = pkgs.papirus-icon-theme;
-      };
-    };
-
     bookmarks = lib.mkOption { type = lib.types.listOf lib.types.singleLineStr; default = []; };
   };
 
@@ -62,19 +20,19 @@ in
 
           # denne er skummel å leke med. Driter i size og setter en classic gnome default font her.
           font = {
-            name = cfg.font.name;
-            package = cfg.font.package;
-            size = cfg.font.size;
+            name = "gnome";
+            package = pkgs.cantarell-fonts;
+            size = null;
           };
 
           theme = {
-            name = cfg.theme.name;
-            package = cfg.theme.package;
+            name = "Adwaita-dark";
+            package = pkgs.gnome.gnome-themes-extra;
           };
 
           iconTheme = {
-            name = cfg.icon_theme.name;
-            package = cfg.icon_theme.package;
+            name = "Papirus-Dark";
+            package = pkgs.papirus-icon-theme;
           };
 
           # fuck gtk2, outdated fucker

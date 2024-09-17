@@ -44,6 +44,9 @@ in
     white = lib.mkOption { type = lib.types.str; default = "#F1F1F1"; };
     white_light = lib.mkOption { type = lib.types.str; default = "#FEFEFE"; };
 
+    gray = lib.mkOption { type = lib.types.str; default = "#818589"; };
+    gray_light = lib.mkOption { type = lib.types.str; default = "#A3A6AA"; };
+
     yellow = lib.mkOption { type = lib.types.str; default = "#F1C50F"; };
     yellow_light = lib.mkOption { type = lib.types.str; default = "#FECF0F"; };
   };

@@ -2,6 +2,7 @@
 
 let
   cfg = config.system_settings.gui.desktops.hyprland;
+  theme = config.system_settings.gui.theme;
 in
 {
   options.system_settings.gui.desktops.hyprland = {
@@ -15,6 +16,8 @@ in
       programs.hyprland.enable = true;
       programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       programs.hyprland.portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+
+      system_settings.gui.applauncher.enable = true;
 
       home_manager_modules = [
         ({
@@ -33,6 +36,16 @@ in
               "$application_launcher" = "rofi -show drun";
               "$screenshot_exec" = "grimblast --freeze copy area";
 
+              env = [
+                "QT_QPA_PLATFORM,wayland"
+                "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+                "NIXOS_OZONE_WL,1" # for any ozone-based browser & electron apps to run on wayland
+                "MOZ_ENABLE_WAYLAND,1" # for firefox to run on wayland
+                "MOZ_WEBRENDER,1"
+                "SDL_VIDEODRIVER,wayland"
+                "GDK_BACKEND,wayland"
+              ];
+
               # autostart
               exec-once = [
                 "$browser"
@@ -47,8 +60,8 @@ in
                 # borders
                 border_size = 2;
                 no_border_on_floating = false;
-                "col.inactive_border" = "rgb(${builtins.replaceStrings ["#"] [""] config.system_settings.gui.theme.unfocused_border_color})";
-                "col.active_border" = "rgb(${builtins.replaceStrings ["#"] [""] config.system_settings.gui.theme.focused_border_color})";
+                "col.inactive_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.unfocused_border_color})";
+                "col.active_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.focused_border_color})";
 
                 # gaps
                 gaps_in = 10;
@@ -176,7 +189,6 @@ in
 
       # dependencies
       environment.systemPackages = with pkgs; [
-        rofi-wayland
         kanshi
         grimblast
         wl-clipboard

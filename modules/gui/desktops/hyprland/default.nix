@@ -17,7 +17,7 @@ in
       programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       programs.hyprland.portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
 
-      system_settings.gui.applauncher.enable = true;
+      system_settings.gui.rofi.enable = true;
 
       home_manager_modules = [
         ({

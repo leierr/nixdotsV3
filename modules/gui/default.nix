@@ -21,7 +21,7 @@ in
     ./general/theme
     ./general/gaming
     ./general/cursor
-    ./general/applauncher
+    ./general/rofi
   ];
 
   config = {

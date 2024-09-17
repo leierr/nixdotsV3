@@ -16,7 +16,7 @@ in
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     services.xserver.windowManager.bspwm.enable = true;
 
-    system_settings.gui.applauncher.enable = true;
+    system_settings.gui.rofi.enable = true;
 
     home_manager_modules = [
       ({

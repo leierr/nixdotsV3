@@ -33,7 +33,7 @@ in
               "$mod" = "SUPER";
               "$terminal" = "alacritty";
               "$browser" = "firefox";
-              "$application_launcher" = "rofi -show drun";
+              "$application_launcher" = "${config.system_settings.gui.rofi.drun_exec}";
               "$screenshot_exec" = "grimblast --freeze copy area";
 
               env = [
@@ -109,6 +109,10 @@ in
                 "float, class:^(nm-connection-editor)$"
                 "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
                 "float, class:^(pavucontrol)$"
+                "nomaxsize, class:^(firefox)$"
+
+                # rofi
+                "stayfocused,class:^(Rofi)$"
               ];
 
               # workspace rules
@@ -124,8 +128,7 @@ in
                 "$mod, W, killactive"
                 "$mod, S, togglefloating"
                 "$mod, F, fullscreen"
-                "$mod, M, togglegroup"
-                "$mod SHIFT, M, moveoutofgroup"
+                "$mod, M, fullscreen, 1"
 
                 # WM control center
                 "$mod, R, exec, hyprctl reload config-only"

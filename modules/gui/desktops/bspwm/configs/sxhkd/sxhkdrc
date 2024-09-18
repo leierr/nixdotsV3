@@ -30,7 +30,7 @@ super + shift + r
 # ------------ #
 
 super + d
-	rofi -show drun
+	rofi -show drun -config ~/.config/rofi/drun.rasi
 
 ## program launcher
 #super + d

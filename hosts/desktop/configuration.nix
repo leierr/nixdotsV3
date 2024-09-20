@@ -19,6 +19,12 @@
   # disable root password
   users.users.root.hashedPassword = "!";
 
+  # automatic screenlocking
+  services.logind.extraConfig = ''
+    IdleAction=lock
+    IdleActionSec=5min
+  '';
+
   # overwriting home-manager values
   home_manager_modules = [
     ({
@@ -44,6 +50,14 @@
 
       # increase the gnome text size a bit
       dconf.settings."org/gnome/desktop/interface".text-scaling-factor = 1.1;
+
+      programs.rbw = {
+        enable = true;
+        settings = {
+          email = "lars.smith.eier@basefarm-orange.com";
+          lock_timeout = 36000;
+        };
+      };
     })
   ];
 

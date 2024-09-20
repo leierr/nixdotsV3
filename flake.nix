@@ -37,10 +37,15 @@
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     #
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=refs/tags/v0.41.2";
-    split-monitor-workspaces = {
-	    	url = "github:Duckonaut/split-monitor-workspaces";
-	    	inputs.hyprland.follows = "hyprland";
+    hyprland = {
+      type = "git";
+      url = "github:hyprwm/Hyprland";
+      submodules = true;
+      ref = "refs/tags/v${inputs.nixpkgs.legacyPackages.x86_64-linux.hyprland.version}";
+    };
+    hyprsplit = {
+      url = "github:shezdy/hyprsplit";
+      inputs.hyprland.follows = "hyprland";
 		};
   };
 }

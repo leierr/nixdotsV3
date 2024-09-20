@@ -40,9 +40,9 @@ super + d
 #super + e
 #	~/.config/rofi/emoji_rofi.sh
 #
-## bitwarden
-#super + b
-#	~/.config/rofi/rbw_rofi.sh
+# bitwarden
+super + b
+	rofi-rbw
 #
 ## bitwarden + autotyper
 #super + control + b

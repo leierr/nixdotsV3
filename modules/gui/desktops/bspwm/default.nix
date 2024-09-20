@@ -17,6 +17,7 @@ in
     services.xserver.windowManager.bspwm.enable = true;
 
     system_settings.gui.rofi.enable = true;
+    system_settings.gui.rofi.plugins.rbw.enable = true;
 
     home_manager_modules = [
       ({
@@ -69,6 +70,7 @@ in
       alsa-utils
       i3lock
       libnotify
+      xclip
       xorg.xprop
     ];
   };

@@ -8,16 +8,19 @@ in
   options.system_settings.gui.desktops.hyprland = {
     enable = lib.mkEnableOption "";
     hyprpaper.enable = lib.mkOption { type = lib.types.bool; default = true; };
+    hyprlock.enable = lib.mkOption { type = lib.types.bool; default = true; };
   };
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
-    (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit lib pkgs; }))
+    (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit theme; }))
+    (lib.mkIf cfg.hyprlock.enable (import ./hyprpaper { inherit lib pkgs theme; }))
     {
       programs.hyprland.enable = true;
       programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       programs.hyprland.portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
 
       system_settings.gui.rofi.enable = true;
+      system_settings.gui.rofi.plugins.rbw.enable = true;
 
       home_manager_modules = [
         ({
@@ -26,7 +29,7 @@ in
             xwayland.enable = true;
             package = inputs.hyprland.packages.${pkgs.system}.hyprland;
             plugins = [
-              inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+              inputs.hyprsplit.${pkgs.system}.hyprsplit
             ];
             settings = {
               # variables
@@ -54,6 +57,7 @@ in
 
               exec = [
                 "pgrep kanshi || kanshi &" "pgrep kanshi && kanshictl reload"
+                "pgrep hyprpaper || hyprpaper &"
               ];
 
               general = {
@@ -123,6 +127,7 @@ in
                 "$mod, Return, exec, $terminal"
                 "$mod, D, exec, $application_launcher"
                 "$mod, Q, exec, $screenshot_exec"
+                "$mod, B, exec, ${config.system_settings.gui.rofi.plugins.rbw.exec}/bin/rofi-rbw"
 
                 # Window managment
                 "$mod, W, killactive"
@@ -138,19 +143,19 @@ in
                 "$mod Control_L, ESCAPE, exec, systemctl poweroff"
 
                 # moving about the WM
-                "$mod, 1, split-workspace, 1"
-                "$mod, 2, split-workspace, 2"
-                "$mod, 3, split-workspace, 3"
-                "$mod, 4, split-workspace, 4"
-                "$mod, 5, split-workspace, 5"
-                "$mod, 6, split-workspace, 6"
+                "$mod, 1, split:workspace, 1"
+                "$mod, 2, split:workspace, 2"
+                "$mod, 3, split:workspace, 3"
+                "$mod, 4, split:workspace, 4"
+                "$mod, 5, split:workspace, 5"
+                "$mod, 6, split:workspace, 6"
 
-                "$mod SHIFT, 1, split-movetoworkspacesilent, 1"
-                "$mod SHIFT, 2, split-movetoworkspacesilent, 2"
-                "$mod SHIFT, 3, split-movetoworkspacesilent, 3"
-                "$mod SHIFT, 4, split-movetoworkspacesilent, 4"
-                "$mod SHIFT, 5, split-movetoworkspacesilent, 5"
-                "$mod SHIFT, 6, split-movetoworkspacesilent, 6"
+                "$mod SHIFT, 1, split:movetoworkspacesilent, 1"
+                "$mod SHIFT, 2, split:movetoworkspacesilent, 2"
+                "$mod SHIFT, 3, split:movetoworkspacesilent, 3"
+                "$mod SHIFT, 4, split:movetoworkspacesilent, 4"
+                "$mod SHIFT, 5, split:movetoworkspacesilent, 5"
+                "$mod SHIFT, 6, split:movetoworkspacesilent, 6"
 
                 "$mod, mouse_up, split-cycleworkspaces, -1"
                 "$mod, mouse_down, split-cycleworkspaces, +1"
@@ -179,10 +184,8 @@ in
               ];
 
               plugin = {
-                split-monitor-workspaces = {
-                  count = 6;
-                  keep_focused = 1;
-                  enable_persistent_workspaces = 1;
+                hyprsplit = {
+                  num_workspaces = 6;
                 };
               };
             };

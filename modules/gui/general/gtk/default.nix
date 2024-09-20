@@ -14,7 +14,9 @@ in
     programs.dconf.enable = true;
 
     home_manager_modules = [
-      ({...}@inputs: {
+      ({ ...}@inputs: {
+        home.sessionVariables."GTK_THEME" = "Adwaita-dark";
+        
         gtk = {
           enable = true;
 

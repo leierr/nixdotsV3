@@ -49,6 +49,11 @@ in
 
     yellow = lib.mkOption { type = lib.types.str; default = "#F1C50F"; };
     yellow_light = lib.mkOption { type = lib.types.str; default = "#FECF0F"; };
+
+    #-------------------------------------#
+
+    wallpaper_jpg = lib.mkOption { type = lib.types.path; default = ./assets/wallpaper.jpg; };
+    nix_logo_png = lib.mkOption { type = lib.types.path; default = ./assets/nix_logo.png; };
   };
 }
 

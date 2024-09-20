@@ -21,7 +21,7 @@ in
     programs.gnupg.agent = { pinentryPackage = cfg.package; };
 
     home_manager_modules = [
-      ({ programs.rbw.settings.pinentry = pkgs.pinentry.${cfg.package}; })
+      ({ programs.rbw.settings.pinentry = cfg.package; })
     ];
   };
 }

@@ -39,9 +39,9 @@
     #
     hyprland = {
       type = "git";
-      url = "github:hyprwm/Hyprland";
+      url = "https://github.com/hyprwm/Hyprland.git";
       submodules = true;
-      ref = "refs/tags/v${inputs.nixpkgs.legacyPackages.x86_64-linux.hyprland.version}";
+      ref = "refs/tags/v0.41.2";
     };
     hyprsplit = {
       url = "github:shezdy/hyprsplit";

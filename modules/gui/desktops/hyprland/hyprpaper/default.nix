@@ -1,4 +1,4 @@
-{ theme }:
+{ lib, pkgs, theme }:
 {
   home_manager_modules = [
     ({

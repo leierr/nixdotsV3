@@ -12,8 +12,9 @@ in
   };
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
-    (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit theme; }))
+    (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hyprpaper { inherit lib pkgs theme; }))
+
     {
       programs.hyprland.enable = true;
       programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -29,7 +30,7 @@ in
             xwayland.enable = true;
             package = inputs.hyprland.packages.${pkgs.system}.hyprland;
             plugins = [
-              inputs.hyprsplit.${pkgs.system}.hyprsplit
+              inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
             ];
             settings = {
               # variables

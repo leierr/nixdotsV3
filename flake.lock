@@ -140,17 +140,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1725839650,
-        "narHash": "sha256-r533kNIyfgPi/q8ddIYyDK1Pmupt/F3ncHuFo3zjDkU=",
-        "owner": "shezdy",
-        "repo": "hyprsplit",
-        "rev": "61d8dacc1733f0a3cd152d4e0522caae4f7b8b2d",
-        "type": "github"
+        "lastModified": 1719357451,
+        "narHash": "sha256-AMK4/87EdBcl8ukTdHMll+zbU76TySqpgwgi6J/jyks=",
+        "ref": "refs/tags/v0.41.2",
+        "rev": "fcf00b770e3b89fd93de2de1bb5e68721090f5fe",
+        "revCount": 34,
+        "type": "git",
+        "url": "https://github.com/shezdy/hyprsplit.git"
       },
       "original": {
-        "owner": "shezdy",
-        "repo": "hyprsplit",
-        "type": "github"
+        "ref": "refs/tags/v0.41.2",
+        "type": "git",
+        "url": "https://github.com/shezdy/hyprsplit.git"
       }
     },
     "hyprutils": {

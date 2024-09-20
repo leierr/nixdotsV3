@@ -12,6 +12,7 @@ in
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     # dependencies
     programs.dconf.enable = true;
+    environment.variables.GTK_THEME = "Adwaita:dark";
 
     home_manager_modules = [
       ({ ...}@inputs: {

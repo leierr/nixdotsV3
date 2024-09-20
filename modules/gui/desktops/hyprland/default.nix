@@ -13,7 +13,7 @@ in
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
     (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit lib pkgs theme; }))
-    (lib.mkIf cfg.hyprlock.enable (import ./hyprpaper { inherit lib pkgs theme; }))
+    (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit lib pkgs theme; }))
 
     {
       programs.hyprland.enable = true;
@@ -129,6 +129,7 @@ in
                 "$mod, D, exec, $application_launcher"
                 "$mod, Q, exec, $screenshot_exec"
                 "$mod, B, exec, ${config.system_settings.gui.rofi.plugins.rbw.exec}/bin/rofi-rbw"
+                "$mod, P, exec, hyprlock"
 
                 # Window managment
                 "$mod, W, killactive"
@@ -158,11 +159,11 @@ in
                 "$mod SHIFT, 5, split:movetoworkspacesilent, 5"
                 "$mod SHIFT, 6, split:movetoworkspacesilent, 6"
 
-                "$mod, mouse_up, split-cycleworkspaces, -1"
-                "$mod, mouse_down, split-cycleworkspaces, +1"
+                "$mod, mouse_up, split:swapactiveworkspaces, current -1"
+                "$mod, mouse_down, split:swapactiveworkspaces, current +1"
 
                 "$mod, o, focusmonitor, +1"
-                "$mod SHIFT, o, split-changemonitor, +1"
+                "$mod SHIFT, o, movewindow, mon:+1"
 
                 "$mod, c, cyclenext"
                 "$mod SHIFT, c, swapnext"

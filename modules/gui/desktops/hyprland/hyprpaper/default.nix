@@ -1,5 +1,7 @@
 { lib, pkgs, theme }:
 {
+  environment.systemPackages = [ pkgs.hyprpaper ];
+
   home_manager_modules = [
     ({
       services.hyprpaper = {

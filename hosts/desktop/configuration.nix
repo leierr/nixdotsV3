@@ -19,7 +19,7 @@
   # disable root password
   users.users.root.hashedPassword = "!";
 
-  # automatic screenlocking
+  # automatic screenlocking - does not work on hyprland btw :P
   services.logind.extraConfig = ''
     IdleAction=lock
     IdleActionSec=5min
@@ -58,9 +58,18 @@
           lock_timeout = 36000;
         };
       };
+
+      wayland.windowManager.hyprland.settings = {
+          windowrulev2 = [
+            "monitor DP-2, class:^(discord)$"
+          ];
+          exec-once = [
+            "vesktop"
+          ];
+      };
     })
   ];
 
   # extra packages
-  environment.systemPackages = with pkgs; [ obsidian spotify remmina brave xfce.mousepad gnome.totem ];
+  environment.systemPackages = with pkgs; [ obsidian vesktop spotify remmina brave xfce.mousepad gnome.totem jq ];
 }

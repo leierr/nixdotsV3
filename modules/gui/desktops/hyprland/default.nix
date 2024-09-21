@@ -23,6 +23,8 @@ in
       system_settings.gui.rofi.enable = true;
       system_settings.gui.rofi.plugins.rbw.enable = true;
 
+      xdg.portal.config.hyprland.default = "*";
+
       home_manager_modules = [
         ({
           wayland.windowManager.hyprland = {
@@ -39,6 +41,7 @@ in
               "$browser" = "firefox";
               "$application_launcher" = "${config.system_settings.gui.rofi.drun_exec}";
               "$screenshot_exec" = "grimblast --freeze copy area";
+              "$lockscreen" = "hyprlock";
 
               env = [
                 "QT_QPA_PLATFORM,wayland"
@@ -53,7 +56,6 @@ in
               # autostart
               exec-once = [
                 "$browser"
-                "discord"
               ];
 
               exec = [
@@ -111,13 +113,17 @@ in
                 "noshadow, floating:0"
 
                 # general
-                "float, class:^(nm-connection-editor)$"
                 "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
-                "float, class:^(pavucontrol)$"
                 "nomaxsize, class:^(firefox)$"
 
                 # rofi
                 "stayfocused,class:^(Rofi)$"
+
+                # temporary popups
+                "tag +tempfloat, initialTitle:^(Open File)$"
+                "tag +tempfloat, class:^(nm-openconnect-auth-dialog|nm-connection-editor|pavucontrol)$"
+                "float, tag:tempfloat"
+                "size 45% 45%, tag:tempfloat"
               ];
 
               # workspace rules
@@ -129,20 +135,12 @@ in
                 "$mod, D, exec, $application_launcher"
                 "$mod, Q, exec, $screenshot_exec"
                 "$mod, B, exec, ${config.system_settings.gui.rofi.plugins.rbw.exec}/bin/rofi-rbw"
-                "$mod, P, exec, hyprlock"
 
                 # Window managment
                 "$mod, W, killactive"
                 "$mod, S, togglefloating"
                 "$mod, F, fullscreen"
                 "$mod, M, fullscreen, 1"
-
-                # WM control center
-                "$mod, R, exec, hyprctl reload config-only"
-                "$mod Control_L, R, exec, hyprctl reload"
-
-                "$mod, ESCAPE, exit"
-                "$mod Control_L, ESCAPE, exec, systemctl poweroff"
 
                 # moving about the WM
                 "$mod, 1, split:workspace, 1"
@@ -191,6 +189,33 @@ in
                 };
               };
             };
+
+            extraConfig = ''
+              # WM control center submap
+              bind = $mod, X, exec, sleep 2 && hyprctl dispatch submap reset
+              bind = $mod, X, submap, system_control
+              submap = system_control
+
+              # shut down computer
+              bind = , ESCAPE, exec, systemctl poweroff
+              bind = , ESCAPE, submap, reset
+
+              # exit hyprland
+              bind = , Q, exit
+              bind = , Q, submap, reset
+
+              # reload hyprland
+              bind = , R, exec, hyprctl reload config-only
+              bind = , R, submap, reset
+
+              # lockscreen
+              bind = , L, exec, $lockscreen
+              bind = , L, submap, reset
+
+              bind = , catchall, submap, reset
+
+              submap = reset
+            '';
           };
         })
       ];

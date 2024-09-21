@@ -12,12 +12,9 @@ in
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
     # dependencies
     programs.dconf.enable = true;
-    environment.variables.GTK_THEME = "Adwaita:dark";
 
     home_manager_modules = [
-      ({ ...}@inputs: {
-        home.sessionVariables."GTK_THEME" = "Adwaita-dark";
-        
+      ({ ...}@inputs: {  
         gtk = {
           enable = true;
 
@@ -29,8 +26,8 @@ in
           };
 
           theme = {
-            name = "Adwaita-dark";
-            package = pkgs.gnome.gnome-themes-extra;
+            name = "Adwaita";
+            package = pkgs.libadwaita;
           };
 
           iconTheme = {

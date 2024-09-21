@@ -20,6 +20,8 @@ in
 
     # disable most default gnome crap
     services.gnome.core-utilities.enable = false;
+    services.gnome.tracker-miners.enable = false;
+    services.gnome.tracker.enable = false;
     environment.gnome.excludePackages = (with pkgs; [ gnome-tour ]);
 
     # tror dette er vanlig lmao

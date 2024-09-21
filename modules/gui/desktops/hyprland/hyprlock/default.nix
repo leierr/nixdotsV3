@@ -1,5 +1,7 @@
 { lib, pkgs, theme }:
 {
+  security.pam.services.hyprlock = { };
+
   home_manager_modules = [
     ({
       programs.hyprlock = {
@@ -50,7 +52,7 @@
             font_color = "rgb(200, 200, 200)";
             placeholder_text = "<i><span foreground=\"##ffffff99\">🔒  Enter Pass</span></i>";
             hide_input = false;
-            position = "0, -400";
+            position = "0, -100";
             halign = "center";
             valign = "center";
           };

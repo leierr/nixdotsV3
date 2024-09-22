@@ -46,6 +46,20 @@
         extensions = with pkgs.vscode-extensions; [
           bbenoist.nix # nix syntax highlighting
         ];
+        userSettings = {
+          "editor.tabSize" = 2;
+          "editor.insertSpaces" = true;
+          "security.workspace.trust.enabled" = false;
+          "git.enableSmartCommit" = true;
+          "git.autofetch" = true;
+          "git.confirmSync" = false;
+          "explorer.confirmDelete" = false;
+          "explorer.confirmDragAndDrop" = false;
+          "colorize.colorized_colors" = ["BROWSERS_COLORS" "HEXA" "RGB" "HSL"];
+          "colorize.colorized_variables" = ["CSS"];
+          "colorize.exclude" = ["**/.git" "**/.svn" "**/.hg" "**/CVS" "**/.DS_Store" "**/.git" "**/node_modules" "**/bower_components" "**/tmp" "**/dist" "**/tests"];
+          "colorize.include" = ["**/*.nix" "**/*.css" "**/*.scss" "**/*.sass" "**/*.less" "**/*.styl"];
+        };
       };
 
       # increase the gnome text size a bit

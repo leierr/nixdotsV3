@@ -23,6 +23,7 @@ in
 
       system_settings.gui.rofi.enable = true;
       system_settings.gui.rofi.plugins.rbw.enable = true;
+      system_settings.gui.terminal_emulator.wayland.enable = true;
 
       xdg.portal.config.hyprland.default = "*";
 
@@ -38,7 +39,7 @@ in
             settings = {
               # variables
               "$mod" = "SUPER";
-              "$terminal" = "alacritty";
+              "$terminal" = config.system_settings.gui.terminal_emulator.wayland.exec;
               "$browser" = "firefox";
               "$application_launcher" = "${config.system_settings.gui.rofi.drun_exec}";
               "$screenshot_exec" = "grimblast --freeze copy area";

@@ -53,6 +53,7 @@ in
                 "MOZ_WEBRENDER,1"
                 "SDL_VIDEODRIVER,wayland"
                 "GDK_BACKEND,wayland"
+                "ADW_DISABLE_PORTAL,1"
               ];
 
               # autostart

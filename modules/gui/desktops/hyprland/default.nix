@@ -14,7 +14,7 @@ in
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
     (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit lib pkgs theme; }))
-    (lib.mkIf cfg.hyprlock.enable (import ./hypridle {}))
+    (lib.mkIf cfg.hyprlock.enable (import ./hypridle { inherit lib pkgs; }))
 
     {
       programs.hyprland.enable = true;
@@ -62,6 +62,7 @@ in
               exec = [
                 "pgrep kanshi || kanshi &" "pgrep kanshi && kanshictl reload"
                 "pgrep hyprpaper || hyprpaper &"
+                "pgrep hypridle || hypridle &"
               ];
 
               general = {

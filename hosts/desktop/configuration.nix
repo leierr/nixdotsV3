@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   system_settings.default_modules.enable = true;
   system_settings.user_account.username = "leier";
@@ -60,6 +60,7 @@
       };
 
       wayland.windowManager.hyprland.settings = {
+          general.border_size = lib.mkForce 3;
           windowrulev2 = [
             "monitor DP-2, class:^(discord)$"
           ];

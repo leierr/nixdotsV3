@@ -14,6 +14,7 @@ in
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
     (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit lib pkgs theme; }))
+    (lib.mkIf cfg.hyprlock.enable (import ./hypridle {}))
 
     {
       programs.hyprland.enable = true;
@@ -68,7 +69,7 @@ in
                 border_size = 2;
                 no_border_on_floating = false;
                 "col.inactive_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.unfocused_border_color})";
-                "col.active_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.focused_border_color})";
+                "col.active_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta})";
 
                 # gaps
                 gaps_in = 10;
@@ -85,10 +86,10 @@ in
                 # shadows
                 drop_shadow = true;
                 shadow_ignore_window = true;
-                shadow_offset = "1 3";
-                shadow_range = 25;
-                shadow_render_power = 3;
-                "col.shadow" = "rgba(000000BF)";
+                shadow_offset = "0 0";
+                shadow_range = 40;
+                shadow_render_power = 5;
+                "col.shadow" = "rgba(0, 0, 0, 0.9)";
               };
 
               animations = {
@@ -110,7 +111,7 @@ in
               # window rules
               windowrulev2 = [
                 # only allow shadows for floating windows
-                "noshadow, floating:0"
+                #"noshadow, floating:0"
 
                 # general
                 "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
@@ -160,8 +161,8 @@ in
                 "$mod, mouse_up, split:swapactiveworkspaces, current -1"
                 "$mod, mouse_down, split:swapactiveworkspaces, current +1"
 
-                "$mod, o, focusmonitor, +1"
-                "$mod SHIFT, o, movewindow, mon:+1"
+                "$mod, A, focusmonitor, +1"
+                "$mod SHIFT, A, movewindow, mon:+1"
 
                 "$mod, c, cyclenext"
                 "$mod SHIFT, c, swapnext"
@@ -186,6 +187,7 @@ in
               plugin = {
                 hyprsplit = {
                   num_workspaces = 6;
+                  persistent_workspaces = true;
                 };
               };
             };
@@ -206,6 +208,8 @@ in
 
               # reload hyprland
               bind = , R, exec, hyprctl reload config-only
+              bind = $mod, R, exec, hyprctl reload
+              bind = $mod, R, submap, reset
               bind = , R, submap, reset
 
               # lockscreen

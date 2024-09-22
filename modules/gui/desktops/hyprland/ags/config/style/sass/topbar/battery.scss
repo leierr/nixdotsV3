@@ -1,0 +1,91 @@
+@use 'sass:color';
+
+.battery_widget_box {
+    min-height: $topbar_widget_maxheight;
+    background-color: $bg2;
+    padding: 0 12pt;
+    border-radius: calc( $topbar_widget_maxheight * 0.5 );
+
+    // Charging part
+
+    .battery_widget_charging_icon { font-size: 14pt; margin-right: 3pt; }
+
+    .battery_widget_charging_progressbar * { all: unset; }
+
+    .battery_widget_charging_progressbar {
+        border: 1pt solid $bg;
+        border-radius: 5pt;
+
+        trough {
+            background-color: $bg3;
+            border-radius: 5pt;
+            min-height: 16pt;
+            min-width: 80pt;
+
+            progress {
+                min-height: 16pt;
+                border-radius: 5pt;
+                background-color: $green;
+            }
+        }
+    }
+
+    // non charging part
+
+    .battery_widget_non_charging_icon {
+        font-size: 15pt;
+        margin-right: 3pt;
+    }
+
+    .battery_widget_non_charging_percentage {
+        font-size: 13pt;
+        color: $fg-primary;
+    }
+}
+
+//.battery_widget {
+//    min-height: $topbar_widget_maxheight;
+//    background-color: $bg2;
+//    padding: 0 8pt;
+//    border-radius: calc( $topbar_widget_maxheight * 0.5 );
+//
+//    & > * {
+//        margin: 0 6pt;
+//    }
+//
+//    > label {
+//        color: $green;
+//        background-color: transparent;
+//    }
+//
+//    .battery_widget_charging_icon {
+//        font-size: $topbar_widget_maxheight - 9pt;
+//    }
+//
+//    .battery_widget_progress {
+//    }
+//
+//    .battery_widget_charging_progressbar {
+//        * { all: unset;}
+//        all: unset;
+//    }
+//
+//    .battery_widget_charging_progressbar {
+//        border: 1pt solid $bg;
+//        margin-top: 2pt;
+//        border-radius: 5pt;
+//
+//        trough {
+//            background-color: $bg3;
+//            border-radius: 5pt;
+//            min-height: 16pt;
+//            min-width: 75pt;
+//
+//            progress {
+//                min-height: 16pt;
+//                border-radius: 5pt;
+//                background-color: $green;
+//            }
+//        }
+//    }
+//}

@@ -1,0 +1,20 @@
+@use 'sass:color';
+
+// fuck default button values
+
+.datetime_widget { all: unset; }
+
+.datetime_widget {
+    min-height: $topbar_widget_maxheight;
+    padding: 0 15pt;
+    border-radius: $topbar_widget_maxheight;
+    border: 0;
+
+    &:hover {
+        background-color: color.scale(#ddd, $alpha: -90%);
+    }
+
+    &:hover:active {
+        background-color: unset;
+    }
+}

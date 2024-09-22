@@ -9,12 +9,14 @@ in
     enable = lib.mkEnableOption "";
     hyprpaper.enable = lib.mkOption { type = lib.types.bool; default = true; };
     hyprlock.enable = lib.mkOption { type = lib.types.bool; default = true; };
+    ags.enable = lib.mkOption { type = lib.types.bool; default = true; };
   };
 
   config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
     (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hypridle { inherit lib pkgs; }))
+    (lib.mkIf cfg.ags.enable (import ./ags { inherit theme pkgs; }))
 
     {
       programs.hyprland.enable = true;
@@ -62,7 +64,6 @@ in
               ];
 
               exec = [
-                "pgrep kanshi || kanshi &" "pgrep kanshi && kanshictl reload"
                 "pgrep hyprpaper || hyprpaper &"
                 "pgrep hypridle || hypridle &"
               ];
@@ -72,7 +73,7 @@ in
                 border_size = 2;
                 no_border_on_floating = false;
                 "col.inactive_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.unfocused_border_color})";
-                "col.active_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta})";
+                "col.active_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) 30deg";
 
                 # gaps
                 gaps_in = 10;

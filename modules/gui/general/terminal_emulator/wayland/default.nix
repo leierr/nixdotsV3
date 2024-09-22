@@ -8,6 +8,7 @@
         enable = true;
         server.enable = false; # No server mode for simplicity
 
+        # https://codeberg.org/dnkl/foot/raw/branch/master/foot.ini
         settings = {
           # Main settings
           main = {
@@ -20,27 +21,29 @@
           };
 
           # Color settings
-          colors = {
-            background = theme.bg1;  # Background color
-            foreground = theme.fg;   # Foreground color
-            #alpha = "1.0";            # Transparency level (1.0 = fully opaque)
-            regular0 = theme.black;   # Color palette settings
-            regular1 = theme.red;
-            regular2 = theme.green;
-            regular3 = theme.yellow;
-            regular4 = theme.blue;
-            regular5 = theme.magenta;
-            regular6 = theme.cyan;
-            regular7 = theme.white;
+          colors = { 
+            background = "${builtins.replaceStrings ["#"] [""] theme.bg1}";  # Background color
+            foreground = "${builtins.replaceStrings ["#"] [""] theme.fg}";   # Foreground color
 
-            bright0 = theme.black_light;
-            bright1 = theme.red_light;
-            bright2 = theme.green_light;
-            bright3 = theme.yellow_light;
-            bright4 = theme.blue_light;
-            bright5 = theme.magenta_light;
-            bright6 = theme.cyan_light;
-            bright7 = theme.white_light;
+            #alpha = "1.0"; # Transparency level (1.0 = fully opaque)
+            
+            regular0 = "${builtins.replaceStrings ["#"] [""] theme.black}";   # Black
+            regular1 = "${builtins.replaceStrings ["#"] [""] theme.red}";     # Red
+            regular2 = "${builtins.replaceStrings ["#"] [""] theme.green}";   # Green
+            regular3 = "${builtins.replaceStrings ["#"] [""] theme.yellow}";  # Yellow
+            regular4 = "${builtins.replaceStrings ["#"] [""] theme.blue}";    # Blue
+            regular5 = "${builtins.replaceStrings ["#"] [""] theme.magenta}"; # Magenta
+            regular6 = "${builtins.replaceStrings ["#"] [""] theme.cyan}";    # Cyan
+            regular7 = "${builtins.replaceStrings ["#"] [""] theme.white}";   # White
+
+            bright0 = "${builtins.replaceStrings ["#"] [""] theme.black_light}";   # Bright black
+            bright1 = "${builtins.replaceStrings ["#"] [""] theme.red_light}";     # Bright red
+            bright2 = "${builtins.replaceStrings ["#"] [""] theme.green_light}";   # Bright green
+            bright3 = "${builtins.replaceStrings ["#"] [""] theme.yellow_light}";  # Bright yellow
+            bright4 = "${builtins.replaceStrings ["#"] [""] theme.blue_light}";    # Bright blue
+            bright5 = "${builtins.replaceStrings ["#"] [""] theme.magenta_light}"; # Bright magenta
+            bright6 = "${builtins.replaceStrings ["#"] [""] theme.cyan_light}";    # Bright cyan
+            bright7 = "${builtins.replaceStrings ["#"] [""] theme.white_light}";   # Bright white
 
             #selection-foreground = ""; # Foreground color for selection
             #selection-background = ""; # Background color for selection
@@ -86,27 +89,41 @@
             #button-close-color = theme.red; # Button color for close
           };
 
-          # Keybindings (we are disabling all)
           key-bindings = {
-            noop = "all";          # Disable all keybindings
-            #scrollback-up-page = "Shift+Page_Up";
-            #scrollback-down-page = "Shift+Page_Down";
-            #clipboard-copy = "Control+Shift+c XF86Copy";
-            #clipboard-paste = "Control+Shift+v XF86Paste";
-            #primary-paste = "Shift+Insert";
-            #font-increase = "Control+plus Control+equal Control+KP_Add";
-            #font-decrease = "Control+minus Control+KP_Subtract";
-            #font-reset = "Control+0 Control+KP_0";
-            #spawn-terminal = "Control+Shift+n";
+            # Disable all keybindings
+            clipboard-copy = "none";
+            clipboard-paste = "none";
+            spawn-terminal = "none";
+            font-increase = "none";
+            font-decrease = "none";
+            font-reset = "none";
+            scrollback-up-page = "none";
+            scrollback-down-page = "none";
+            search-start = "none";
+            primary-paste = "none";
+            unicode-input = "none";
+            prompt-prev = "none";
+            prompt-next = "none";
+            show-urls-launch = "none";
+            show-urls-copy = "none";
+            # Disable all other keybindings as well
           };
 
-          # Mouse Bindings (disabled)
           mouse-bindings = {
-            noop = "all";          # Disable all mouse bindings
-            #scrollback-up-mouse = "BTN_WHEEL_BACK";
-            #scrollback-down-mouse = "BTN_WHEEL_FORWARD";
-            #primary-paste = "BTN_MIDDLE";
-            #select-begin = "BTN_LEFT";
+            # Disable all mouse bindings
+            scrollback-up-mouse = "none";           # Disable scrollback up with mouse wheel
+            scrollback-down-mouse = "none";         # Disable scrollback down with mouse wheel
+            primary-paste = "none";                 # Disable middle click paste
+            select-begin = "none";                  # Disable text selection on left-click
+            select-begin-block = "none";            # Disable block selection with control + left-click
+            select-extend = "none";                 # Disable extending selection on right-click
+            select-extend-character-wise = "none";  # Disable character-wise selection on control + right-click
+            select-word = "none";                   # Disable word selection on double-click
+            select-word-whitespace = "none";        # Disable word selection with control + double-click
+            select-quote = "none";                  # Disable quote selection on triple-click
+            select-row = "none";                    # Disable row selection on quadruple-click
+            font-increase = "none";                 # Disable font increase with mouse wheel + control
+            font-decrease = "none";                 # Disable font decrease with mouse wheel + control
           };
 
           # URL detection settings
@@ -116,18 +133,6 @@
             #osc8-underline = "url-mode"; # Underline style for URLs
             #protocols = "http,https"; # List of protocols to detect
             #uri-characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+=\"'()[]";
-          };
-
-          # Touch settings
-          touch = {
-            #long-press-delay = "400";   # Long press delay in ms
-          };
-
-          # Shell integration
-          shell = {
-            #osc-7 = ""; # Current working directory integration
-            #osc-133 = ""; # Prompt detection integration
-            #pipe-command-output = "Control+Shift+g"; # Pipe last command's output
           };
         };
       };

@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   systemd.tmpfiles.rules = let
     gdm_monitor_config_multiline = ''
@@ -74,12 +75,32 @@
 
   home_manager_modules = [
     ({
-      home.file.".config/kanshi/config".text = ''
-        profile main {
-          output "AOC Q27G2G4 0x000023BD" mode 2560x1440@143.91Hz position 2560,0
-          output "AOC Q27G2G4 0x000021BD" mode 2560x1440@143.91Hz position 0,0
-        }
-      '';
+      systemd.user.services.kanshi = lib.mkForce {}; # disable the systemd service.
+      services.kanshi = {
+        enable = true;
+        settings = [
+          {
+            profile.name = "main";
+            profile.outputs = [
+              {
+                criteria = "AOC Q27G2G4 0x000023BD";
+                mode = "2560x1440@143.91Hz";
+                position = "2560,0";
+              }
+              {
+                criteria = "AOC Q27G2G4 0x000021BD";
+                mode = "2560x1440@143.91Hz";
+                position = "0,0";
+              }
+            ];
+          }
+        ];
+      };
+
+      wayland.windowManager.hyprland.settings.exec = [
+        "pgrep kanshi || kanshi &"
+        "pgrep kanshi && kanshictl reload"
+      ];
     })
   ];
 }

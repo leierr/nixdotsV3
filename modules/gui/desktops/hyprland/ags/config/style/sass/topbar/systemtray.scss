@@ -1,0 +1,13 @@
+@use 'sass:color';
+
+.systray_container {
+    min-height: $topbar_widget_maxheight;
+    background-color: $bg2;
+    padding: 0 8pt;
+    border-radius: calc( $topbar_widget_maxheight * 0.5 );
+
+    .systray_item {
+        font-size: 16pt;
+        margin: 0 2pt;
+    }
+}

@@ -1,0 +1,45 @@
+@use 'sass:color';
+
+.workspaces_widget { all: unset; }
+
+.workspaces_widget {
+    min-height: $topbar_widget_maxheight;
+    border-radius: $topbar_widget_maxheight;
+    padding: 0 8pt 0 8pt;
+    border: 0;
+
+    &:hover {
+        background-color: color.scale(#ddd, $alpha: -90%);
+        border: 0pt solid color.scale(#ddd, $alpha: -90%);
+    }
+
+    &:hover:active {
+        background-color: unset;
+        min-height: $topbar_widget_maxheight;
+    }
+
+    .workspaces_box{    
+        > label {
+            $main_size: 11pt;
+            font-size: 0;
+            min-height: $main_size;
+            min-width: $main_size;
+            margin: 0 2.5pt;
+            border: 0;
+            border-radius: calc($main_size * 0.5);
+            background-color: $bg3;
+    
+            transition: min-width .15s;
+    
+            &.occupied {
+                background-color: $bg7;
+            }
+    
+            &.active { 
+                min-width: calc($main_size * 1.85);
+                border-radius: calc($main_size * 0.5);
+                background-color: $primary-color;
+            }
+        }
+    }
+}

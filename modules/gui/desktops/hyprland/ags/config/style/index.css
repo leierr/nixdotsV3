@@ -1,0 +1,171 @@
+* {
+  font-family: "Hack";
+  font-size: 12pt;
+}
+
+.topbar {
+  background-color: #121212;
+  border-bottom: 1pt solid #000;
+}
+.topbar .topbar_centerbox {
+  margin: 6pt 8pt;
+}
+
+.workspaces_widget {
+  all: unset;
+}
+
+.workspaces_widget {
+  min-height: 28pt;
+  border-radius: 28pt;
+  padding: 0 8pt 0 8pt;
+  border: 0;
+}
+.workspaces_widget:hover {
+  background-color: rgba(221, 221, 221, 0.1);
+  border: 0pt solid rgba(221, 221, 221, 0.1);
+}
+.workspaces_widget:hover:active {
+  background-color: unset;
+  min-height: 28pt;
+}
+.workspaces_widget .workspaces_box > label {
+  font-size: 0;
+  min-height: 11pt;
+  min-width: 11pt;
+  margin: 0 2.5pt;
+  border: 0;
+  border-radius: 5.5pt;
+  background-color: #414141;
+  transition: min-width 0.15s;
+}
+.workspaces_widget .workspaces_box > label.occupied {
+  background-color: #a0a0a0;
+}
+.workspaces_widget .workspaces_box > label.active {
+  min-width: 20.35pt;
+  border-radius: 5.5pt;
+  background-color: #0e66d0;
+}
+
+.nixlogo_widget {
+  background-color: transparent;
+}
+.nixlogo_widget .nixlogo_icon {
+  font-size: 21pt;
+}
+
+.datetime_widget {
+  all: unset;
+}
+
+.datetime_widget {
+  min-height: 28pt;
+  padding: 0 15pt;
+  border-radius: 28pt;
+  border: 0;
+}
+.datetime_widget:hover {
+  background-color: rgba(221, 221, 221, 0.1);
+}
+.datetime_widget:hover:active {
+  background-color: unset;
+}
+
+.battery_widget_box {
+  min-height: 28pt;
+  background-color: #292929;
+  padding: 0 12pt;
+  border-radius: 14pt;
+}
+.battery_widget_box .battery_widget_charging_icon {
+  font-size: 14pt;
+  margin-right: 3pt;
+}
+.battery_widget_box .battery_widget_charging_progressbar * {
+  all: unset;
+}
+.battery_widget_box .battery_widget_charging_progressbar {
+  border: 1pt solid #121212;
+  border-radius: 5pt;
+}
+.battery_widget_box .battery_widget_charging_progressbar trough {
+  background-color: #414141;
+  border-radius: 5pt;
+  min-height: 16pt;
+  min-width: 80pt;
+}
+.battery_widget_box .battery_widget_charging_progressbar trough progress {
+  min-height: 16pt;
+  border-radius: 5pt;
+  background-color: #2bbf3e;
+}
+.battery_widget_box .battery_widget_non_charging_icon {
+  font-size: 15pt;
+  margin-right: 3pt;
+}
+.battery_widget_box .battery_widget_non_charging_percentage {
+  font-size: 13pt;
+  color: #f1f1f1;
+}
+
+.systray_container {
+  min-height: 28pt;
+  background-color: #292929;
+  padding: 0 8pt;
+  border-radius: 14pt;
+}
+.systray_container .systray_item {
+  font-size: 16pt;
+  margin: 0 2pt;
+}
+
+.application_entry {
+  all: unset;
+}
+
+.application_entry {
+  min-height: 42pt;
+  border: 1pt solid transparent;
+  border-radius: 10.5pt;
+  padding-left: 10pt;
+}
+.application_entry:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1pt solid rgba(255, 255, 255, 0.1);
+}
+.application_entry:hover:active {
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1pt solid transparent;
+}
+.application_entry .application_entry_icon {
+  font-size: 26pt;
+}
+.application_entry .application_entry_label {
+  color: #f1f1f1;
+  font-size: 15pt;
+  margin: 0 8pt;
+}
+
+.application_launcher_window {
+  background-color: #121212;
+  border-radius: 2.5%;
+}
+.application_launcher_window > box {
+  min-height: 350pt;
+  min-width: 350pt;
+  padding: 15pt;
+  border: 2pt solid black;
+  border-radius: 2.5%;
+}
+.application_launcher_window > box > entry {
+  all: unset;
+}
+.application_launcher_window > box > entry {
+  background-color: #121212;
+  border: 0;
+  border-bottom: 1pt solid rgba(0, 0, 0, 0.5);
+  margin-bottom: 10pt;
+  padding: 10pt;
+  font-size: 14pt;
+}

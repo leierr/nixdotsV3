@@ -1,0 +1,45 @@
+@charset "utf-8";
+@use 'sass:color';
+
+$bright_black: #323232;
+$bright_blue: #0875f6;
+$bright_cyan: #4fc0f7;
+$bright_green: #2dd042;
+$bright_magenta: #b24fea;
+$bright_red: #fe3c33;
+$bright_white: #fefefe;
+$bright_yellow: #fecf0f;
+$black: #1e1e1e;
+$blue: #0e66d0;
+$cyan: #4bb0e3;
+$green: #2bbf3e;
+$magenta: #9c48cc;
+$red: #f13a31;
+$white: #f1f1f1;
+$yellow: #f1c50f;
+
+$monochromatic-layer1: #0b0b0b;
+$monochromatic-layer2: #171717;
+$monochromatic-layer3: #242424;
+$monochromatic-layer4: #313131;
+$monochromatic-layer5: #3e3e3e;
+$monochromatic-layer6: #4a4a4a;
+
+$primary-color: $blue;
+$fg-primary: #f1f1f1;
+
+$bg: #121212;
+$bg2: #292929; // lighten($bg, 10%)
+$bg3: #414141; // lighten($bg, 20%)
+$bg4: #595959; // lighten($bg, 30%)
+$bg5: #707070; // lighten($bg, 40%)
+$bg6: #888888; // lighten($bg, 50%)
+$bg7: #a0a0a0; // lighten($bg, 60%)
+$bg8: #b7b7b7; // lighten($bg, 70%)
+
+* {
+    font-family: 'Hack';
+    font-size: 12pt;
+}
+
+@import 'topbar';

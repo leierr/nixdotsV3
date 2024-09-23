@@ -21,6 +21,7 @@ in
         fira-code-symbols
         hack-font
         nerdfonts
+        jetbrains-mono
       ];
       description = "default fonts I usually want to have available on every GUI system, can easily be overwritten or disabled";
     };

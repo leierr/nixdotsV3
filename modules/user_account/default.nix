@@ -38,6 +38,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # disable root password
+    users.users.root.hashedPassword = "!";
+
     # create user group until https://github.com/NixOS/nixpkgs/issues/198296 is implemented.
     users.extraGroups.${cfg.username}.name = cfg.username;
 

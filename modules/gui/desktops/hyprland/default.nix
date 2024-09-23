@@ -117,9 +117,19 @@ in
 
               # window rules
               windowrulev2 = [
+                # no decorations unless floating on single tile workspace
+                "noborder, onworkspace:w[t1], floating:0"
+                "rounding 0, onworkspace:w[t1], floating:0"
+                "noshadow, onworkspace:w[t1], floating:0"
+
                 # general
                 "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
                 "suppressevent maximize, class:^(.*)$"
+
+                # virt-manager
+                "float, initialClass:^(virt-manager)$, initialTitle:^(New VM)$"
+                "stayfocused, initialClass:^(virt-manager)$, initialTitle:^(New VM)$"
+                "pin, initialClass:^(virt-manager)$, initialTitle:^(New VM)$"
 
                 # pinentry
                 "float, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
@@ -138,7 +148,11 @@ in
 
               # workspace rules
               workspace = [
-                "w[t1], shadow:false, border:false, rounding:false, gapsout:0"
+                "w[t1] f[-1], gapsout:0" 
+              ];
+
+              layerrule = [
+                "dimaround, rofi"
               ];
 
               # keyboard binds
@@ -197,7 +211,7 @@ in
 
               plugin = {
                 hyprsplit = {
-                  num_workspaces = 6;
+                  num_workspaces = 5;
                   persistent_workspaces = true;
                 };
               };

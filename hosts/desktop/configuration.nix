@@ -5,19 +5,16 @@
   system_settings.user_account.shell = pkgs.zsh;
   system_settings.shell.zsh.enable = true;
   system_settings.shell.starship.enable = true;
+  system_settings.virtualization.libvirt.enable = true;
+  system_settings.virtualization.libvirt.virt_manager.enable = true;
+  system_settings.privilege_escalation.wheel_needs_password = false;
+  system_settings.bluetooth.enable = true;
 
   system_settings.gui.enable = true;
   system_settings.gui.desktops.bspwm.enable = true;
   system_settings.gui.desktops.gnome.enable = true;
   system_settings.gui.desktops.hyprland.enable = true;
   system_settings.gui.gaming.enable = true;
-
-  system_settings.privilege_escalation.wheel_needs_password = false;
-
-  system_settings.bluetooth.enable = true;
-
-  # disable root password
-  users.users.root.hashedPassword = "!";
 
   # automatic screenlocking - does not work on hyprland btw :P
   services.logind.extraConfig = ''

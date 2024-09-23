@@ -27,6 +27,15 @@ in
       allowedBridges = [ "virbr0" ];
     };
 
+    home_manager_modules = [
+      ({
+        dconf = lib.mkIf (cfg.libvirt.enable && cfg.libvirt.virt_manager.enable) {
+          settings."org/virt-manager/virt-manager/connections".uris = [ "qemu:///session" ];
+          settings."org/virt-manager/virt-manager/connections".autoconnect = [ "qemu:///session" ];
+        };
+      })
+    ];
+
     networking.firewall.trustedInterfaces = lib.mkIf cfg.libvirt.enable [ "virbr0" ];
 
     virtualisation.docker.rootless = lib.mkIf cfg.docker.enable {

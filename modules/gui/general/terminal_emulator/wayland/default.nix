@@ -122,8 +122,6 @@
             select-word-whitespace = "none";        # Disable word selection with control + double-click
             select-quote = "none";                  # Disable quote selection on triple-click
             select-row = "none";                    # Disable row selection on quadruple-click
-            font-increase = "none";                 # Disable font increase with mouse wheel + control
-            font-decrease = "none";                 # Disable font decrease with mouse wheel + control
           };
 
           # URL detection settings

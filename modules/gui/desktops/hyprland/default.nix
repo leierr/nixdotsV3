@@ -64,8 +64,11 @@ in
               ];
 
               exec = [
-                "pgrep hyprpaper || hyprpaper &"
-                "pgrep hypridle || hypridle &"
+                "pgrep hyprpaper || hyprpaper"
+                "pgrep hypridle || hypridle"
+                "pgrep ags || ags"
+                "pgrep nm-applet || nm-applet"
+                "pgrep pinentry-gnome3 || pinentry-gnome3"
               ];
 
               general = {
@@ -114,25 +117,29 @@ in
 
               # window rules
               windowrulev2 = [
-                # only allow shadows for floating windows
-                #"noshadow, floating:0"
-
                 # general
                 "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
-                "nomaxsize, class:^(firefox)$"
+                "suppressevent maximize, class:^(.*)$"
+
+                # pinentry
+                "float, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
+                "stayfocused, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
+                "pin, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
 
                 # rofi
-                "stayfocused,class:^(Rofi)$"
+                "stayfocused, class:^(Rofi)$"
 
-                # temporary popups
+                # temporary floaties
                 "tag +tempfloat, initialTitle:^(Open File)$"
-                "tag +tempfloat, class:^(nm-openconnect-auth-dialog|nm-connection-editor|pavucontrol)$"
+                "tag +tempfloat, class:^(nm-connection-editor|pavucontrol)$"
                 "float, tag:tempfloat"
                 "size 45% 45%, tag:tempfloat"
               ];
 
               # workspace rules
-              workspace = [];
+              workspace = [
+                "w[t1], shadow:false, border:false, rounding:false, gapsout:0"
+              ];
 
               # keyboard binds
               bind = [
@@ -165,21 +172,21 @@ in
                 "$mod, mouse_up, split:swapactiveworkspaces, current -1"
                 "$mod, mouse_down, split:swapactiveworkspaces, current +1"
 
-                "$mod, A, focusmonitor, +1"
-                "$mod SHIFT, A, movewindow, mon:+1"
+                "$mod, TAB, focusmonitor, +1"
+                "$mod SHIFT, TAB, movewindow, mon:+1"
 
-                "$mod, c, cyclenext"
-                "$mod SHIFT, c, swapnext"
+                "$mod, C, cyclenext"
+                "$mod SHIFT, C, swapnext"
 
                 "$mod, h, movefocus, l"
                 "$mod, l, movefocus, r"
                 "$mod, k, movefocus, u"
                 "$mod, j, movefocus, d"
 
-                "$mod, h, movewindow, l"
-                "$mod, l, movewindow, r"
-                "$mod, k, movewindow, u"
-                "$mod, j, movewindow, d"
+                "$mod SHIFT, h, movewindow, l"
+                "$mod SHIFT, l, movewindow, r"
+                "$mod SHIFT, k, movewindow, u"
+                "$mod SHIFT, j, movewindow, d"
               ];
 
               # mouse binds
@@ -212,9 +219,9 @@ in
 
               # reload hyprland
               bind = , R, exec, hyprctl reload config-only
+              bind = , R, submap, reset
               bind = $mod, R, exec, hyprctl reload
               bind = $mod, R, submap, reset
-              bind = , R, submap, reset
 
               # lockscreen
               bind = , L, exec, $lockscreen
@@ -230,7 +237,6 @@ in
 
       # dependencies
       environment.systemPackages = with pkgs; [
-        kanshi
         grimblast
         wl-clipboard
       ];

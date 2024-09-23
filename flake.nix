@@ -37,17 +37,7 @@
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     #
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland.git";
-      submodules = true;
-      ref = "refs/tags/v0.41.2";
-    };
-    hyprsplit = {
-      type = "git";
-      url = "https://github.com/shezdy/hyprsplit.git";
-      ref = "backport-0.41.2";
-      inputs.hyprland.follows = "hyprland";
-		};
+    hyprland = { type = "git"; url = "https://github.com/hyprwm/Hyprland.git"; submodules = true; ref = "refs/tags/v0.41.2"; };
+    hyprsplit = { type = "git"; url = "https://github.com/shezdy/hyprsplit.git"; ref = "backport-0.41.2"; inputs.hyprland.follows = "hyprland"; };
   };
 }

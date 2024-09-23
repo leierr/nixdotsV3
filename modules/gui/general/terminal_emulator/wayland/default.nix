@@ -63,10 +63,10 @@
 
           # Scrollback settings
           scrollback = {
-            #lines = "1000";             # Number of scrollback lines
-            #multiplier = "3.0";         # Scroll multiplier
+            lines = "9999"; # Number of scrollback lines
+            #multiplier = "3.0"; # Scroll multiplier
             #indicator-position = "relative"; # Scrollback indicator position
-            #indicator-format = "";      # Scrollback indicator format
+            #indicator-format = ""; # Scrollback indicator format
           };
 
           # Mouse settings
@@ -91,12 +91,12 @@
 
           key-bindings = {
             # Disable all keybindings
-            clipboard-copy = "none";
-            clipboard-paste = "none";
+            clipboard-copy = "Control+Shift+c";
+            clipboard-paste = "Control+Shift+v";
             spawn-terminal = "none";
-            font-increase = "none";
-            font-decrease = "none";
-            font-reset = "none";
+            font-increase = "Control+plus";
+            font-decrease = "Control+minus";
+            font-reset = "Control+0";
             scrollback-up-page = "none";
             scrollback-down-page = "none";
             search-start = "none";
@@ -110,18 +110,20 @@
           };
 
           mouse-bindings = {
-            # Disable all mouse bindings
-            scrollback-up-mouse = "none";           # Disable scrollback up with mouse wheel
-            scrollback-down-mouse = "none";         # Disable scrollback down with mouse wheel
-            primary-paste = "none";                 # Disable middle click paste
-            select-begin = "none";                  # Disable text selection on left-click
-            select-begin-block = "none";            # Disable block selection with control + left-click
-            select-extend = "none";                 # Disable extending selection on right-click
-            select-extend-character-wise = "none";  # Disable character-wise selection on control + right-click
-            select-word = "none";                   # Disable word selection on double-click
-            select-word-whitespace = "none";        # Disable word selection with control + double-click
-            select-quote = "none";                  # Disable quote selection on triple-click
-            select-row = "none";                    # Disable row selection on quadruple-click
+            font-decrease = "none";
+            font-increase = "none";
+            primary-paste = "none";
+            scrollback-down-mouse = "BTN_FORWARD";
+            scrollback-up-mouse = "BTN_BACK";
+            select-begin = "BTN_LEFT";
+            select-begin-block = "Control+BTN_LEFT";
+            select-extend = "none";
+            select-extend-character-wise = "none";
+            select-quote = "none";
+            select-row = "none";
+            select-word = "BTN_LEFT-2";
+            select-word-whitespace = "Control+BTN_LEFT-2";
+            selection-override-modifiers = "Shift";
           };
 
           # URL detection settings

@@ -11,7 +11,7 @@ timeout 3 bash -c "</dev/tcp/archlinux.org/443" &> /dev/null
 flake_git_url="https://github.com/leierr/nixdotsV3.git"
 
 # print nixos logo 4 fun
-clear ; fastfetch -s ":" -l nixos
+clear ; fastfetch -s ":"
 
 # get flake info & choose system to install
 gum style --border double --margin "0 1" --padding "1 2" --border-foreground "006" "Please select NixOS system to install from ${flake_git_url}"

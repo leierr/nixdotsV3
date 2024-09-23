@@ -5,7 +5,7 @@
         home.file.".config/rofi/theme.rasi".text = ''
         * {
             primary: ${theme.primary_color};
-            black: ${theme.black};
+            black: #000000;
             red: ${theme.red};
             green: ${theme.green};
             yellow: ${theme.yellow};
@@ -19,7 +19,7 @@
             foreground: ${theme.fg};
             //
             separatorcolor: @foreground;
-            border-color: @gray; //shadow
+            border-color: @black; //shadow
             selected-normal-foreground: @foreground;
             selected-normal-background: @background2;
             selected-active-foreground: @foreground;
@@ -109,7 +109,7 @@
             y-offset: -10%;
             padding: 2% 1%;
             border-radius: 0.8em;
-            border: 1px;
+            border: 1;
             border-color: var(border-color);
             location: center;
             anchor: north;

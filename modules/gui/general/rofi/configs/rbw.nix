@@ -19,12 +19,6 @@
                 width: 22%;
             }
 
-            listview {
-                fixed-height: false;
-                dynamic: true;
-                require-input: false;
-            }
-
             textbox-icon {
             expand: false;
             content: "";

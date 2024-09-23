@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   systemd.tmpfiles.rules = let
     gdm_monitor_config_multiline = ''
@@ -103,4 +103,6 @@
       ];
     })
   ];
+
+  environment.systemPackages = [ pkgs.kanshi ];
 }

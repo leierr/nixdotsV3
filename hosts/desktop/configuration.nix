@@ -86,5 +86,5 @@
   ];
 
   # extra packages
-  environment.systemPackages = with pkgs; [ obsidian vesktop spotify remmina brave xfce.mousepad gnome.totem jq ];
+  environment.systemPackages = with pkgs; [ obsidian fastfetch vesktop spotify remmina brave xfce.mousepad gnome.totem jq ];
 }

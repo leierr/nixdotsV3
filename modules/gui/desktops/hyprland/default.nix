@@ -148,7 +148,7 @@ in
 
               # workspace rules
               workspace = [
-                "w[t1] f[-1], gapsout:0" 
+                "w[t1], gapsout:0" 
               ];
 
               layerrule = [

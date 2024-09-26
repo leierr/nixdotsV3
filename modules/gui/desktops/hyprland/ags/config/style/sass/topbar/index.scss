@@ -3,7 +3,7 @@
 $topbar_widget_maxheight: 28pt;
 
 .topbar {
-    background-color: rgba(105, 105, 105, 0.3);
+    background-color: $bg;
 
     .topbar_centerbox {
         margin: 6pt 8pt;

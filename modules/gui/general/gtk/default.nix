@@ -9,7 +9,7 @@ in
     bookmarks = lib.mkOption { type = lib.types.listOf lib.types.singleLineStr; default = []; };
   };
 
-  config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
+  config = lib.mkIf (cfg.enable) {
     # dependencies
     programs.dconf.enable = true;
 

@@ -39,15 +39,11 @@ launch_always pinentry
 # work time! monday-friday 07:00-15:30
 if [[ $(date +"%u") -le 5 && $(date +"%H%M") < "1530" && $(date +"%H%M") > "0700" ]] ; then
     launch_once bspc rule -a Slack desktop="1" -o
-    launch_once bspc rule -a discord desktop="1" -o
     launch_once bspc config ignore_ewmh_focus true
     launch_once slack
-    launch_once discord
     launch_once bash -c "sleep 3; bspc config ignore_ewmh_focus false"
 else
-    launch_once bspc rule -a discord desktop="1" -o
     launch_once bspc config ignore_ewmh_focus true
-    launch_once discord
     launch_once bash -c "sleep 3; bspc config ignore_ewmh_focus false"
 fi
 

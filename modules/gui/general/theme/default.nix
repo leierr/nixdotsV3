@@ -56,4 +56,3 @@ in
     nix_logo_png = lib.mkOption { type = lib.types.path; default = ./assets/nix_logo.png; };
   };
 }
-

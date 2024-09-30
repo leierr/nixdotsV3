@@ -12,7 +12,7 @@ in
     ags.enable = lib.mkOption { type = lib.types.bool; default = true; };
   };
 
-  config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
+  config = lib.mkIf (cfg.enable) (lib.mkMerge [
     (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hypridle { inherit lib pkgs; }))
@@ -76,7 +76,7 @@ in
                 border_size = 2;
                 no_border_on_floating = false;
                 "col.inactive_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.unfocused_border_color})";
-                "col.active_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) rgb(${builtins.replaceStrings ["#"] [""] theme.magenta}) 30deg";
+                "col.active_border" = "rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.green}) rgb(${builtins.replaceStrings ["#"] [""] theme.blue}) rgb(${builtins.replaceStrings ["#"] [""] theme.blue}) rgb(${builtins.replaceStrings ["#"] [""] theme.blue}) 30deg";
 
                 # gaps
                 gaps_in = 10;
@@ -95,7 +95,7 @@ in
                 shadow_ignore_window = true;
                 shadow_offset = "0 0";
                 shadow_range = 40;
-                shadow_render_power = 5;
+                shadow_render_power = 6;
                 "col.shadow" = "rgba(0, 0, 0, 0.9)";
               };
 
@@ -125,11 +125,6 @@ in
                 # general
                 "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
                 "suppressevent maximize, class:^(.*)$"
-
-                # virt-manager
-                "float, initialClass:^(virt-manager)$, initialTitle:^(New VM)$"
-                "stayfocused, initialClass:^(virt-manager)$, initialTitle:^(New VM)$"
-                "pin, initialClass:^(virt-manager)$, initialTitle:^(New VM)$"
 
                 # pinentry
                 "float, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
@@ -182,9 +177,6 @@ in
                 "$mod SHIFT, 4, split:movetoworkspacesilent, 4"
                 "$mod SHIFT, 5, split:movetoworkspacesilent, 5"
                 "$mod SHIFT, 6, split:movetoworkspacesilent, 6"
-
-                "$mod, mouse_up, split:swapactiveworkspaces, current -1"
-                "$mod, mouse_down, split:swapactiveworkspaces, current +1"
 
                 "$mod, TAB, focusmonitor, +1"
                 "$mod SHIFT, TAB, movewindow, mon:+1"

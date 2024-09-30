@@ -13,7 +13,7 @@ in
     alacritty_config_dir = lib.mkOption { type = lib.types.path; default = ./configs/alacritty; };
   };
 
-  config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
+  config = lib.mkIf (cfg.enable) {
     services.xserver.windowManager.bspwm.enable = true;
 
     system_settings.gui.rofi.enable = true;
@@ -61,7 +61,6 @@ in
       dunst
       firefox
       slack
-      discord
       feh
       xorg.xsetroot
       procps

@@ -11,7 +11,7 @@ in
     x11.enable = lib.mkEnableOption "";
   };
 
-  config = lib.mkIf ((cfg.wayland.enable || cfg.x11.enable) && config.system_settings.gui.enable) (lib.mkMerge [
+  config = lib.mkIf ((cfg.wayland.enable || cfg.x11.enable)) (lib.mkMerge [
     (lib.mkIf cfg.wayland.enable (import ./wayland { inherit theme; }))
   ]);
 }

@@ -73,7 +73,7 @@
       wayland.windowManager.hyprland.settings = {
           general.border_size = lib.mkForce 3;
           windowrulev2 = [
-            "monitor DP-2, class:^(discord)$"
+            "monitor DP-2, class:^(vesktop)$"
           ];
           exec-once = [
             "vesktop"
@@ -83,5 +83,5 @@
   ];
 
   # extra packages
-  environment.systemPackages = with pkgs; [ obsidian fastfetch vesktop spotify remmina brave xfce.mousepad gnome.totem jq ];
+  environment.systemPackages = with pkgs; [ obsidian fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
 }

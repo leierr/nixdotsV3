@@ -27,7 +27,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
+  config = lib.mkIf (cfg.enable) {
     fonts.enableDefaultPackages = true;
     fonts.packages = cfg.default_fonts;
   };

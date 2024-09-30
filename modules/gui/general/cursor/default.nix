@@ -6,7 +6,7 @@ in
 {
   options.system_settings.gui.cursor.enable = lib.mkEnableOption "";
 
-  config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) {
+  config = lib.mkIf (cfg.enable) {
     services.xserver.displayManager.lightdm.greeters.gtk.cursorTheme = {
       name = "Adwaita";
       package = pkgs.gnome.adwaita-icon-theme;

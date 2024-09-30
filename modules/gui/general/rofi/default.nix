@@ -26,7 +26,7 @@ in
     ''; };
   };
 
-  config = lib.mkIf (cfg.enable && config.system_settings.gui.enable) (lib.mkMerge [
+  config = lib.mkIf (cfg.enable) (lib.mkMerge [
     {
       environment.systemPackages = with pkgs; [
       # dependencies to run correctly

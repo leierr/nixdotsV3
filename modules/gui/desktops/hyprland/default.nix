@@ -26,7 +26,6 @@ in
 
       system_settings.gui.rofi.enable = true;
       system_settings.gui.rofi.plugins.rbw.enable = true;
-      system_settings.gui.terminal_emulator.wayland.enable = true;
 
       xdg.portal.config.hyprland.default = "*";
 

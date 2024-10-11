@@ -27,7 +27,8 @@ in
       system_settings.gui.rofi.enable = true;
       system_settings.gui.rofi.plugins.rbw.enable = true;
 
-      xdg.portal.config.hyprland.default = "*";
+      xdg.portal.config.hyprland.default = [ "hyprland" "gtk" ];
+      xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
       home_manager_modules = [
         ({
@@ -41,7 +42,7 @@ in
             settings = {
               # variables
               "$mod" = "SUPER";
-              "$terminal" = config.system_settings.gui.terminal_emulator.wayland.exec;
+              "$terminal" = "foot";
               "$browser" = "firefox";
               "$application_launcher" = "${config.system_settings.gui.rofi.drun_exec}";
               "$screenshot_exec" = "grimblast --freeze copy area";
@@ -59,17 +60,13 @@ in
               ];
 
               # autostart
-              exec-once = [
-                "$browser"
-                "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit"
-              ];
+              exec-once = [ "$browser" ];
 
               exec = [
                 "pidof hyprpaper || hyprpaper"
                 "pidof hypridle || hypridle"
                 "pidof ags || ags"
                 "pidof nm-applet || nm-applet"
-                "pidof pinentry-gnome3 || ${config.system_settings.gui.pinentry.package}/bin/pinentry-gnome3"
               ];
 
               general = {
@@ -123,14 +120,16 @@ in
                 "rounding 0, onworkspace:w[t1], floating:0"
                 "noshadow, onworkspace:w[t1], floating:0"
 
-                # general
+                # float
                 "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
+
+                # dont maximize on your own
                 "suppressevent maximize, class:^(.*)$"
               
                 # pinentry
-                "float, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog|io.elementary.desktop.agent-polkit)$"
-                "stayfocused, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog|io.elementary.desktop.agent-polkit)$"
-                "pin, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog|io.elementary.desktop.agent-polkit)$"
+                "float, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
+                "pin, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
+                "stayfocused, initialClass:^(gcr-prompter)$"
 
                 # rofi
                 "stayfocused, class:^(Rofi)$"

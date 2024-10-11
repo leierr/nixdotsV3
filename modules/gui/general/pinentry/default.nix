@@ -17,8 +17,8 @@ in
     environment.systemPackages = [ cfg.package ];
     
     # dependencies
-    services.dbus.packages = [ pkgs.gcr ];
-    services.pcscd.enable = true;
+    # services.dbus.packages = [ pkgs.gcr ]; - tror ikke jeg trenger det
+    # services.pcscd.enable = true; - tror ikke jeg trenger det
 
     programs.gnupg.agent = { pinentryPackage = cfg.package; };
 

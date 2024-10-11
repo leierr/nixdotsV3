@@ -16,6 +16,7 @@ in
     ./general/qt
     ./general/gtk
     ./general/pinentry
+    ./general/polkit
     ./general/audio
     ./general/fonts
     ./general/theme
@@ -33,6 +34,7 @@ in
     system_settings.gui.audio.enable = true;
     system_settings.gui.fonts.enable = true;
     system_settings.gui.pinentry.enable = true;
+    system_settings.gui.polkit.enable = true;
     system_settings.gui.cursor.enable = true;
 
     # to get some chromium based programs to work on wayland

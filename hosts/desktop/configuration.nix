@@ -15,6 +15,7 @@
   system_settings.gui.desktops.gnome.enable = true;
   system_settings.gui.desktops.hyprland.enable = true;
   system_settings.gui.gaming.enable = true;
+  system_settings.gui.discord.enable = true;
 
   # automatic screenlocking - does not work on hyprland btw :P
   services.logind.extraConfig = ''
@@ -27,7 +28,7 @@
     ({
       programs.git.includes = [
         {
-          condition = "gitdir:remote.*.url=git@github.com:";
+          condition = "hasconfig:remote.*.url:git@github.com:*/**";
           contents = {
             user = {
               name = "Lars Smith Eier";
@@ -77,11 +78,12 @@
           ];
           exec-once = [
             "vesktop"
+            "${pkgs.writeShellScript "launch-slack-if-work-hours" "[[ $(date +%u) -le 5 && $(date +%H%M) -ge 0600 && $(date +%H%M) -le 1500 ]] && slack"}"
           ];
       };
     })
   ];
 
   # extra packages
-  environment.systemPackages = with pkgs; [ obsidian fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
+  environment.systemPackages = with pkgs; [ meld obsidian obs-studio fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
 }

@@ -16,7 +16,7 @@
             @theme "theme.rasi"
 
             window {
-                width: 22%;
+                width: 30%;
             }
 
             textbox-icon {

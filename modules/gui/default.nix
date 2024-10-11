@@ -23,6 +23,7 @@ in
     ./general/cursor
     ./general/rofi
     ./general/terminal_emulator
+    ./general/discord
   ];
 
   config = {

@@ -16,7 +16,7 @@ in
     (lib.mkIf cfg.hyprpaper.enable (import ./hyprpaper { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hypridle { inherit lib pkgs; }))
-    (lib.mkIf cfg.ags.enable (import ./ags { inherit theme pkgs; }))
+    (lib.mkIf cfg.ags.enable (import ./ags { inherit lib pkgs theme; }))
 
     {
       programs.hyprland.enable = true;
@@ -61,14 +61,15 @@ in
               # autostart
               exec-once = [
                 "$browser"
+                "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit"
               ];
 
               exec = [
-                "pgrep hyprpaper || hyprpaper"
-                "pgrep hypridle || hypridle"
-                "pgrep ags || ags"
-                "pgrep nm-applet || nm-applet"
-                "pgrep pinentry-gnome3 || pinentry-gnome3"
+                "pidof hyprpaper || hyprpaper"
+                "pidof hypridle || hypridle"
+                "pidof ags || ags"
+                "pidof nm-applet || nm-applet"
+                "pidof pinentry-gnome3 || ${config.system_settings.gui.pinentry.package}/bin/pinentry-gnome3"
               ];
 
               general = {
@@ -107,7 +108,7 @@ in
                 # disable default shit
                 disable_hyprland_logo = true;
                 disable_splash_rendering = true;
-
+                focus_on_activate = true;
               };
 
               dwindle = {
@@ -125,11 +126,11 @@ in
                 # general
                 "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
                 "suppressevent maximize, class:^(.*)$"
-
+              
                 # pinentry
-                "float, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
-                "stayfocused, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
-                "pin, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
+                "float, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog|io.elementary.desktop.agent-polkit)$"
+                "stayfocused, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog|io.elementary.desktop.agent-polkit)$"
+                "pin, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog|io.elementary.desktop.agent-polkit)$"
 
                 # rofi
                 "stayfocused, class:^(Rofi)$"
@@ -243,8 +244,9 @@ in
 
       # dependencies
       environment.systemPackages = with pkgs; [
-        grimblast
-        wl-clipboard
+        grimblast # screenshot
+        wl-clipboard # clipboard manipulation tool
+        cinnamon.nemo-with-extensions # GUI file explorer
       ];
     }
   ]);

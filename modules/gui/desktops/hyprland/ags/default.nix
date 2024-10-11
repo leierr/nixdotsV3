@@ -1,4 +1,13 @@
-{ pkgs, theme }:
+{ lib, pkgs, theme }:
+let
+  hexColorPattern = "^#[0-9a-fA-F]{6}";
+  # Function to generate SCSS variable declarations from theme attributes
+  nixThemeToScssVariables = lib.concatStrings (lib.mapAttrsToList (name: value: 
+    if lib.isString value && builtins.match hexColorPattern value != null then ''
+      ''$${name}: ${value};
+    '' else ""
+  ) theme);
+in
 {
   environment.systemPackages = with pkgs; [
     ags
@@ -23,6 +32,8 @@
       #  source = ./config;
       #  recursive = true;
       #};
+
+      home.file.".config/ags/style/sass/nix_theme.scss".text = nixThemeToScssVariables;
     })
   ];
 }

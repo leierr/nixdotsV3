@@ -53,7 +53,7 @@
 
           # Cursor settings
           cursor = {
-            style = "beam"; # Cursor style (block, beam, underline)
+            style = "block"; # Cursor style (block, beam, underline)
             blink = "no"; # Disable blinking for simplicity
             #blink-rate = "500";    # Blink rate in ms
             #beam-thickness = "1.5"; # Thickness of the beam cursor
@@ -97,8 +97,8 @@
             font-increase = "Control+plus";
             font-decrease = "Control+minus";
             font-reset = "Control+0";
-            scrollback-up-page = "none";
-            scrollback-down-page = "none";
+            scrollback-up-page = "Shift+Page_Up";
+            scrollback-down-page = "Shift+Page_Down";
             search-start = "none";
             primary-paste = "none";
             unicode-input = "none";

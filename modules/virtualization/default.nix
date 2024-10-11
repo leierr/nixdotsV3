@@ -25,6 +25,18 @@ in
       onShutdown = "shutdown";
       # simple networking
       allowedBridges = [ "virbr0" ];
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+        ovmf = {
+          enable = true;
+          packages = [(pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd];
+        };
+      };
     };
 
     home_manager_modules = [
@@ -33,6 +45,10 @@ in
           settings."org/virt-manager/virt-manager/connections".uris = [ "qemu:///session" ];
           settings."org/virt-manager/virt-manager/connections".autoconnect = [ "qemu:///session" ];
         };
+
+        home.file.".config/libvirt/qemu.conf".text = ''
+          nvram = [ "/run/libvirt/nix-ovmf/AAVMF_CODE.fd:/run/libvirt/nix-ovmf/AAVMF_VARS.fd", "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd" ]
+        '';
       })
     ];
 

@@ -1,7 +1,5 @@
 { theme }:
 {
-  #environment.systemPackages = with pkgs; [ foot ];
-
   home_manager_modules = [
     ({
       programs.foot = {
@@ -128,11 +126,8 @@
 
           # URL detection settings
           url = {
-            #launch = "xdg-open ${url}"; # Default URL handler
-            #label-letters = "sadfjklewcmpgh"; # Letters for URL labels
-            #osc8-underline = "url-mode"; # Underline style for URLs
-            #protocols = "http,https"; # List of protocols to detect
-            #uri-characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+=\"'()[]";
+            launch = "xdg-open \${url}"; # Default URL handler
+            protocols = "http,https";
           };
         };
       };

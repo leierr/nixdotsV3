@@ -17,6 +17,7 @@ in
     (lib.mkIf cfg.hyprlock.enable (import ./hyprlock { inherit lib pkgs theme; }))
     (lib.mkIf cfg.hyprlock.enable (import ./hypridle { inherit lib pkgs; }))
     (lib.mkIf cfg.ags.enable (import ./ags { inherit lib pkgs theme; }))
+    (lib.mkIf cfg.ags.enable (import ./terminal { inherit theme; }))
 
     {
       programs.hyprland.enable = true;

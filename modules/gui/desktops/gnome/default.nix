@@ -10,7 +10,7 @@ in
     enable = lib.mkEnableOption "";
   };
 
-  config = {
+  config = lib.mkIf (cfg.enable) {
     # install gnome globally
     services.xserver.desktopManager.gnome.enable = true;
 

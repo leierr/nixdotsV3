@@ -28,7 +28,10 @@ in
       system_settings.gui.rofi.plugins.rbw.enable = true;
 
       xdg.portal.config.hyprland.default = [ "hyprland" "gtk" ];
-      xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; # det er currently issue https://github.com/NixOS/nixpkgs/issues/334260
+
+      # NAUTILUS FUNCTIONALITY
+      services.gvfs.enable = true;
 
       home_manager_modules = [
         ({
@@ -243,9 +246,11 @@ in
 
       # dependencies
       environment.systemPackages = with pkgs; [
-        grimblast # screenshot
+        grimblast # screenshot tool
         wl-clipboard # clipboard manipulation tool
-        cinnamon.nemo-with-extensions # GUI file explorer
+        gnome.nautilus gnome.sushi # filebrowser
+        firefox # browser
+        networkmanagerapplet # dependencies
       ];
     }
   ]);

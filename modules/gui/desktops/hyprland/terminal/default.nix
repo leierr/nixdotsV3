@@ -8,22 +8,26 @@
 
         # https://codeberg.org/dnkl/foot/raw/branch/master/foot.ini
         settings = {
-          # Main settings
           main = {
-            font = "Hack:size=13"; # Using the Hack font with size 13
-            dpi-aware = "yes"; # Automatically adjust based on DPI
-            term = "xterm-256color"; # Terminal type, defaults to foot or xterm-256color
-            #login-shell = "no"; # Whether to start as a login shell
-            #initial-window-size-pixels = "700x500"; # Initial window size in pixels
-            #initial-window-size-chars = "80x24";    # Initial window size in characters
+            term = "xterm-256color"; # default: foot
+            login-shell = "no";
+            app-id = "foot";
+            title = "foot";
+            locked-title = "yes"; # less overhead
+            font = "Hack:size=14";
+            font-size-adjustment = 0.5;
+            bold-text-in-bright = "no";
+            dpi-aware = "no";
+            pad = "0x0";
+            resize-by-cells = "yes";
+            resize-delay-ms = 100;
           };
 
-          # Color settings
           colors = { 
             background = "${builtins.replaceStrings ["#"] [""] theme.bg1}";  # Background color
             foreground = "${builtins.replaceStrings ["#"] [""] theme.fg}";   # Foreground color
 
-            #alpha = "1.0"; # Transparency level (1.0 = fully opaque)
+            alpha = "1.0"; # Transparency level (1.0 = fully opaque)
             
             regular0 = "${builtins.replaceStrings ["#"] [""] theme.black}";   # Black
             regular1 = "${builtins.replaceStrings ["#"] [""] theme.red}";     # Red
@@ -43,91 +47,122 @@
             bright6 = "${builtins.replaceStrings ["#"] [""] theme.cyan_light}";    # Bright cyan
             bright7 = "${builtins.replaceStrings ["#"] [""] theme.white_light}";   # Bright white
 
-            #selection-foreground = ""; # Foreground color for selection
-            #selection-background = ""; # Background color for selection
-            #scrollback-indicator = ""; # Indicator for scrollback
-            #urls = "";                 # Color for URLs
+            ## Misc colors
+            # selection-foreground=<inverse foreground/background>
+            # selection-background=<inverse foreground/background>
+            # jump-labels=<regular0> <regular3>          # black-on-yellow
+            # scrollback-indicator=<regular0> <bright4>  # black-on-bright-blue
+            # search-box-no-match=<regular0> <regular1>  # black-on-red
+            # search-box-match=<regular0> <regular3>     # black-on-yellow
+            # urls=<regular3>
           };
 
-          # Cursor settings
-          cursor = {
-            style = "block"; # Cursor style (block, beam, underline)
-            blink = "no"; # Disable blinking for simplicity
-            #blink-rate = "500";    # Blink rate in ms
-            #beam-thickness = "1.5"; # Thickness of the beam cursor
-            #underline-thickness = ""; # Thickness of the underline cursor
-            #color = "";            # Custom cursor color
-          };
+          # not needed
+          environment = {};
+          # uses WM provided window decorations by default <3
+          csd = {};
+           # default disabled
+          bell = {};
+          # sensible defaults thus far
+          # desktop-notifications = {}; invalid section name: desktop-notifications???
+          mouse = {};
+          cursor = {};
+          touch = {};
+          url = {};
+          url-bindings = {};
 
-          # Scrollback settings
           scrollback = {
-            lines = "9999"; # Number of scrollback lines
-            #multiplier = "3.0"; # Scroll multiplier
-            #indicator-position = "relative"; # Scrollback indicator position
-            #indicator-format = ""; # Scrollback indicator format
-          };
-
-          # Mouse settings
-          mouse = {
-            #hide-when-typing = "no";     # Hide the mouse cursor while typing
-            #alternate-scroll-mode = "yes"; # Alternate scroll mode when using the mouse wheel
-          };
-
-          # CSD (Client-side decorations)
-          csd = {
-            size = 0;              # Border size
-            #font = "";             # Custom font for title bar
-            #color = "";            # Color for title bar
-            #hide-when-maximized = "no"; # Hide CSD when maximized
-            #double-click-to-maximize = "yes"; # Enable double-click to maximize
-            #border-width = "0";    # Border width around the window
-            #button-width = "26";   # Button width (close, maximize, minimize)
-            #button-minimize-color = theme.blue; # Button color for minimize
-            #button-maximize-color = theme.green; # Button color for maximize
-            #button-close-color = theme.red; # Button color for close
+            lines=100000;
+            multiplier = 3.0;
           };
 
           key-bindings = {
-            # Disable all keybindings
-            clipboard-copy = "Control+Shift+c";
-            clipboard-paste = "Control+Shift+v";
-            spawn-terminal = "none";
+            show-urls-launch = "Control+Shift+l"; # show-urls-copy, show-urls-persistent
+            scrollback-up-page = "Shift+Page_Up";
+            scrollback-down-page = "Shift+Page_Down";
+            clipboard-copy = "Control+Shift+c XF86Copy";
+            clipboard-paste = "Control+Shift+v XF86Paste";
+            search-start = "Control+Shift+r";
             font-increase = "Control+plus";
             font-decrease = "Control+minus";
             font-reset = "Control+0";
-            scrollback-up-page = "Shift+Page_Up";
-            scrollback-down-page = "Shift+Page_Down";
-            search-start = "none";
+            # disable everything except what I actually use.
+            noop = "none";
+            scrollback-up-half-page = "none";
+            scrollback-up-line = "none";
+            scrollback-down-half-page = "none";
+            scrollback-down-line = "none";
+            scrollback-home = "none";
+            scrollback-end = "none";
             primary-paste = "none";
-            unicode-input = "none";
+            spawn-terminal = "none";
+            minimize = "none";
+            maximize = "none";
+            fullscreen = "none";
+            pipe-visible = "none";
+            pipe-scrollback = "none";
+            pipe-selected = "none";
+            pipe-command-output = "none";
+            show-urls-persistent = "none";
+            show-urls-copy = "none";
             prompt-prev = "none";
             prompt-next = "none";
-            show-urls-launch = "none";
-            show-urls-copy = "none";
-            # Disable all other keybindings as well
+            unicode-input = "none";
+            quit = "none";
           };
 
           mouse-bindings = {
-            font-decrease = "none";
-            font-increase = "none";
-            primary-paste = "none";
             scrollback-down-mouse = "BTN_FORWARD";
             scrollback-up-mouse = "BTN_BACK";
+            selection-override-modifiers = "Shift";
             select-begin = "BTN_LEFT";
             select-begin-block = "Control+BTN_LEFT";
+            select-word = "none"; select-word-whitespace = "BTN_LEFT-2"; # usually Control+BTN_LEFT-2
+            select-row = "BTN_LEFT-3";
+            # disable everything except what I actually use.
+            primary-paste = "none";
+            font-increase = "none";
+            font-decrease = "none";
+            select-quote = "none";
             select-extend = "none";
             select-extend-character-wise = "none";
-            select-quote = "none";
-            select-row = "none";
-            select-word = "BTN_LEFT-2";
-            select-word-whitespace = "Control+BTN_LEFT-2";
-            selection-override-modifiers = "Shift";
           };
 
-          # URL detection settings
-          url = {
-            launch = "xdg-open \${url}"; # Default URL handler
-            protocols = "http,https";
+          search-bindings = {
+            cancel = "Control+g Control+c Escape";
+            commit = "Return";
+            find-next = "Control+n";
+            find-prev = "Control+p";
+            cursor-left = "Left";
+            cursor-left-word = "Control+Left";
+            cursor-right = "Right";
+            cursor-right-word = "Control+Right";
+            delete-prev = "BackSpace";
+            delete-prev-word = "Control+BackSpace";
+            clipboard-paste = "Control+Shift+v";
+            # disable everything except what I actually use.
+            cursor-home = "none";
+            cursor-end = "none";
+            delete-next = "none";
+            delete-next-word = "none";
+            extend-char = "none";
+            extend-to-word-boundary = "none";
+            extend-to-next-whitespace = "none";
+            extend-line-down = "none";
+            extend-backward-char = "none";
+            extend-backward-to-word-boundary = "none";
+            extend-backward-to-next-whitespace = "none";
+            extend-line-up = "none";
+            primary-paste = "none";
+            unicode-input = "none";
+            scrollback-up-page = "none";
+            scrollback-up-half-page = "none";
+            scrollback-up-line = "none";
+            scrollback-down-page = "none";
+            scrollback-down-half-page = "none";
+            scrollback-down-line = "none";
+            scrollback-home = "none";
+            scrollback-end = "none";
           };
         };
       };

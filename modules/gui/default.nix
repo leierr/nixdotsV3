@@ -9,7 +9,6 @@ in
   imports = [
     ./display_manager
 
-    ./desktops/bspwm
     ./desktops/gnome
     ./desktops/hyprland
 
@@ -17,7 +16,6 @@ in
     ./general/gtk
     ./general/xdg
     ./general/pinentry
-    ./general/polkit
     ./general/audio
     ./general/fonts
     ./general/theme
@@ -35,7 +33,6 @@ in
     system_settings.gui.audio.enable = true;
     system_settings.gui.fonts.enable = true;
     system_settings.gui.pinentry.enable = true;
-    system_settings.gui.polkit.enable = true;
     system_settings.gui.cursor.enable = true;
     system_settings.gui.xdg.enable = true;
 

@@ -69,6 +69,7 @@ in
                 "pidof hypridle || hypridle"
                 "pidof ags || ags"
                 "pidof nm-applet || nm-applet"
+                "pidof ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 || ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
               ];
 
               general = {

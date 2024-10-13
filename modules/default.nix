@@ -33,6 +33,7 @@
       shell.enable = true;
       gnupg.enable = true;
       mlocate.enable = true;
+      polkit.enable = true;
     };
   };
 
@@ -49,6 +50,7 @@
     ./shell
     ./gnupg
     ./mlocate
+    ./polkit
 
     # the rest
     ./gui

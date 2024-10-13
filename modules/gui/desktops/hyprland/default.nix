@@ -64,7 +64,6 @@ in
 
               # autostart
               exec-once = [ "$browser" ];
-
               exec = [
                 "pidof hyprpaper || hyprpaper"
                 "pidof hypridle || hypridle"
@@ -181,8 +180,8 @@ in
                 "$mod SHIFT, 5, split:movetoworkspacesilent, 5"
                 "$mod SHIFT, 6, split:movetoworkspacesilent, 6"
 
-                "$mod, TAB, focusmonitor, +1"
-                "$mod SHIFT, TAB, movewindow, mon:+1"
+                "$mod, O, focusmonitor, +1"
+                "$mod SHIFT, O, movewindow, mon:+1"
 
                 "$mod, C, cyclenext"
                 "$mod SHIFT, C, swapnext"

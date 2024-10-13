@@ -15,6 +15,7 @@ in
 
     ./general/qt
     ./general/gtk
+    ./general/xdg
     ./general/pinentry
     ./general/polkit
     ./general/audio
@@ -36,9 +37,7 @@ in
     system_settings.gui.pinentry.enable = true;
     system_settings.gui.polkit.enable = true;
     system_settings.gui.cursor.enable = true;
-
-    # to get some chromium based programs to work on wayland
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    system_settings.gui.xdg.enable = true;
 
     # remove that stupid default terminal
     services.xserver.excludePackages = [ pkgs.xterm ];

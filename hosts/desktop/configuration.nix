@@ -85,5 +85,5 @@
   ];
 
   # extra packages
-  environment.systemPackages = with pkgs; [ meld obsidian obs-studio fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
+  environment.systemPackages = with pkgs; [ pavucontrol fzf meld obsidian obs-studio fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
 }

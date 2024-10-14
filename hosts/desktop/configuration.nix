@@ -11,7 +11,6 @@
   system_settings.bluetooth.enable = true;
 
   system_settings.gui.enable = true;
-  system_settings.gui.desktops.bspwm.enable = false;
   system_settings.gui.desktops.gnome.enable = false;
   system_settings.gui.desktops.hyprland.enable = true;
   system_settings.gui.gaming.enable = true;
@@ -85,5 +84,5 @@
   ];
 
   # extra packages
-  environment.systemPackages = with pkgs; [ pavucontrol fzf meld obsidian obs-studio fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
+  environment.systemPackages = with pkgs; [ slack pavucontrol fzf meld obsidian obs-studio fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
 }

@@ -118,24 +118,24 @@ in
 
               # window rules
               windowrulev2 = [
+                # floaters
+                "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
+                "float, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog|polkit-gnome-authentication-agent-1)$"
+
+                # stay in focus
+                "stayfocused, initialClass:^(gcr-prompter|polkit-gnome-authentication-agent-1)$"
+                "stayfocused, class:^(Rofi)$"
+
+                # pinned
+                "pin, initialClass:^(gcr-prompter|polkit-gnome-authentication-agent-1)$"
+
                 # no decorations unless floating on single tile workspace
                 "noborder, onworkspace:w[t1], floating:0"
                 "rounding 0, onworkspace:w[t1], floating:0"
                 "noshadow, onworkspace:w[t1], floating:0"
 
-                # float
-                "float, class:^(gnome-calculator|org\.gnome\.Calculator)$"
-
                 # dont maximize on your own
                 "suppressevent maximize, class:^(.*)$"
-              
-                # pinentry
-                "float, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
-                "pin, initialClass:^(gcr-prompter|nm-openconnect-auth-dialog)$"
-                "stayfocused, initialClass:^(gcr-prompter)$"
-
-                # rofi
-                "stayfocused, class:^(Rofi)$"
 
                 # temporary floaties
                 "tag +tempfloat, initialTitle:^(Open File)$"

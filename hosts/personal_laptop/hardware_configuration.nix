@@ -15,7 +15,9 @@
   boot.initrd.kernelModules = [ "i915" "xhci_pci" "nvme" "iwlwifi" "uvcvideo" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
-  hardware.graphics.extraPackages = with pkgs; [
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.extraPackages = with pkgs; [
     intel-vaapi-driver.override { enableHybridCodec = true; } # what is this?
     intel-media-driver # what is this?
   ];

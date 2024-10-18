@@ -12,7 +12,7 @@
 
   swapDevices = [ ];
 
-  boot.initrd.kernelModules = [ "i915" "xhci_pci" "nvme" "iwlwifi" ];
+  boot.initrd.kernelModules = [ "i915" "xhci_pci" "nvme" "iwlwifi" "uvcvideo" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   hardware.graphics.extraPackages = with pkgs; [
@@ -24,7 +24,6 @@
 
   hardware.trackpoint.enable = true;
   # hardware.trackpoint.sensitivity = 200;
-  hardware.camera.enable = true;
 
   services.fstrim.enable = true; # SSD optimization
   services.fwupd.enable = true;  # Firmware updates

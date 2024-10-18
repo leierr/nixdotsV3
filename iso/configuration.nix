@@ -27,6 +27,7 @@
 
   networking.hostName = "iso";
   networking.networkmanager.enable = true;
+  networking.wireless.enable = false;
 
   # packages
   environment.systemPackages = with pkgs; [

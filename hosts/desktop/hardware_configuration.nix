@@ -17,7 +17,7 @@
 
     swapDevices = [ ];
 
-    boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ]; # basicly kernel modules needed to mount/boot
+    boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "btusb" "usb_storage" "sd_mod" ]; # basicly kernel modules needed to mount/boot
     boot.kernelModules = [ "amdgpu" "kvm-amd" ]; # AMD GPU + kvm stuff
 
     services.xserver.videoDrivers = [ "amdgpu" ];

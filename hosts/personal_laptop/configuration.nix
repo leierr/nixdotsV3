@@ -5,15 +5,11 @@
   system_settings.user_account.shell = pkgs.zsh;
   system_settings.shell.zsh.enable = true;
   system_settings.shell.starship.enable = true;
-  system_settings.virtualization.libvirt.enable = true;
-  system_settings.virtualization.libvirt.virt_manager.enable = true;
   system_settings.privilege_escalation.wheel_needs_password = false;
   system_settings.bluetooth.enable = true;
 
   system_settings.gui.enable = true;
-  system_settings.gui.desktops.gnome.enable = false;
   system_settings.gui.desktops.hyprland.enable = true;
-  system_settings.gui.gaming.enable = true;
   system_settings.gui.discord.enable = true;
 
   # overwriting home-manager values
@@ -53,30 +49,12 @@
         };
       };
 
-      # increase the gnome text size a bit
-      dconf.settings."org/gnome/desktop/interface".text-scaling-factor = 1.1;
-
-      programs.rbw = {
-        enable = true;
-        settings = {
-          email = "lars.smith.eier@basefarm-orange.com";
-          lock_timeout = 36000;
-        };
-      };
-
       wayland.windowManager.hyprland.settings = {
-          general.border_size = lib.mkForce 3;
-          windowrulev2 = [
-            "monitor DP-2, class:^(vesktop)$"
-          ];
-          exec-once = [
-            "vesktop"
-            "${pkgs.writeShellScript "launch-slack-if-work-hours" "[[ $(date +%u) -le 5 && $(date +%H%M | sed 's/^0*//') -ge 600 && $(date +%H%M | sed 's/^0*//') -le 1500 ]] && slack"}"
-          ];
+          exec-once = [ "vesktop" ];
       };
     })
   ];
 
   # extra packages
-  environment.systemPackages = with pkgs; [ slack pavucontrol fzf meld obsidian obs-studio fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
+  environment.systemPackages = with pkgs; [ pavucontrol fzf meld obsidian fastfetch spotify brave xfce.mousepad jq ];
 }

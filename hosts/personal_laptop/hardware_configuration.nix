@@ -1,0 +1,37 @@
+{ pkgs, ... }:
+{
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/NIXROOT";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/NIXBOOT";
+    fsType = "vfat";
+  };
+
+  swapDevices = [ ];
+
+  boot.initrd.kernelModules = [ "i915" "xhci_pci" "nvme" "iwlwifi" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+
+  hardware.graphics.extraPackages = with pkgs; [
+    intel-vaapi-driver.override { enableHybridCodec = true; } # what is this?
+    intel-media-driver # what is this?
+  ];
+
+  hardware.cpu.intel.updateMicrocode = true;
+
+  hardware.trackpoint.enable = true;
+  # hardware.trackpoint.sensitivity = 200;
+  hardware.camera.enable = true;
+
+  services.fstrim.enable = true; # SSD optimization
+  services.fwupd.enable = true;  # Firmware updates
+
+  #services.logind.extraConfig = ''
+  #  HandleSuspendKey=suspend
+  #  HandleLidSwitch=suspend
+  #  HandleHibernateKey=hibernate
+  #'';
+}

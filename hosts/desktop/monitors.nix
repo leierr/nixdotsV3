@@ -10,10 +10,10 @@
             <scale>1</scale>
             <monitor>
               <monitorspec>
-                <connector>DP-2</connector>
+                <connector>DP-1</connector>
                 <vendor>AOC</vendor>
                 <product>Q27G2G4</product>
-                <serial>0x000021bd</serial>
+                <serial>0x000023bd</serial>
               </monitorspec>
               <mode>
                 <width>2560</width>
@@ -29,10 +29,10 @@
             <primary>yes</primary>
             <monitor>
               <monitorspec>
-                <connector>DP-1</connector>
+                <connector>DP-2</connector>
                 <vendor>AOC</vendor>
                 <product>Q27G2G4</product>
-                <serial>0x000023bd</serial>
+                <serial>0x000021bd</serial>
               </monitorspec>
               <mode>
                 <width>2560</width>
@@ -53,8 +53,7 @@
 
   services.xserver.xrandrHeads = [
     {
-      output = "DisplayPort-1";
-      primary = true;
+      output = "DisplayPort-0";
       monitorConfig = ''
         Option "Position" "0 0"
         Option "Enable" "true"
@@ -63,7 +62,8 @@
       '';
     }
     {
-      output = "DisplayPort-0";
+      output = "DisplayPort-1";
+      primary = true;
       monitorConfig = ''
         Option "Position" "2560 0"
         Option "Enable" "true"
@@ -83,12 +83,12 @@
             profile.name = "main";
             profile.outputs = [
               {
-                criteria = "AOC Q27G2G4 0x000023BD";
+                criteria = "AOC Q27G2G4 0x000021BD";
                 mode = "2560x1440@143.91Hz";
                 position = "2560,0";
               }
               {
-                criteria = "AOC Q27G2G4 0x000021BD";
+                criteria = "AOC Q27G2G4 0x000023BD";
                 mode = "2560x1440@143.91Hz";
                 position = "0,0";
               }

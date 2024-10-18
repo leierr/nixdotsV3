@@ -18,8 +18,8 @@
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.extraPackages = with pkgs; [
-    intel-vaapi-driver.override { enableHybridCodec = true; } # what is this?
-    intel-media-driver # what is this?
+    intel-vaapi-driver
+    intel-media-driver
   ];
 
   hardware.cpu.intel.updateMicrocode = true;

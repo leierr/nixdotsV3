@@ -5,19 +5,20 @@ let
 in
 {
   options.system_settings.gui.cursor.enable = lib.mkEnableOption "";
+  options.system_settings.gui.cursor.size = 24;
 
   config = lib.mkIf (cfg.enable) {
     services.xserver.displayManager.lightdm.greeters.gtk.cursorTheme = {
       name = "Adwaita";
       package = pkgs.gnome.adwaita-icon-theme;
-      size = 32;
+      size = cfg.size;
     };
 
     home_manager_modules = [
       ({
         home.pointerCursor = {
           name = "Adwaita";
-          size = 32;
+          size = cfg.size;
           package = pkgs.gnome.adwaita-icon-theme;
           x11 = {
             enable = true;
@@ -28,11 +29,11 @@ in
 
         wayland.windowManager.hyprland.settings.env = [
           "HYPRCURSOR_THEME,Adwaita"
-          "HYPRCURSOR_SIZE,32"
+          "HYPRCURSOR_SIZE,${cfg.size}"
         ];
 
         wayland.windowManager.hyprland.settings.exec-once = [
-          "hyprctl setcursor Adwaita 32"
+          "hyprctl setcursor Adwaita ${cfg.size}"
         ];
       })
     ];

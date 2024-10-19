@@ -55,6 +55,8 @@
 
       # increase the gnome text size a bit
       dconf.settings."org/gnome/desktop/interface".text-scaling-factor = 1.1;
+      # scale cursor to bigger display
+      system_settings.gui.cursor.size = 32;
 
       programs.rbw = {
         enable = true;

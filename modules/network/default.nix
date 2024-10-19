@@ -8,10 +8,11 @@ in
 
   config = lib.mkIf cfg.enable {
     networking = {
+      wireless.enable = false;
       networkmanager = {
         enable = true;
         wifi = {
-          backend = "iwd"; # stable = wpa_supplicant
+          backend = "wpa_supplicant";
           powersave = false;
           macAddress = "stable";
         };

@@ -15,7 +15,6 @@
   boot = {
     kernelModules = [
       "acpi_call" # Useful for power management, especially for turning off the discrete GPU if needed.
-      # "iwlmvm" # Intel Wi-Fi module for better wireless performance (since you have Intel Wi-Fi).
     ];
 
     initrd = {

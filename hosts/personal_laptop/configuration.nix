@@ -49,6 +49,14 @@
         };
       };
 
+      programs.rbw = {
+        enable = true;
+        settings = {
+          email = "larssmitheier@gmail.com";
+          lock_timeout = 36000;
+        };
+      };
+
       wayland.windowManager.hyprland.settings = {
           exec-once = [ "vesktop" ];
       };

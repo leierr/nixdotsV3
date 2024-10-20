@@ -15,6 +15,8 @@
   system_settings.gui.desktops.hyprland.enable = true;
   system_settings.gui.gaming.enable = true;
   system_settings.gui.discord.enable = true;
+  # scale cursor to bigger display
+  system_settings.gui.cursor.size = 32;
 
   # overwriting home-manager values
   home_manager_modules = [
@@ -55,8 +57,6 @@
 
       # increase the gnome text size a bit
       dconf.settings."org/gnome/desktop/interface".text-scaling-factor = 1.1;
-      # scale cursor to bigger display
-      system_settings.gui.cursor.size = 32;
 
       programs.rbw = {
         enable = true;

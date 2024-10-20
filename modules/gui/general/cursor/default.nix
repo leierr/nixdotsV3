@@ -5,7 +5,7 @@ let
 in
 {
   options.system_settings.gui.cursor.enable = lib.mkEnableOption "";
-  options.system_settings.gui.cursor.size = 24;
+  options.system_settings.gui.cursor.size = lib.mkOption { type = lib.types.int; default = 24; };
 
   config = lib.mkIf (cfg.enable) {
     services.xserver.displayManager.lightdm.greeters.gtk.cursorTheme = {
@@ -29,11 +29,11 @@ in
 
         wayland.windowManager.hyprland.settings.env = [
           "HYPRCURSOR_THEME,Adwaita"
-          "HYPRCURSOR_SIZE,${cfg.size}"
+          "HYPRCURSOR_SIZE,${toString cfg.size}"
         ];
 
         wayland.windowManager.hyprland.settings.exec-once = [
-          "hyprctl setcursor Adwaita ${cfg.size}"
+          "hyprctl setcursor Adwaita ${toString cfg.size}"
         ];
       })
     ];

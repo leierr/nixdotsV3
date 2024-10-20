@@ -21,6 +21,8 @@
       verbose = false;
       kernelModules = [
         "i915" # Intel graphics driver for integrated graphics (needed for boot display).
+        "iwlwifi" # Wifi drivers
+        "btusb" # I tink I need it to make bluetooth work optimally :shrug:
       ];
       availableKernelModules = [
         "xhci_pci" # USB 3.0 support.

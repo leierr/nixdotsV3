@@ -127,7 +127,10 @@ in
                 "stayfocused, class:^(Rofi)$"
 
                 # pinned
-                "pin, initialClass:^(gcr-prompter|polkit-gnome-authentication-agent-1)$"
+                "pin, initialClass:^(gcr-prompter|polkit-gnome-authentication-agent-1|nm-openconnect-auth-dialog)$"
+
+                # centered windows
+                "center 1, initialClass:^(nm-openconnect-auth-dialog)$"
 
                 # no decorations unless floating on single tile workspace
                 "noborder, onworkspace:w[t1], floating:0"
@@ -136,6 +139,9 @@ in
 
                 # dont maximize on your own
                 "suppressevent maximize, class:^(.*)$"
+
+                # nm-auth-dialog size
+                "size 640 510, initialClass:^(nm-openconnect-auth-dialog)$"
 
                 # temporary floaties
                 "tag +tempfloat, initialTitle:^(Open File)$"

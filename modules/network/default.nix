@@ -12,7 +12,7 @@ in
       networkmanager = {
         enable = true;
         wifi = {
-          backend = "wpa_supplicant";
+          backend = "iwd";
           powersave = false;
           macAddress = "stable";
         };
@@ -36,6 +36,7 @@ in
       };
       nftables = {
         enable = true;
+        flushRuleset = true;
         ruleset = "";
       };
     };

@@ -52,7 +52,7 @@ in
 
     #-------------------------------------#
 
-    wallpaper_jpg = lib.mkOption { type = lib.types.path; default = ./assets/ScarletTree.png; };
+    wallpaper_jpg = lib.mkOption { type = lib.types.path; default = ./assets/blue_wallpaper.jpg; };
     nix_logo_png = lib.mkOption { type = lib.types.path; default = ./assets/nix_logo.png; };
   };
 }

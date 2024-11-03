@@ -82,5 +82,5 @@
   networking.firewall.checkReversePath = false; # for å få wireguard to work
 
   # extra packages
-  environment.systemPackages = with pkgs; [ slack pavucontrol fzf meld obsidian obs-studio fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
+  environment.systemPackages = with pkgs; [ slack unrar pavucontrol fzf meld obsidian obs-studio fastfetch spotify remmina brave xfce.mousepad gnome.totem jq ];
 }
